@@ -870,7 +870,7 @@
     {
       "name": "Income and customer category",
       "status": "Confirmation Required",
-      "detail": "Monthly Income field exists in the application form; acceptable income sources and thresholds are require confirmation."
+      "detail": "Acceptable income sources and thresholds require Suryoday confirmation."
     },
     {
       "name": "Loan amount, tenure and rate",
@@ -880,12 +880,12 @@
     {
       "name": "LTV and asset valuation",
       "status": "Confirmation Required",
-      "detail": "New car labels show LTV percentages dynamically; used asset forms use grid/valuation fields. Approved limits and grids are require confirmation."
+      "detail": "LTV limits, valuation grids and applicable used-asset rules require Suryoday confirmation."
     },
     {
       "name": "CLI coverage",
       "status": "Displayed rule; bank confirmation required",
-      "detail": "The displayed minimum is a minimum coverage of ₹100,000 for ProductId 2 and 7 and ₹300,000 for ProductId >7, with maximum equal to loan availed. Confirm current policy and boundary behavior with Suryoday."
+      "detail": "Displayed CLI minimums are ₹100,000 for Product IDs 2 and 7, and ₹300,000 for Product IDs above 7; the maximum equals the loan availed. Confirm current policy and boundaries with Suryoday."
     },
     {
       "name": "Charges and taxes",
@@ -905,7 +905,7 @@
     {
       "name": "Deviation and approval",
       "status": "Confirmation Required",
-      "detail": "Legacy page names indicate deviation/approval/QC surfaces; active rules, authorities and roles are not verified."
+      "detail": "Deviation, QC and approval stages may apply; confirm active rules, authorities and roles with Suryoday."
     },
     {
       "name": "Disbursement",
