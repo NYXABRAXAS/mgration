@@ -1,23 +1,22 @@
 {
   "version": "1.0",
-  "sourceNotice": "Six ProductId branches were identified in the supplied SuryodayWeb React UI. This site catalogs controls visible in inspected UI components. Server-side rules, lookup values and complete approved Suryoday policy schedules were not supplied. SuryodayaBank ASP.NET sources contain mixed Suryoday and ESAF references; confirm the production baseline before treating legacy pages as authoritative.",
-  "deliveryTarget": "Management target in supplied brief: implementation and testing by 31 December 2026; OPTIM ready to replace APPX from 1 January 2027.",
+  "deliveryTarget": "Target timeline: implementation and testing by 31 December 2026; OPTIM ready to replace APPX from 1 January 2027.",
   "stages": [
     {
       "id": "login",
       "title": "Login and authentication",
       "kind": "shared",
       "files": [
-        "login/Login.js"
+        "group-034"
       ],
-      "detail": "APPX exposes ProHorizon credential login and an ADID route/callback. OPTIM screenshots show username, password, arithmetic captcha, then six-digit OTP. Confirm target authentication policy."
+      "detail": "Login options include ProHorizon credentials and ADID authentication. OPTIM screenshots show username, password, arithmetic captcha, then six-digit OTP. Confirm target authentication policy."
     },
     {
       "id": "dashboard",
       "title": "Dashboard",
       "kind": "shared",
       "files": [
-        "dashboard/Dashboard.js"
+        "group-035"
       ],
       "detail": "Dashboard uses date, product and month filters. Queue/widgets are role and API driven."
     },
@@ -26,7 +25,7 @@
       "title": "Lead creation and sourcing",
       "kind": "shared",
       "files": [
-        "lead/LeadCreateLogin.js"
+        "group-001"
       ],
       "detail": "Sourcing fields include channel, employee code, state, district, source name, disbursement branch and product. Geography/channel lookups depend on user and location."
     },
@@ -35,25 +34,25 @@
       "title": "Mobile and OTP verification",
       "kind": "shared",
       "files": [
-        "lead/LeadMobileVerfication.js"
+        "group-002"
       ],
-      "detail": "Member mobile verification screen. OTP service rules and expiry/retry are not present in supplied client source."
+      "detail": "Member mobile verification screen. OTP service rules and expiry/retry are not present in the active setup."
     },
     {
       "id": "member",
       "title": "Applicant and member selection",
       "kind": "shared",
       "files": [
-        "lead/LeadSelectMember.js"
+        "group-008"
       ],
-      "detail": "Member type values in source are Co-Applicant and Guarantor. Skip Add Member is shown only when DEStatus=3 and posts Mode=23, CLOSED, DONE."
+      "detail": "Member types are Co-Applicant and Guarantor. Skip Add Member is shown only when DEStatus=3 and posts Mode=23, CLOSED, DONE."
     },
     {
       "id": "applicant",
       "title": "Applicant identity and details",
       "kind": "shared",
       "files": [
-        "applicant/Applicant.js"
+        "group-016"
       ],
       "detail": "Applicant entity, POI/POA, name, DOB, gender, PAN and loan amount fields. Many values are prefilled or disabled."
     },
@@ -62,29 +61,29 @@
       "title": "KYC and identity verification",
       "kind": "shared",
       "files": [
-        "kyc/PendingKyc.js",
-        "kyc/VidEkyc.js"
+        "group-024",
+        "group-026"
       ],
-      "detail": "Aadhaar/VID and OTP controls are visible in code. Provider contracts, consent and exception handling require confirmation."
+      "detail": "Aadhaar/VID and OTP controls are available in the journey. Provider contracts, consent and exception handling require confirmation."
     },
     {
       "id": "dedupe",
       "title": "Dedupe",
       "kind": "shared",
       "files": [
-        "kyc/VaultDedupe.js"
+        "group-025"
       ],
-      "detail": "Vault dedupe component is present. Match keys, outcomes and override policy are service-owned and unavailable."
+      "detail": "Vault dedupe stage is available. Match keys, outcomes and override policy are service-owned and unavailable."
     },
     {
       "id": "product-sourcing",
       "title": "Product and scheme sourcing",
       "kind": "shared",
       "files": [
-        "lead/LeadProfileLoanDetails.js",
-        "lead/LeadPersonalLoanDetails.js"
+        "group-006",
+        "group-005"
       ],
-      "detail": "ProductId selects one of six product-specific forms. Scheme, Policy, Funding Type, Customer Grade and dealer lookups are dynamic."
+      "detail": "Choose one of six product configurations. Scheme, Policy, Funding Type, Customer Grade and dealer lookups are dynamic."
     },
     {
       "id": "asset",
@@ -98,33 +97,33 @@
       "title": "Loan details",
       "kind": "product",
       "files": [],
-      "detail": "Fields are rendered from the product-specific form. Effective pricing, amount limits, term and LTV schedules are API/master driven."
+      "detail": "Fields vary by product configuration. Effective pricing, amount limits, term and LTV schedules are API/master driven."
     },
     {
       "id": "scorecard",
       "title": "Scorecard and credit inputs",
       "kind": "shared",
       "files": [
-        "lead/LeadScoreCard.js"
+        "group-007"
       ],
-      "detail": "Score Type and dynamic controls are fetched from API. Question definitions and scoring values are not in source."
+      "detail": "Score Type and dynamic controls are fetched from API. Question definitions and scoring values require confirmation."
     },
     {
       "id": "fleet",
       "title": "Fleet and asset grouping",
       "kind": "shared",
       "files": [
-        "fleet/FleetForm.js",
-        "fleet/FleetFilter.js"
+        "group-037",
+        "group-036"
       ],
-      "detail": "Fleet components exist; applicability must be confirmed from product journey configuration."
+      "detail": "Fleet stages may apply; applicability must be confirmed from product journey configuration."
     },
     {
       "id": "viability",
       "title": "Viability",
       "kind": "shared",
       "files": [
-        "viability/ViabilityCreate.js"
+        "group-038"
       ],
       "detail": "Viability type is configurable/API driven. Applicability and rules require confirmation."
     },
@@ -133,7 +132,7 @@
       "title": "Application form personal details",
       "kind": "shared",
       "files": [
-        "applicationform/PersonalInformation.js"
+        "group-021"
       ],
       "detail": "Personal, relationship, contact, education, residency, marital status, dependents, income and communication fields."
     },
@@ -142,16 +141,16 @@
       "title": "Application form address details",
       "kind": "shared",
       "files": [
-        "applicationform/AddressDetails.js"
+        "group-019"
       ],
-      "detail": "Current/permanent address, accommodation/residence, rent and address-duration fields. Current address fields are disabled in the source form."
+      "detail": "Current/permanent address, accommodation/residence, rent and address-duration fields. Current address fields are disabled in this stage."
     },
     {
       "id": "employment",
       "title": "Employment and business details",
       "kind": "shared",
       "files": [
-        "applicationform/OfficeDetails.js"
+        "group-020"
       ],
       "detail": "Udyam, occupation, business/industry, office location, contact and experience fields."
     },
@@ -160,7 +159,7 @@
       "title": "References and nominee",
       "kind": "shared",
       "files": [
-        "applicationform/TradeNominee.js"
+        "group-022"
       ],
       "detail": "Two references and nominee identity/address fields are represented."
     },
@@ -169,7 +168,7 @@
       "title": "Charges and insurance",
       "kind": "shared",
       "files": [
-        "charges/LeadDocumentCharges.js"
+        "group-027"
       ],
       "detail": "Sanction, ROI, CLI/Hospi, processing, valuation, eSign, stamp and document charges. Most values are calculated or API/master driven."
     },
@@ -178,7 +177,7 @@
       "title": "Bank account verification",
       "kind": "shared",
       "files": [
-        "applicant/BankAccountAuthentication.js"
+        "group-017"
       ],
       "detail": "Repayment account, customer name, IFSC, account and PDC fields. IFSC and bank-status service calls are present."
     },
@@ -187,28 +186,28 @@
       "title": "Documents, request and RCU",
       "kind": "shared",
       "files": [
-        "lead/LeadDocument.js",
-        "lead/RequestDocument.js",
-        "lead/RcuQuery.js"
+        "group-039",
+        "group-041",
+        "group-040"
       ],
-      "detail": "Upload, request, view and RCU components exist. The exact document matrix and service fields are not fully represented as labelled controls."
+      "detail": "Document upload, request, view and RCU stages are included. The exact document matrix and service fields are not fully represented as labelled controls."
     },
     {
       "id": "sanction",
       "title": "Sanction and multi-loan summary",
       "kind": "shared",
       "files": [
-        "disbursement/SanctionMultiLoanSummary.js"
+        "group-032"
       ],
-      "detail": "Sanction-letter and multi-loan modules exist; exact policy fields and approval outputs require bank confirmation."
+      "detail": "Includes sanction-letter and multi-loan details; exact policy fields and approval outputs require bank confirmation."
     },
     {
       "id": "disbursement",
       "title": "Disbursement details",
       "kind": "shared",
       "files": [
-        "disbursement/DisbursementForm.js",
-        "disbursement/BodyDisbursementSummary.js"
+        "group-030",
+        "group-028"
       ],
       "detail": "Dealer/payee, district, outlet, proforma invoice, account, IFSC and balance-transfer fields."
     },
@@ -217,17 +216,17 @@
       "title": "Repayment setup and NACH",
       "kind": "shared",
       "files": [
-        "disbursement/NachInitiate.js",
-        "disbursement/BodyNachInitiate.js"
+        "group-031",
+        "group-029"
       ],
-      "detail": "Static NACH choices in source: Physical NACH, E-Nach and SI."
+      "detail": "Static NACH choices in the active setup: Physical NACH, E-Nach and SI."
     },
     {
       "id": "approvals",
       "title": "Approval queues and workflow",
       "kind": "workflow",
       "files": [],
-      "detail": "LeadJourney receives MenuName, status, active and visibility from GetJourney. Legacy pages indicate credit, deviation, QC/audit and approval modules; active stage names, roles and transitions need an approved workflow export."
+      "detail": "Journey stages may include credit, deviation, QC/audit and approval steps; active stage names, roles and transitions need an approved workflow export."
     }
   ],
   "products": [
@@ -236,90 +235,90 @@
       "id": "2",
       "name": "New Car Loan",
       "family": "New vehicle finance",
-      "form": "lead/LoanNewCarLoanForm.js",
+      "form": "Product-specific configuration",
       "assetFiles": [],
       "loanFiles": [
-        "lead/LoanNewCarLoanForm.js"
+        "group-014"
       ],
       "disbursementFiles": [],
       "cliMin": 100000,
       "stageFiles": {
         "login": [
-          "login/Login.js"
+          "group-034"
         ],
         "dashboard": [
-          "dashboard/Dashboard.js"
+          "group-035"
         ],
         "lead": [
-          "lead/LeadCreateLogin.js"
+          "group-001"
         ],
         "mobile": [
-          "lead/LeadMobileVerfication.js"
+          "group-002"
         ],
         "member": [
-          "lead/LeadSelectMember.js"
+          "group-008"
         ],
         "applicant": [
-          "applicant/Applicant.js"
+          "group-016"
         ],
         "kyc": [
-          "kyc/PendingKyc.js",
-          "kyc/VidEkyc.js"
+          "group-024",
+          "group-026"
         ],
         "dedupe": [
-          "kyc/VaultDedupe.js"
+          "group-025"
         ],
         "product-sourcing": [
-          "lead/LeadProfileLoanDetails.js",
-          "lead/LeadPersonalLoanDetails.js"
+          "group-006",
+          "group-005"
         ],
         "asset": [],
         "loan": [
-          "lead/LoanNewCarLoanForm.js"
+          "group-014"
         ],
         "scorecard": [
-          "lead/LeadScoreCard.js"
+          "group-007"
         ],
         "fleet": [
-          "fleet/FleetForm.js",
-          "fleet/FleetFilter.js"
+          "group-037",
+          "group-036"
         ],
         "viability": [
-          "viability/ViabilityCreate.js"
+          "group-038"
         ],
         "personal": [
-          "applicationform/PersonalInformation.js"
+          "group-021"
         ],
         "address": [
-          "applicationform/AddressDetails.js"
+          "group-019"
         ],
         "employment": [
-          "applicationform/OfficeDetails.js"
+          "group-020"
         ],
         "references": [
-          "applicationform/TradeNominee.js"
+          "group-022"
         ],
         "charges": [
-          "charges/LeadDocumentCharges.js"
+          "group-027"
         ],
         "bank": [
-          "applicant/BankAccountAuthentication.js"
+          "group-017"
         ],
         "documents": [
-          "lead/LeadDocument.js",
-          "lead/RequestDocument.js",
-          "lead/RcuQuery.js"
+          "group-039",
+          "group-041",
+          "group-040"
         ],
         "sanction": [
-          "disbursement/SanctionMultiLoanSummary.js"
+          "group-032"
         ],
         "disbursement": [
-          "disbursement/DisbursementForm.js",
-          "disbursement/BodyDisbursementSummary.js"
+          "group-030",
+          "group-028"
         ],
         "repayment": [
-          "disbursement/NachInitiate.js",
-          "disbursement/BodyNachInitiate.js"
+          "group-031",
+          "group-029"
         ],
         "approvals": []
       }
@@ -329,97 +328,97 @@
       "id": "7",
       "name": "Used Car Loan",
       "family": "Used vehicle finance",
-      "form": "lead/LeadUsedCarAssetDetails.js + lead/LoanUsedCarLoanForm.js",
+      "form": "Product-specific configuration",
       "assetFiles": [
-        "lead/LeadUsedCarAssetDetails.js"
+        "group-010"
       ],
       "loanFiles": [
-        "lead/LoanUsedCarLoanForm.js"
+        "group-015"
       ],
       "disbursementFiles": [
-        "disbursement/UsedCarDisbursementDetails.js"
+        "group-033"
       ],
       "cliMin": 100000,
       "stageFiles": {
         "login": [
-          "login/Login.js"
+          "group-034"
         ],
         "dashboard": [
-          "dashboard/Dashboard.js"
+          "group-035"
         ],
         "lead": [
-          "lead/LeadCreateLogin.js"
+          "group-001"
         ],
         "mobile": [
-          "lead/LeadMobileVerfication.js"
+          "group-002"
         ],
         "member": [
-          "lead/LeadSelectMember.js"
+          "group-008"
         ],
         "applicant": [
-          "applicant/Applicant.js"
+          "group-016"
         ],
         "kyc": [
-          "kyc/PendingKyc.js",
-          "kyc/VidEkyc.js"
+          "group-024",
+          "group-026"
         ],
         "dedupe": [
-          "kyc/VaultDedupe.js"
+          "group-025"
         ],
         "product-sourcing": [
-          "lead/LeadProfileLoanDetails.js",
-          "lead/LeadPersonalLoanDetails.js"
+          "group-006",
+          "group-005"
         ],
         "asset": [
-          "lead/LeadUsedCarAssetDetails.js"
+          "group-010"
         ],
         "loan": [
-          "lead/LoanUsedCarLoanForm.js"
+          "group-015"
         ],
         "scorecard": [
-          "lead/LeadScoreCard.js"
+          "group-007"
         ],
         "fleet": [
-          "fleet/FleetForm.js",
-          "fleet/FleetFilter.js"
+          "group-037",
+          "group-036"
         ],
         "viability": [
-          "viability/ViabilityCreate.js"
+          "group-038"
         ],
         "personal": [
-          "applicationform/PersonalInformation.js"
+          "group-021"
         ],
         "address": [
-          "applicationform/AddressDetails.js"
+          "group-019"
         ],
         "employment": [
-          "applicationform/OfficeDetails.js"
+          "group-020"
         ],
         "references": [
-          "applicationform/TradeNominee.js"
+          "group-022"
         ],
         "charges": [
-          "charges/LeadDocumentCharges.js"
+          "group-027"
         ],
         "bank": [
-          "applicant/BankAccountAuthentication.js"
+          "group-017"
         ],
         "documents": [
-          "lead/LeadDocument.js",
-          "lead/RequestDocument.js",
-          "lead/RcuQuery.js"
+          "group-039",
+          "group-041",
+          "group-040"
         ],
         "sanction": [
-          "disbursement/SanctionMultiLoanSummary.js"
+          "group-032"
         ],
         "disbursement": [
-          "disbursement/DisbursementForm.js",
-          "disbursement/BodyDisbursementSummary.js",
-          "disbursement/UsedCarDisbursementDetails.js"
+          "group-030",
+          "group-028",
+          "group-033"
         ],
         "repayment": [
-          "disbursement/NachInitiate.js",
-          "disbursement/BodyNachInitiate.js"
+          "group-031",
+          "group-029"
         ],
         "approvals": []
       }
@@ -429,90 +428,90 @@
       "id": "9",
       "name": "New Commercial Vehicle",
       "family": "New commercial vehicle finance",
-      "form": "lead/LeadNewVehicleForm.js",
+      "form": "Product-specific configuration",
       "assetFiles": [],
       "loanFiles": [
-        "lead/LeadNewVehicleForm.js"
+        "group-004"
       ],
       "disbursementFiles": [],
       "cliMin": 300000,
       "stageFiles": {
         "login": [
-          "login/Login.js"
+          "group-034"
         ],
         "dashboard": [
-          "dashboard/Dashboard.js"
+          "group-035"
         ],
         "lead": [
-          "lead/LeadCreateLogin.js"
+          "group-001"
         ],
         "mobile": [
-          "lead/LeadMobileVerfication.js"
+          "group-002"
         ],
         "member": [
-          "lead/LeadSelectMember.js"
+          "group-008"
         ],
         "applicant": [
-          "applicant/Applicant.js"
+          "group-016"
         ],
         "kyc": [
-          "kyc/PendingKyc.js",
-          "kyc/VidEkyc.js"
+          "group-024",
+          "group-026"
         ],
         "dedupe": [
-          "kyc/VaultDedupe.js"
+          "group-025"
         ],
         "product-sourcing": [
-          "lead/LeadProfileLoanDetails.js",
-          "lead/LeadPersonalLoanDetails.js"
+          "group-006",
+          "group-005"
         ],
         "asset": [],
         "loan": [
-          "lead/LeadNewVehicleForm.js"
+          "group-004"
         ],
         "scorecard": [
-          "lead/LeadScoreCard.js"
+          "group-007"
         ],
         "fleet": [
-          "fleet/FleetForm.js",
-          "fleet/FleetFilter.js"
+          "group-037",
+          "group-036"
         ],
         "viability": [
-          "viability/ViabilityCreate.js"
+          "group-038"
         ],
         "personal": [
-          "applicationform/PersonalInformation.js"
+          "group-021"
         ],
         "address": [
-          "applicationform/AddressDetails.js"
+          "group-019"
         ],
         "employment": [
-          "applicationform/OfficeDetails.js"
+          "group-020"
         ],
         "references": [
-          "applicationform/TradeNominee.js"
+          "group-022"
         ],
         "charges": [
-          "charges/LeadDocumentCharges.js"
+          "group-027"
         ],
         "bank": [
-          "applicant/BankAccountAuthentication.js"
+          "group-017"
         ],
         "documents": [
-          "lead/LeadDocument.js",
-          "lead/RequestDocument.js",
-          "lead/RcuQuery.js"
+          "group-039",
+          "group-041",
+          "group-040"
         ],
         "sanction": [
-          "disbursement/SanctionMultiLoanSummary.js"
+          "group-032"
         ],
         "disbursement": [
-          "disbursement/DisbursementForm.js",
-          "disbursement/BodyDisbursementSummary.js"
+          "group-030",
+          "group-028"
         ],
         "repayment": [
-          "disbursement/NachInitiate.js",
-          "disbursement/BodyNachInitiate.js"
+          "group-031",
+          "group-029"
         ],
         "approvals": []
       }
@@ -522,94 +521,94 @@
       "id": "10",
       "name": "Used Commercial Vehicle",
       "family": "Used commercial vehicle finance",
-      "form": "lead/LeadUsedAssetDetails.js + lead/LeadUsedVehicleForm.js",
+      "form": "Product-specific configuration",
       "assetFiles": [
-        "lead/LeadUsedAssetDetails.js"
+        "group-009"
       ],
       "loanFiles": [
-        "lead/LeadUsedVehicleForm.js"
+        "group-013"
       ],
       "disbursementFiles": [],
       "cliMin": 300000,
       "stageFiles": {
         "login": [
-          "login/Login.js"
+          "group-034"
         ],
         "dashboard": [
-          "dashboard/Dashboard.js"
+          "group-035"
         ],
         "lead": [
-          "lead/LeadCreateLogin.js"
+          "group-001"
         ],
         "mobile": [
-          "lead/LeadMobileVerfication.js"
+          "group-002"
         ],
         "member": [
-          "lead/LeadSelectMember.js"
+          "group-008"
         ],
         "applicant": [
-          "applicant/Applicant.js"
+          "group-016"
         ],
         "kyc": [
-          "kyc/PendingKyc.js",
-          "kyc/VidEkyc.js"
+          "group-024",
+          "group-026"
         ],
         "dedupe": [
-          "kyc/VaultDedupe.js"
+          "group-025"
         ],
         "product-sourcing": [
-          "lead/LeadProfileLoanDetails.js",
-          "lead/LeadPersonalLoanDetails.js"
+          "group-006",
+          "group-005"
         ],
         "asset": [
-          "lead/LeadUsedAssetDetails.js"
+          "group-009"
         ],
         "loan": [
-          "lead/LeadUsedVehicleForm.js"
+          "group-013"
         ],
         "scorecard": [
-          "lead/LeadScoreCard.js"
+          "group-007"
         ],
         "fleet": [
-          "fleet/FleetForm.js",
-          "fleet/FleetFilter.js"
+          "group-037",
+          "group-036"
         ],
         "viability": [
-          "viability/ViabilityCreate.js"
+          "group-038"
         ],
         "personal": [
-          "applicationform/PersonalInformation.js"
+          "group-021"
         ],
         "address": [
-          "applicationform/AddressDetails.js"
+          "group-019"
         ],
         "employment": [
-          "applicationform/OfficeDetails.js"
+          "group-020"
         ],
         "references": [
-          "applicationform/TradeNominee.js"
+          "group-022"
         ],
         "charges": [
-          "charges/LeadDocumentCharges.js"
+          "group-027"
         ],
         "bank": [
-          "applicant/BankAccountAuthentication.js"
+          "group-017"
         ],
         "documents": [
-          "lead/LeadDocument.js",
-          "lead/RequestDocument.js",
-          "lead/RcuQuery.js"
+          "group-039",
+          "group-041",
+          "group-040"
         ],
         "sanction": [
-          "disbursement/SanctionMultiLoanSummary.js"
+          "group-032"
         ],
         "disbursement": [
-          "disbursement/DisbursementForm.js",
-          "disbursement/BodyDisbursementSummary.js"
+          "group-030",
+          "group-028"
         ],
         "repayment": [
-          "disbursement/NachInitiate.js",
-          "disbursement/BodyNachInitiate.js"
+          "group-031",
+          "group-029"
         ],
         "approvals": []
       }
@@ -619,90 +618,90 @@
       "id": "13",
       "name": "New Construction Equipment",
       "family": "New equipment finance",
-      "form": "lead/LeadNewCEVehicleForm.js",
+      "form": "Product-specific configuration",
       "assetFiles": [],
       "loanFiles": [
-        "lead/LeadNewCEVehicleForm.js"
+        "group-003"
       ],
       "disbursementFiles": [],
       "cliMin": 300000,
       "stageFiles": {
         "login": [
-          "login/Login.js"
+          "group-034"
         ],
         "dashboard": [
-          "dashboard/Dashboard.js"
+          "group-035"
         ],
         "lead": [
-          "lead/LeadCreateLogin.js"
+          "group-001"
         ],
         "mobile": [
-          "lead/LeadMobileVerfication.js"
+          "group-002"
         ],
         "member": [
-          "lead/LeadSelectMember.js"
+          "group-008"
         ],
         "applicant": [
-          "applicant/Applicant.js"
+          "group-016"
         ],
         "kyc": [
-          "kyc/PendingKyc.js",
-          "kyc/VidEkyc.js"
+          "group-024",
+          "group-026"
         ],
         "dedupe": [
-          "kyc/VaultDedupe.js"
+          "group-025"
         ],
         "product-sourcing": [
-          "lead/LeadProfileLoanDetails.js",
-          "lead/LeadPersonalLoanDetails.js"
+          "group-006",
+          "group-005"
         ],
         "asset": [],
         "loan": [
-          "lead/LeadNewCEVehicleForm.js"
+          "group-003"
         ],
         "scorecard": [
-          "lead/LeadScoreCard.js"
+          "group-007"
         ],
         "fleet": [
-          "fleet/FleetForm.js",
-          "fleet/FleetFilter.js"
+          "group-037",
+          "group-036"
         ],
         "viability": [
-          "viability/ViabilityCreate.js"
+          "group-038"
         ],
         "personal": [
-          "applicationform/PersonalInformation.js"
+          "group-021"
         ],
         "address": [
-          "applicationform/AddressDetails.js"
+          "group-019"
         ],
         "employment": [
-          "applicationform/OfficeDetails.js"
+          "group-020"
         ],
         "references": [
-          "applicationform/TradeNominee.js"
+          "group-022"
         ],
         "charges": [
-          "charges/LeadDocumentCharges.js"
+          "group-027"
         ],
         "bank": [
-          "applicant/BankAccountAuthentication.js"
+          "group-017"
         ],
         "documents": [
-          "lead/LeadDocument.js",
-          "lead/RequestDocument.js",
-          "lead/RcuQuery.js"
+          "group-039",
+          "group-041",
+          "group-040"
         ],
         "sanction": [
-          "disbursement/SanctionMultiLoanSummary.js"
+          "group-032"
         ],
         "disbursement": [
-          "disbursement/DisbursementForm.js",
-          "disbursement/BodyDisbursementSummary.js"
+          "group-030",
+          "group-028"
         ],
         "repayment": [
-          "disbursement/NachInitiate.js",
-          "disbursement/BodyNachInitiate.js"
+          "group-031",
+          "group-029"
         ],
         "approvals": []
       }
@@ -712,101 +711,210 @@
       "id": "14",
       "name": "Used Construction Equipment",
       "family": "Used equipment finance",
-      "form": "lead/LeadUsedCEAssetDetails.js + lead/LeadUsedCEVehicleForm.js",
+      "form": "Product-specific configuration",
       "assetFiles": [
-        "lead/LeadUsedCEAssetDetails.js"
+        "group-011"
       ],
       "loanFiles": [
-        "lead/LeadUsedCEVehicleForm.js"
+        "group-012"
       ],
       "disbursementFiles": [],
       "cliMin": 300000,
       "stageFiles": {
         "login": [
-          "login/Login.js"
+          "group-034"
         ],
         "dashboard": [
-          "dashboard/Dashboard.js"
+          "group-035"
         ],
         "lead": [
-          "lead/LeadCreateLogin.js"
+          "group-001"
         ],
         "mobile": [
-          "lead/LeadMobileVerfication.js"
+          "group-002"
         ],
         "member": [
-          "lead/LeadSelectMember.js"
+          "group-008"
         ],
         "applicant": [
-          "applicant/Applicant.js"
+          "group-016"
         ],
         "kyc": [
-          "kyc/PendingKyc.js",
-          "kyc/VidEkyc.js"
+          "group-024",
+          "group-026"
         ],
         "dedupe": [
-          "kyc/VaultDedupe.js"
+          "group-025"
         ],
         "product-sourcing": [
-          "lead/LeadProfileLoanDetails.js",
-          "lead/LeadPersonalLoanDetails.js"
+          "group-006",
+          "group-005"
         ],
         "asset": [
-          "lead/LeadUsedCEAssetDetails.js"
+          "group-011"
         ],
         "loan": [
-          "lead/LeadUsedCEVehicleForm.js"
+          "group-012"
         ],
         "scorecard": [
-          "lead/LeadScoreCard.js"
+          "group-007"
         ],
         "fleet": [
-          "fleet/FleetForm.js",
-          "fleet/FleetFilter.js"
+          "group-037",
+          "group-036"
         ],
         "viability": [
-          "viability/ViabilityCreate.js"
+          "group-038"
         ],
         "personal": [
-          "applicationform/PersonalInformation.js"
+          "group-021"
         ],
         "address": [
-          "applicationform/AddressDetails.js"
+          "group-019"
         ],
         "employment": [
-          "applicationform/OfficeDetails.js"
+          "group-020"
         ],
         "references": [
-          "applicationform/TradeNominee.js"
+          "group-022"
         ],
         "charges": [
-          "charges/LeadDocumentCharges.js"
+          "group-027"
         ],
         "bank": [
-          "applicant/BankAccountAuthentication.js"
+          "group-017"
         ],
         "documents": [
-          "lead/LeadDocument.js",
-          "lead/RequestDocument.js",
-          "lead/RcuQuery.js"
+          "group-039",
+          "group-041",
+          "group-040"
         ],
         "sanction": [
-          "disbursement/SanctionMultiLoanSummary.js"
+          "group-032"
         ],
         "disbursement": [
-          "disbursement/DisbursementForm.js",
-          "disbursement/BodyDisbursementSummary.js"
+          "group-030",
+          "group-028"
         ],
         "repayment": [
-          "disbursement/NachInitiate.js",
-          "disbursement/BodyNachInitiate.js"
+          "group-031",
+          "group-029"
         ],
         "approvals": []
       }
     }
   ],
-  "fieldsBySource": {
-    "lead/LeadCreateLogin.js": [
+  "workflowMenu": [
+    {
+      "id": "2",
+      "route": "/pendingkyc/list/:id",
+      "detail": "KYC queue"
+    },
+    {
+      "id": "3",
+      "route": "/loandetails/applicant/:id",
+      "detail": "Sourcing Details; conditional Asset Details; Loan Details"
+    },
+    {
+      "id": "4",
+      "route": "/lead/scorecard/:id",
+      "detail": "Scorecard"
+    },
+    {
+      "id": "5",
+      "route": "/fleet/:id",
+      "detail": "Fleet"
+    },
+    {
+      "id": "6",
+      "route": "/createviability/:id/:viability",
+      "detail": "Viability"
+    },
+    {
+      "id": "7",
+      "route": "/lead/application/:id",
+      "detail": "Application form"
+    },
+    {
+      "id": "8",
+      "route": "/lead/charges/:id",
+      "detail": "Charges route; journey UI also prints POST DISBURSEMENT STAGE before MenuID 8, so ordering/name conflict requires confirmation"
+    },
+    {
+      "id": "9",
+      "route": "/bkverify/:id",
+      "detail": "Bank verification"
+    },
+    {
+      "id": "11",
+      "route": "/lead/document/request/:id",
+      "detail": "Document request"
+    },
+    {
+      "id": "13",
+      "route": "/lead/document/rcu/:id",
+      "detail": "RCU"
+    },
+    {
+      "id": "28",
+      "route": "/lead/document/upload/:id",
+      "detail": "Document upload"
+    }
+  ],
+  "policyAreas": [
+    {
+      "name": "Age and applicant eligibility",
+      "status": "Confirmation Required",
+      "detail": "No approved age thresholds or customer-category rules in the approved policy."
+    },
+    {
+      "name": "Income and customer category",
+      "status": "Confirmation Required",
+      "detail": "Monthly Income field exists in the application form; acceptable income sources and thresholds are require confirmation."
+    },
+    {
+      "name": "Loan amount, tenure and rate",
+      "status": "Dynamic / confirmation required",
+      "detail": "Forms show dynamic term, ROI and amount fields; effective product/scheme limits and rate tables are API/master-driven."
+    },
+    {
+      "name": "LTV and asset valuation",
+      "status": "Confirmation Required",
+      "detail": "New car labels show LTV percentages dynamically; used asset forms use grid/valuation fields. Approved limits and grids are require confirmation."
+    },
+    {
+      "name": "CLI coverage",
+      "status": "Displayed rule; bank confirmation required",
+      "detail": "The displayed minimum is a minimum coverage of ₹100,000 for ProductId 2 and 7 and ₹300,000 for ProductId >7, with maximum equal to loan availed. Confirm current policy and boundary behavior with Suryoday."
+    },
+    {
+      "name": "Charges and taxes",
+      "status": "Dynamic / confirmation required",
+      "detail": "Processing, document, GST, stamp, valuation, CLI and Hospi fields/calculations are represented; charge masters and signed values require confirmation."
+    },
+    {
+      "name": "Bureau, scorecard and dedupe",
+      "status": "Confirmation Required",
+      "detail": "Dynamic scorecard, bureau and dedupe modules exist; thresholds, responses and override authorities require confirmation."
+    },
+    {
+      "name": "Documents and KYC",
+      "status": "Confirmation Required",
+      "detail": "KYC and upload modules exist; product/member/stage mandatory document matrix and provider contracts require confirmation."
+    },
+    {
+      "name": "Deviation and approval",
+      "status": "Confirmation Required",
+      "detail": "Legacy page names indicate deviation/approval/QC surfaces; active rules, authorities and roles are not verified."
+    },
+    {
+      "name": "Disbursement",
+      "status": "Confirmation Required",
+      "detail": "Dealer, payee, account, IFSC, NACH and balance transfer controls exist; payout limits, approval rules and host contracts require confirmation."
+    }
+  ],
+  "fieldGroups": {
+    "group-001": [
       {
         "id": "leadCreateChannel",
         "name": "leadCreateChannel",
@@ -818,7 +926,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadCreateLogin.js"
+        "group": "group-001"
       },
       {
         "id": "branchEmpCode",
@@ -829,7 +937,7 @@
         "disabled": false,
         "label": "Employee Code *",
         "options": [],
-        "source": "lead/LeadCreateLogin.js"
+        "group": "group-001"
       },
       {
         "id": "leadCreateState",
@@ -842,7 +950,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadCreateLogin.js"
+        "group": "group-001"
       },
       {
         "id": "leadCreateDistrict",
@@ -855,7 +963,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadCreateLogin.js"
+        "group": "group-001"
       },
       {
         "id": "leadCreateSourceName",
@@ -868,7 +976,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadCreateLogin.js"
+        "group": "group-001"
       },
       {
         "id": "leadCreateBranch",
@@ -881,7 +989,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadCreateLogin.js"
+        "group": "group-001"
       },
       {
         "id": "leadCreateProduct",
@@ -894,10 +1002,10 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadCreateLogin.js"
+        "group": "group-001"
       }
     ],
-    "lead/LeadMobileVerfication.js": [
+    "group-002": [
       {
         "id": "mobile",
         "name": "mobile",
@@ -907,7 +1015,7 @@
         "disabled": false,
         "label": "Mobile Number *",
         "options": [],
-        "source": "lead/LeadMobileVerfication.js"
+        "group": "group-002"
       },
       {
         "id": "otp",
@@ -918,10 +1026,10 @@
         "disabled": false,
         "label": "Enter OTP *",
         "options": [],
-        "source": "lead/LeadMobileVerfication.js"
+        "group": "group-002"
       }
     ],
-    "lead/LeadNewCEVehicleForm.js": [
+    "group-003": [
       {
         "id": "fleetManufacture",
         "name": "fleetManufacture",
@@ -933,7 +1041,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "fleetModel",
@@ -946,7 +1054,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newVariant",
@@ -957,7 +1065,7 @@
         "disabled": false,
         "label": "Vehicle Variant *",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newChassisCost",
@@ -968,7 +1076,7 @@
         "disabled": false,
         "label": "Chasiss Cost (Proforma Inv.) *",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newDiscount",
@@ -979,7 +1087,7 @@
         "disabled": false,
         "label": "Discount * (max : )",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newNetChassisCost",
@@ -990,7 +1098,7 @@
         "disabled": true,
         "label": "Net Chassis Cost",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newChassisFundingProposed",
@@ -1001,7 +1109,7 @@
         "disabled": false,
         "label": "Proposed Funding (Chassis) * (max : )",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newBodyCost",
@@ -1012,7 +1120,7 @@
         "disabled": false,
         "label": "Body Cost *",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newBodyProposedFunding",
@@ -1023,7 +1131,7 @@
         "disabled": false,
         "label": "Proposed Funding (Body) * (max : )",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newTotalFundingProposed",
@@ -1034,7 +1142,7 @@
         "disabled": true,
         "label": "Total Funding Proposed",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newLoanTenure",
@@ -1047,7 +1155,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "hospiIsTaken",
@@ -1058,7 +1166,7 @@
         "disabled": false,
         "label": "Taken / Not Taken",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newCliCoverageAmount",
@@ -1069,7 +1177,7 @@
         "disabled": false,
         "label": "CLI Coverage Amount * (Min : 300000 | max : )",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newCliTenure",
@@ -1082,7 +1190,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newSelectBank",
@@ -1095,7 +1203,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "fundedBox",
@@ -1110,7 +1218,7 @@
           "Funded",
           "Non Funded"
         ],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newActualCliPremium",
@@ -1121,7 +1229,7 @@
         "disabled": true,
         "label": "Actual CLI As Per Policy",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newCliPremium",
@@ -1132,7 +1240,7 @@
         "disabled": true,
         "label": "Offered CLI",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "cliScheme",
@@ -1143,7 +1251,7 @@
         "disabled": true,
         "label": "CLI Scheme",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newHospiTenure",
@@ -1156,7 +1264,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newHospiPremium",
@@ -1167,7 +1275,7 @@
         "disabled": true,
         "label": "Calculated Premium",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newFinanceAmount",
@@ -1178,7 +1286,7 @@
         "disabled": true,
         "label": "Finance Amount",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newFinanceMlr",
@@ -1189,7 +1297,7 @@
         "disabled": true,
         "label": "MLR : � Applicable",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newFinanceMlr",
@@ -1200,7 +1308,7 @@
         "disabled": true,
         "label": "MCLR : Not Applicable",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newOfferedRoi",
@@ -1211,7 +1319,7 @@
         "disabled": false,
         "label": "Offered ROI * (min : )",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newOfferedRoiRemarks",
@@ -1222,7 +1330,7 @@
         "disabled": false,
         "label": "ROI Discount Remarks",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "moratoriumMonths",
@@ -1235,7 +1343,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newEmiAmount",
@@ -1246,7 +1354,7 @@
         "disabled": true,
         "label": "EMI Amount *",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newNoUnits",
@@ -1257,7 +1365,7 @@
         "disabled": false,
         "label": "No. Of Units *",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newEndUse",
@@ -1270,7 +1378,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newCustomerBackground",
@@ -1281,7 +1389,7 @@
         "disabled": false,
         "label": "Customer Background *",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newCustomerOtherDetail",
@@ -1292,7 +1400,7 @@
         "disabled": false,
         "label": "Customer Other Detail *",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "usedDistanceSourcingBranch",
@@ -1303,7 +1411,7 @@
         "disabled": false,
         "label": "Distance Of Sourcing Branch (KM) *",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "remarks",
@@ -1314,7 +1422,7 @@
         "disabled": false,
         "label": "Remarks *",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "cliIsTaken",
@@ -1323,9 +1431,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       },
       {
         "id": "newHospiFundedType",
@@ -1334,12 +1442,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LeadNewCEVehicleForm.js"
+        "group": "group-003"
       }
     ],
-    "lead/LeadNewVehicleForm.js": [
+    "group-004": [
       {
         "id": "fleetManufacture",
         "name": "fleetManufacture",
@@ -1351,7 +1459,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "fleetModel",
@@ -1364,7 +1472,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newVariant",
@@ -1375,7 +1483,7 @@
         "disabled": false,
         "label": "Vehicle Variant *",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newChassisCost",
@@ -1386,7 +1494,7 @@
         "disabled": false,
         "label": "Chasiss Cost (Proforma Inv.) *",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newDiscount",
@@ -1397,7 +1505,7 @@
         "disabled": false,
         "label": "Discount * (max : )",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newNetChassisCost",
@@ -1408,7 +1516,7 @@
         "disabled": true,
         "label": "Net Chassis Cost",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newChassisFundingProposed",
@@ -1419,7 +1527,7 @@
         "disabled": false,
         "label": "Proposed Funding (Chassis) * (max : )",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newBodyCost",
@@ -1430,7 +1538,7 @@
         "disabled": false,
         "label": "Body Cost *",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newBodyProposedFunding",
@@ -1441,7 +1549,7 @@
         "disabled": false,
         "label": "Proposed Funding (Body) * (max : )",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newTotalFundingProposed",
@@ -1452,7 +1560,7 @@
         "disabled": true,
         "label": "Total Funding Proposed",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newLoanTenure",
@@ -1465,7 +1573,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "hospiIsTaken",
@@ -1476,7 +1584,7 @@
         "disabled": false,
         "label": "Taken / Not Taken",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newCliCoverageAmount",
@@ -1487,7 +1595,7 @@
         "disabled": false,
         "label": "CLI Coverage Amount * (Min : 300000 | max : )",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newCliTenure",
@@ -1500,7 +1608,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newSelectBank",
@@ -1513,7 +1621,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "fundedBox",
@@ -1528,7 +1636,7 @@
           "Funded",
           "Non Funded"
         ],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newActualCliPremium",
@@ -1539,7 +1647,7 @@
         "disabled": true,
         "label": "Actual CLI As Per Policy",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newCliPremium",
@@ -1550,7 +1658,7 @@
         "disabled": true,
         "label": "Offered CLI",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "cliScheme",
@@ -1561,7 +1669,7 @@
         "disabled": true,
         "label": "CLI Scheme",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newHospiTenure",
@@ -1574,7 +1682,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newHospiPremium",
@@ -1585,7 +1693,7 @@
         "disabled": true,
         "label": "Calculated Premium",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newFinanceAmount",
@@ -1596,7 +1704,7 @@
         "disabled": true,
         "label": "Finance Amount",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newFinanceMlr",
@@ -1607,7 +1715,7 @@
         "disabled": true,
         "label": "MLR : � Applicable",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newFinanceMlr",
@@ -1618,7 +1726,7 @@
         "disabled": true,
         "label": "MCLR : Not Applicable",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newOfferedRoi",
@@ -1629,7 +1737,7 @@
         "disabled": false,
         "label": "Offered ROI * (min : )",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newOfferedRoiRemarks",
@@ -1640,7 +1748,7 @@
         "disabled": false,
         "label": "ROI Discount Remarks",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "moratoriumMonths",
@@ -1653,7 +1761,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newAdvanceEmi",
@@ -1664,7 +1772,7 @@
         "disabled": false,
         "label": "Advance EMI *",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newEmiAmount",
@@ -1675,7 +1783,7 @@
         "disabled": true,
         "label": "EMI Amount *",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newTotalAdvanceEmi",
@@ -1686,7 +1794,7 @@
         "disabled": true,
         "label": "Total Advance EMI",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newNoSpdc",
@@ -1697,7 +1805,7 @@
         "disabled": false,
         "label": "No. Of SPDC *",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newNoUnits",
@@ -1708,7 +1816,7 @@
         "disabled": false,
         "label": "No. Of Units *",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newEndUse",
@@ -1721,7 +1829,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newCustomerBackground",
@@ -1732,7 +1840,7 @@
         "disabled": false,
         "label": "Customer Background *",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newCustomerOtherDetail",
@@ -1743,7 +1851,7 @@
         "disabled": false,
         "label": "Customer Other Detail *",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "usedDistanceSourcingBranch",
@@ -1754,7 +1862,7 @@
         "disabled": false,
         "label": "Distance Of Sourcing Branch (KM) *",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "remarks",
@@ -1765,7 +1873,7 @@
         "disabled": false,
         "label": "Remarks *",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "cliIsTaken",
@@ -1774,9 +1882,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       },
       {
         "id": "newHospiFundedType",
@@ -1785,12 +1893,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LeadNewVehicleForm.js"
+        "group": "group-004"
       }
     ],
-    "lead/LeadPersonalLoanDetails.js": [
+    "group-005": [
       {
         "id": "schemeType",
         "name": "schemeType",
@@ -1802,7 +1910,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadPersonalLoanDetails.js"
+        "group": "group-005"
       },
       {
         "id": "policy",
@@ -1815,7 +1923,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadPersonalLoanDetails.js"
+        "group": "group-005"
       },
       {
         "id": "fundingType",
@@ -1828,7 +1936,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadPersonalLoanDetails.js"
+        "group": "group-005"
       },
       {
         "id": "customerGrade",
@@ -1841,7 +1949,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadPersonalLoanDetails.js"
+        "group": "group-005"
       },
       {
         "id": "dealerDistrict",
@@ -1854,7 +1962,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadPersonalLoanDetails.js"
+        "group": "group-005"
       },
       {
         "id": "dealer",
@@ -1867,7 +1975,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadPersonalLoanDetails.js"
+        "group": "group-005"
       },
       {
         "id": "dealerOutlet",
@@ -1880,7 +1988,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadPersonalLoanDetails.js"
+        "group": "group-005"
       },
       {
         "id": "distanceFromBranch",
@@ -1891,7 +1999,7 @@
         "disabled": false,
         "label": "Distance From Branch *",
         "options": [],
-        "source": "lead/LeadPersonalLoanDetails.js"
+        "group": "group-005"
       },
       {
         "id": "usedSourcingDetails",
@@ -1904,7 +2012,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadPersonalLoanDetails.js"
+        "group": "group-005"
       },
       {
         "id": "sourcingType",
@@ -1917,10 +2025,10 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadPersonalLoanDetails.js"
+        "group": "group-005"
       }
     ],
-    "lead/LeadProfileLoanDetails.js": [
+    "group-006": [
       {
         "id": "schemeType",
         "name": "schemeType",
@@ -1932,10 +2040,10 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadProfileLoanDetails.js"
+        "group": "group-006"
       }
     ],
-    "lead/LeadScoreCard.js": [
+    "group-007": [
       {
         "id": "scoreType",
         "name": "scoreType",
@@ -1947,10 +2055,10 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadScoreCard.js"
+        "group": "group-007"
       }
     ],
-    "lead/LeadSelectMember.js": [
+    "group-008": [
       {
         "id": "newChangeDealer",
         "name": "",
@@ -1960,7 +2068,7 @@
         "disabled": false,
         "label": "Skip Add Member",
         "options": [],
-        "source": "lead/LeadSelectMember.js"
+        "group": "group-008"
       },
       {
         "id": "selectMember",
@@ -1975,10 +2083,10 @@
           "Co-Applicant",
           "Guarantor"
         ],
-        "source": "lead/LeadSelectMember.js"
+        "group": "group-008"
       }
     ],
-    "lead/LeadUsedAssetDetails.js": [
+    "group-009": [
       {
         "id": "usedManufacture",
         "name": "usedManufacture",
@@ -1990,7 +2098,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedModel",
@@ -2003,7 +2111,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedBodyType",
@@ -2016,7 +2124,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedVehicleRegistrationNumber",
@@ -2027,7 +2135,7 @@
         "disabled": false,
         "label": "Registration No *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedRagistrationDate",
@@ -2038,7 +2146,7 @@
         "disabled": false,
         "label": "Registration Date *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedYearOfManufacture",
@@ -2051,7 +2159,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedMonthOfManufacture",
@@ -2076,7 +2184,7 @@
           "Nov",
           "Dec"
         ],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedGridValue",
@@ -2087,7 +2195,7 @@
         "disabled": true,
         "label": "Grid Value *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedSoGridValue",
@@ -2098,7 +2206,7 @@
         "disabled": false,
         "label": "Value Entered By So *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedEngineNo",
@@ -2109,7 +2217,7 @@
         "disabled": false,
         "label": "Engine No *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedChassisNumber",
@@ -2120,7 +2228,7 @@
         "disabled": false,
         "label": "Chassis Number *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedInsuranceCompany",
@@ -2131,7 +2239,7 @@
         "disabled": false,
         "label": "Insurance Company *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedInsuranceIdv",
@@ -2142,7 +2250,7 @@
         "disabled": false,
         "label": "Insurance IDV *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedFitnessValidUpTo",
@@ -2153,7 +2261,7 @@
         "disabled": false,
         "label": "Fitness Valid Up To *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedPermitValidUpTo",
@@ -2164,7 +2272,7 @@
         "disabled": false,
         "label": "Permit Valid Up To *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "isLtt",
@@ -2175,7 +2283,7 @@
         "disabled": false,
         "label": "LTT",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedTaxValidUpTo",
@@ -2186,7 +2294,7 @@
         "disabled": false,
         "label": "Tax Valid Up To *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedInsuranceExpireDate",
@@ -2197,7 +2305,7 @@
         "disabled": false,
         "label": "Insurance Expire Date *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedPreviousRcOwner",
@@ -2215,7 +2323,7 @@
           "4",
           "5"
         ],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedVehicleColor",
@@ -2226,7 +2334,7 @@
         "disabled": false,
         "label": "Vehicle Color *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedPreviousOwnerName",
@@ -2237,7 +2345,7 @@
         "disabled": false,
         "label": "Previous Owner Name *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedEndUse",
@@ -2250,7 +2358,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedCustomerBackground",
@@ -2261,7 +2369,7 @@
         "disabled": false,
         "label": "Customer Background *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedCustomerOtherDetails",
@@ -2272,7 +2380,7 @@
         "disabled": false,
         "label": "Customer Other Detail *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       },
       {
         "id": "usedDistanceFromBranch",
@@ -2283,10 +2391,10 @@
         "disabled": false,
         "label": "Distance From Sourcing Branch *",
         "options": [],
-        "source": "lead/LeadUsedAssetDetails.js"
+        "group": "group-009"
       }
     ],
-    "lead/LeadUsedCarAssetDetails.js": [
+    "group-010": [
       {
         "id": "usedManufacture",
         "name": "usedManufacture",
@@ -2298,7 +2406,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedModel",
@@ -2311,7 +2419,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedVariant",
@@ -2322,7 +2430,7 @@
         "disabled": false,
         "label": "Vehicle Variant *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedVehicleColor",
@@ -2333,7 +2441,7 @@
         "disabled": false,
         "label": "Vehicle Color *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedVehicleRegistrationNumber",
@@ -2344,7 +2452,7 @@
         "disabled": false,
         "label": "Registration No *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedRagistrationDate",
@@ -2355,7 +2463,7 @@
         "disabled": false,
         "label": "Registration Date *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedYearOfManufacture",
@@ -2368,7 +2476,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedMonthOfManufacture",
@@ -2393,7 +2501,7 @@
           "Nov",
           "Dec"
         ],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedEngineNo",
@@ -2404,7 +2512,7 @@
         "disabled": false,
         "label": "Engine Number *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedChassisNumber",
@@ -2415,7 +2523,7 @@
         "disabled": false,
         "label": "Chassis Number *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedInsuranceCompany",
@@ -2426,7 +2534,7 @@
         "disabled": false,
         "label": "Insurance Company *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedInsuranceIdv",
@@ -2437,7 +2545,7 @@
         "disabled": false,
         "label": "Insurance IDV *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedInsuranceExpireDate",
@@ -2448,7 +2556,7 @@
         "disabled": false,
         "label": "Insurance Expire Date *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedPreviousRcOwnerCount",
@@ -2466,7 +2574,7 @@
           "4",
           "5"
         ],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedPreviousRcOwnerName",
@@ -2477,7 +2585,7 @@
         "disabled": false,
         "label": "RC Owner Name *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarSellerContactNo",
@@ -2488,7 +2596,7 @@
         "disabled": false,
         "label": "RC Owner Contact No",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarLoanType",
@@ -2501,7 +2609,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedEndUse",
@@ -2512,7 +2620,7 @@
         "disabled": false,
         "label": "End Use *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarFuelType",
@@ -2525,7 +2633,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarOdoMeterReading",
@@ -2536,7 +2644,7 @@
         "disabled": false,
         "label": "Odometer Reading *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "customerBackground",
@@ -2547,7 +2655,7 @@
         "disabled": false,
         "label": "Customer Background *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarRcLimit",
@@ -2560,7 +2668,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarRepurchaseForm",
@@ -2573,7 +2681,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarFinacerName",
@@ -2584,7 +2692,7 @@
         "disabled": false,
         "label": "Financer Name *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarLoanFinancerIfsc",
@@ -2595,7 +2703,7 @@
         "disabled": false,
         "label": "Financer IFSC Code *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarLoanAccountNo",
@@ -2606,7 +2714,7 @@
         "disabled": false,
         "label": "Loan Account Number *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarMaucdType",
@@ -2619,7 +2727,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarContactPersonName",
@@ -2630,7 +2738,7 @@
         "disabled": false,
         "label": "Contact Person Name *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarContactPersonNo",
@@ -2641,7 +2749,7 @@
         "disabled": false,
         "label": "Contact Person No *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarValuationAddressLine1",
@@ -2652,7 +2760,7 @@
         "disabled": false,
         "label": "Address Line 1 *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarValuationAddressLine2",
@@ -2663,7 +2771,7 @@
         "disabled": false,
         "label": "Address Line 2 *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarValuationAddressLine3",
@@ -2674,7 +2782,7 @@
         "disabled": false,
         "label": "Address Line 3 *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarValuationPincode",
@@ -2685,7 +2793,7 @@
         "disabled": false,
         "label": "Pin Code *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarValuationDistrict",
@@ -2696,7 +2804,7 @@
         "disabled": false,
         "label": "District *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarValuationState",
@@ -2707,7 +2815,7 @@
         "disabled": false,
         "label": "State *",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       },
       {
         "id": "usedCarSameCurrentAddressChk",
@@ -2716,12 +2824,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LeadUsedCarAssetDetails.js"
+        "group": "group-010"
       }
     ],
-    "lead/LeadUsedCEAssetDetails.js": [
+    "group-011": [
       {
         "id": "usedManufacture",
         "name": "usedManufacture",
@@ -2733,7 +2841,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedModel",
@@ -2746,7 +2854,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedBodyType",
@@ -2759,7 +2867,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedVehicleRegistrationNumber",
@@ -2770,7 +2878,7 @@
         "disabled": false,
         "label": "Registration / Invoice No *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedRagistrationDate",
@@ -2781,7 +2889,7 @@
         "disabled": false,
         "label": "Registration Date *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedYearOfManufacture",
@@ -2794,7 +2902,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedMonthOfManufacture",
@@ -2819,7 +2927,7 @@
           "Nov",
           "Dec"
         ],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedGridValue",
@@ -2830,7 +2938,7 @@
         "disabled": true,
         "label": "Grid Value *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedSoGridValue",
@@ -2841,7 +2949,7 @@
         "disabled": false,
         "label": "Value Entered By So *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedEngineNo",
@@ -2852,7 +2960,7 @@
         "disabled": false,
         "label": "Engine No *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedChassisNumber",
@@ -2863,7 +2971,7 @@
         "disabled": false,
         "label": "Chassis Number *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedInsuranceCompany",
@@ -2874,7 +2982,7 @@
         "disabled": false,
         "label": "Insurance Company *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedInsuranceIdv",
@@ -2885,7 +2993,7 @@
         "disabled": false,
         "label": "Insurance IDV *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedFitnessValidUpTo",
@@ -2896,7 +3004,7 @@
         "disabled": false,
         "label": "Fitness Valid Up To *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedPermitValidUpTo",
@@ -2907,7 +3015,7 @@
         "disabled": false,
         "label": "Permit Valid Up To *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "isLtt",
@@ -2918,7 +3026,7 @@
         "disabled": false,
         "label": "LTT",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedTaxValidUpTo",
@@ -2929,7 +3037,7 @@
         "disabled": false,
         "label": "Tax Valid Up To *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedInsuranceExpireDate",
@@ -2940,7 +3048,7 @@
         "disabled": false,
         "label": "Insurance Expire Date *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedPreviousRcOwner",
@@ -2958,7 +3066,7 @@
           "4",
           "5"
         ],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedVehicleColor",
@@ -2969,7 +3077,7 @@
         "disabled": false,
         "label": "Vehicle Color *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedPreviousOwnerName",
@@ -2980,7 +3088,7 @@
         "disabled": false,
         "label": "Previous Owner Name *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedEndUse",
@@ -2993,7 +3101,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedCustomerBackground",
@@ -3004,7 +3112,7 @@
         "disabled": false,
         "label": "Customer Background *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedCustomerOtherDetails",
@@ -3015,7 +3123,7 @@
         "disabled": false,
         "label": "Customer Other Detail *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       },
       {
         "id": "usedDistanceFromBranch",
@@ -3026,10 +3134,10 @@
         "disabled": false,
         "label": "Distance From Sourcing Branch *",
         "options": [],
-        "source": "lead/LeadUsedCEAssetDetails.js"
+        "group": "group-011"
       }
     ],
-    "lead/LeadUsedCEVehicleForm.js": [
+    "group-012": [
       {
         "id": "usedGridValue",
         "name": "usedGridValue",
@@ -3039,7 +3147,7 @@
         "disabled": true,
         "label": "*",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedProposedFunding",
@@ -3050,7 +3158,7 @@
         "disabled": false,
         "label": "Proposed Funding * (max : )",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "hospiIsTaken",
@@ -3061,7 +3169,7 @@
         "disabled": false,
         "label": "Taken / Not Taken",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedCliCoverageAmount",
@@ -3072,7 +3180,7 @@
         "disabled": false,
         "label": "CLI Coverage Amount * (min : 300000 | max : )",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedCliTenure",
@@ -3085,7 +3193,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedSelectBank",
@@ -3098,7 +3206,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "fundedBox",
@@ -3113,7 +3221,7 @@
           "Funded",
           "Non Funded"
         ],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedActualCliPremium",
@@ -3124,7 +3232,7 @@
         "disabled": true,
         "label": "Actual CLI As Per Policy",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedCliPremium",
@@ -3135,7 +3243,7 @@
         "disabled": true,
         "label": "Offered CLI",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "cliScheme",
@@ -3146,7 +3254,7 @@
         "disabled": true,
         "label": "CLI Scheme",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "fundedBox",
@@ -3161,7 +3269,7 @@
           "Funded",
           "Non Funded"
         ],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedHospiTenure",
@@ -3174,7 +3282,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedHospiPremium",
@@ -3185,7 +3293,7 @@
         "disabled": true,
         "label": "Calculated Premium",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedFinanceAmount",
@@ -3196,7 +3304,7 @@
         "disabled": true,
         "label": "Finance Amount",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedOfferedRoi",
@@ -3207,7 +3315,7 @@
         "disabled": false,
         "label": "Offered ROI * (min : )",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedOfferedRoiRemarks",
@@ -3218,7 +3326,7 @@
         "disabled": false,
         "label": "ROI Discount Remarks *",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "moratoriumMonths",
@@ -3231,7 +3339,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedAdavnceEmi",
@@ -3242,7 +3350,7 @@
         "disabled": false,
         "label": "Advance Emi *",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedEmiAmount",
@@ -3253,7 +3361,7 @@
         "disabled": true,
         "label": "EMI Amount *",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedTotalAdvanceEmi",
@@ -3264,7 +3372,7 @@
         "disabled": true,
         "label": "Total Advance Emi",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "remarks",
@@ -3275,7 +3383,7 @@
         "disabled": false,
         "label": "Remarks *",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "usedTenure",
@@ -3284,9 +3392,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "cliIsTaken",
@@ -3295,9 +3403,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       },
       {
         "id": "newFinanceMlr",
@@ -3306,12 +3414,12 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": true,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LeadUsedCEVehicleForm.js"
+        "group": "group-012"
       }
     ],
-    "lead/LeadUsedVehicleForm.js": [
+    "group-013": [
       {
         "id": "usedGridValue",
         "name": "usedGridValue",
@@ -3321,7 +3429,7 @@
         "disabled": true,
         "label": "*",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedProposedFunding",
@@ -3332,7 +3440,7 @@
         "disabled": false,
         "label": "Proposed Funding * (max : )",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "hospiIsTaken",
@@ -3343,7 +3451,7 @@
         "disabled": false,
         "label": "Taken / Not Taken",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedCliCoverageAmount",
@@ -3354,7 +3462,7 @@
         "disabled": false,
         "label": "CLI Coverage Amount * (min : 300000 | max : )",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedCliTenure",
@@ -3367,7 +3475,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedSelectBank",
@@ -3380,7 +3488,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "fundedBox",
@@ -3395,7 +3503,7 @@
           "Funded",
           "Non Funded"
         ],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedActualCliPremium",
@@ -3406,7 +3514,7 @@
         "disabled": true,
         "label": "Actual CLI As Per Policy",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedCliPremium",
@@ -3417,7 +3525,7 @@
         "disabled": true,
         "label": "Offered CLI",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "cliScheme",
@@ -3428,7 +3536,7 @@
         "disabled": true,
         "label": "CLI Scheme",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "fundedBox",
@@ -3443,7 +3551,7 @@
           "Funded",
           "Non Funded"
         ],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedHospiTenure",
@@ -3456,7 +3564,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedHospiPremium",
@@ -3467,7 +3575,7 @@
         "disabled": true,
         "label": "Calculated Premium",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedFinanceAmount",
@@ -3478,7 +3586,7 @@
         "disabled": true,
         "label": "Finance Amount",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedOfferedRoi",
@@ -3489,7 +3597,7 @@
         "disabled": false,
         "label": "Offered ROI * (min : )",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedOfferedRoiRemarks",
@@ -3500,7 +3608,7 @@
         "disabled": false,
         "label": "ROI Discount Remarks *",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "moratoriumMonths",
@@ -3513,7 +3621,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedAdavnceEmi",
@@ -3524,7 +3632,7 @@
         "disabled": false,
         "label": "Advance Emi *",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedEmiAmount",
@@ -3535,7 +3643,7 @@
         "disabled": true,
         "label": "EMI Amount *",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedTotalAdvanceEmi",
@@ -3546,7 +3654,7 @@
         "disabled": true,
         "label": "Total Advance Emi",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "remarks",
@@ -3557,7 +3665,7 @@
         "disabled": false,
         "label": "Remarks *",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "usedTenure",
@@ -3566,9 +3674,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "cliIsTaken",
@@ -3577,9 +3685,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       },
       {
         "id": "newFinanceMlr",
@@ -3588,12 +3696,12 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": true,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LeadUsedVehicleForm.js"
+        "group": "group-013"
       }
     ],
-    "lead/LoanNewCarLoanForm.js": [
+    "group-014": [
       {
         "id": "fleetManufacture",
         "name": "fleetManufacture",
@@ -3605,7 +3713,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "fleetModel",
@@ -3618,7 +3726,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newVariant",
@@ -3629,7 +3737,7 @@
         "disabled": false,
         "label": "Vehicle Variant *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newCarLoanType",
@@ -3642,7 +3750,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newCarFuelType",
@@ -3655,7 +3763,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "customerBackground",
@@ -3666,7 +3774,7 @@
         "disabled": false,
         "label": "Customer Background *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "exShowRoomPrice",
@@ -3677,7 +3785,7 @@
         "disabled": false,
         "label": "Ex Show Room Price *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "discount",
@@ -3688,7 +3796,7 @@
         "disabled": false,
         "label": "Discount *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "roadTax",
@@ -3699,7 +3807,7 @@
         "disabled": false,
         "label": "Road Tax *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "insuranceAmount",
@@ -3710,7 +3818,7 @@
         "disabled": false,
         "label": "Insurance Amount *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "onRoadPrice",
@@ -3721,7 +3829,7 @@
         "disabled": true,
         "label": "On Road Price",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "accessoriesCost",
@@ -3732,7 +3840,7 @@
         "disabled": false,
         "label": "Accessories Cost *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "extendedWarrantyCharges",
@@ -3743,7 +3851,7 @@
         "disabled": false,
         "label": "Extended Warranty Charges *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "registrationCharges",
@@ -3754,7 +3862,7 @@
         "disabled": false,
         "label": "Registration Charges *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "otherCharges",
@@ -3765,7 +3873,7 @@
         "disabled": false,
         "label": "Other Charges *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "totalAssetCost",
@@ -3776,7 +3884,7 @@
         "disabled": true,
         "label": "Total Asset Cost",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "marginMoney",
@@ -3787,7 +3895,7 @@
         "disabled": false,
         "label": "Margin Money",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "appliedLoanAmount",
@@ -3798,7 +3906,7 @@
         "disabled": true,
         "label": "Applied Loan Amount (LTV On Road Price : %) (LTV Total Asset Cost : %)",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newLoanTenure",
@@ -3811,7 +3919,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newFinanceMlr",
@@ -3822,7 +3930,7 @@
         "disabled": true,
         "label": "MLR : � Applicable",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newFinanceMlr",
@@ -3833,7 +3941,7 @@
         "disabled": true,
         "label": "MCLR : Not Applicable",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newOfferedRoi",
@@ -3844,7 +3952,7 @@
         "disabled": false,
         "label": "Offered ROI % * (min : )",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newOfferedRoiRemarks",
@@ -3855,7 +3963,7 @@
         "disabled": false,
         "label": "ROI Discount Remarks *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "hospiIsTaken",
@@ -3866,7 +3974,7 @@
         "disabled": false,
         "label": "Taken / Not Taken",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newCliCoverageAmount",
@@ -3877,7 +3985,7 @@
         "disabled": false,
         "label": "CLI Coverage Amount * (Min : 100000 | max : )",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newCliTenure",
@@ -3890,7 +3998,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newSelectBank",
@@ -3903,7 +4011,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "fundedBox",
@@ -3918,7 +4026,7 @@
           "Funded",
           "Non Funded"
         ],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newActualCliPremium",
@@ -3929,7 +4037,7 @@
         "disabled": true,
         "label": "Actual CLI As Per Policy",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newCliPremium",
@@ -3940,7 +4048,7 @@
         "disabled": true,
         "label": "Offered CLI",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newHospiTenure",
@@ -3953,7 +4061,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newHospiPremium",
@@ -3964,7 +4072,7 @@
         "disabled": true,
         "label": "Calculated Premium",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "processingFeePercent",
@@ -3975,7 +4083,7 @@
         "disabled": true,
         "label": "Processing Fee Percent *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "processingFeeExcGst",
@@ -3986,7 +4094,7 @@
         "disabled": true,
         "label": "Actual Processing Fee (Excluding GST) *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "offeredProcessingFee",
@@ -3997,7 +4105,7 @@
         "disabled": false,
         "label": "Offered Processing Fee * (max : )",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "totalProcessingFee",
@@ -4008,7 +4116,7 @@
         "disabled": true,
         "label": "Total Processing Fee (Include GST) *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newFinanceAmount",
@@ -4019,7 +4127,7 @@
         "disabled": true,
         "label": "Finance Amount",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newAdvanceEmi",
@@ -4030,7 +4138,7 @@
         "disabled": false,
         "label": "Advance EMI *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "moratoriumMonths",
@@ -4043,7 +4151,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newEmiAmount",
@@ -4054,7 +4162,7 @@
         "disabled": true,
         "label": "EMI Amount *",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newTotalAdvanceEmi",
@@ -4065,7 +4173,7 @@
         "disabled": true,
         "label": "Total Advance EMI",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "cliIsTaken",
@@ -4074,9 +4182,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       },
       {
         "id": "newHospiFundedType",
@@ -4085,12 +4193,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LoanNewCarLoanForm.js"
+        "group": "group-014"
       }
     ],
-    "lead/LoanUsedCarLoanForm.js": [
+    "group-015": [
       {
         "id": "gridValue",
         "name": "gridValue",
@@ -4100,7 +4208,7 @@
         "disabled": true,
         "label": "Grid Value *",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "totalAssetCost",
@@ -4111,7 +4219,7 @@
         "disabled": false,
         "label": "Valuation Entered By SO *",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "appliedLoanAmount",
@@ -4122,7 +4230,7 @@
         "disabled": false,
         "label": "Applied Loan Amount * (max : ) (LTV: %)",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "loanTenure",
@@ -4135,7 +4243,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "mlr",
@@ -4146,7 +4254,7 @@
         "disabled": true,
         "label": "MLR",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "offeredRoi",
@@ -4157,7 +4265,7 @@
         "disabled": false,
         "label": "Offered ROI % * (min : )",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "roiDiscountRemarks",
@@ -4168,7 +4276,7 @@
         "disabled": false,
         "label": "ROI Discount Remarks *",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "hospiIsTaken",
@@ -4179,7 +4287,7 @@
         "disabled": false,
         "label": "Taken / Not Taken",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "cliCoverageAmount",
@@ -4190,7 +4298,7 @@
         "disabled": false,
         "label": "CLI Coverage Amount * (Min : 100000 | max : )",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "cliTenure",
@@ -4203,7 +4311,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "bank",
@@ -4216,7 +4324,7 @@
         "options": [
           "Select"
         ],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "fundedBox",
@@ -4231,7 +4339,7 @@
           "Funded",
           "Non Funded"
         ],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "actualCli",
@@ -4242,7 +4350,7 @@
         "disabled": true,
         "label": "Actual CLI As Per Policy",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "offeredCli",
@@ -4253,7 +4361,7 @@
         "disabled": true,
         "label": "Offered CLI",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "fundedBox",
@@ -4268,7 +4376,7 @@
           "Funded",
           "Non Funded"
         ],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "usedHospiTenure",
@@ -4281,7 +4389,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "usedHospiPremium",
@@ -4292,7 +4400,7 @@
         "disabled": true,
         "label": "Calculated Premium",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "processingFeePercent",
@@ -4303,7 +4411,7 @@
         "disabled": true,
         "label": "Processing Fee Percent *",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "actualProcessingFee",
@@ -4314,7 +4422,7 @@
         "disabled": true,
         "label": "Actual Processing Fee (Excluding GST) *",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "offeredProcessingFee",
@@ -4325,7 +4433,7 @@
         "disabled": false,
         "label": "Offered Processing Fee * (max : )",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "totalProcessingFee",
@@ -4336,7 +4444,7 @@
         "disabled": true,
         "label": "Total Processing Fee (Include GST) *",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "newFinanceAmount",
@@ -4347,7 +4455,7 @@
         "disabled": true,
         "label": "Finance Amount",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "advanceEmi",
@@ -4358,7 +4466,7 @@
         "disabled": false,
         "label": "Advance EMI *",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "moratoriumMonths",
@@ -4371,7 +4479,7 @@
         "options": [
           "0"
         ],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "emiAmount",
@@ -4382,7 +4490,7 @@
         "disabled": true,
         "label": "EMI Amount *",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "totalAdvanceEmi",
@@ -4393,7 +4501,7 @@
         "disabled": true,
         "label": "Total Advance EMI",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "newFinanceMlr",
@@ -4402,9 +4510,9 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": true,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "cliIsTaken",
@@ -4413,9 +4521,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       },
       {
         "id": "newHospiFundedType",
@@ -4424,12 +4532,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": true,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "lead/LoanUsedCarLoanForm.js"
+        "group": "group-015"
       }
     ],
-    "applicant/Applicant.js": [
+    "group-016": [
       {
         "id": "applicantMobile",
         "name": "applicantMobile",
@@ -4439,7 +4547,7 @@
         "disabled": true,
         "label": "Mobile Number *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantEntity",
@@ -4454,7 +4562,7 @@
           "Individual",
           "Non Individual"
         ],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantPoiType",
@@ -4467,7 +4575,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantPoiNumber",
@@ -4478,7 +4586,7 @@
         "disabled": true,
         "label": "Poi Number *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantFirstname",
@@ -4489,7 +4597,7 @@
         "disabled": false,
         "label": "First Name *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantMiddlename",
@@ -4500,7 +4608,7 @@
         "disabled": false,
         "label": "Middle Name",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantLastname",
@@ -4511,7 +4619,7 @@
         "disabled": false,
         "label": "Last Name *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantDOB",
@@ -4522,7 +4630,7 @@
         "disabled": true,
         "label": "Date Of Birth *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantGender",
@@ -4535,7 +4643,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantFatherName",
@@ -4546,7 +4654,7 @@
         "disabled": false,
         "label": "Father Name *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantPoaType",
@@ -4559,7 +4667,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantPoaNumber",
@@ -4570,7 +4678,7 @@
         "disabled": true,
         "label": "Poa Number *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantPinCode",
@@ -4581,7 +4689,7 @@
         "disabled": false,
         "label": "Pin Code *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "addressline1",
@@ -4592,7 +4700,7 @@
         "disabled": true,
         "label": "Address Line 1 *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "addressline2",
@@ -4603,7 +4711,7 @@
         "disabled": true,
         "label": "Address Line 2 *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "addressline3",
@@ -4614,7 +4722,7 @@
         "disabled": true,
         "label": "Address Line 3 *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "setPanCardNumber",
@@ -4625,7 +4733,7 @@
         "disabled": false,
         "label": "Pan Number *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "pancardName",
@@ -4636,7 +4744,7 @@
         "disabled": false,
         "label": "Pan Name *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "pancardFatherName",
@@ -4647,7 +4755,7 @@
         "disabled": false,
         "label": "Pan Father Name *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "poiType2",
@@ -4660,7 +4768,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "poi2Number",
@@ -4671,7 +4779,7 @@
         "disabled": false,
         "label": "Additional POI Number *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "doi",
@@ -4682,7 +4790,7 @@
         "disabled": true,
         "label": "Date Of Issue *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "passportFileNo",
@@ -4693,7 +4801,7 @@
         "disabled": false,
         "label": "File No *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantLoanAmt",
@@ -4704,7 +4812,7 @@
         "disabled": true,
         "label": "Loan Amount *",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "poiImage",
@@ -4713,9 +4821,9 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "samepoiadd",
@@ -4724,9 +4832,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "poaFrontImage",
@@ -4735,9 +4843,9 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "poaBackImage",
@@ -4746,9 +4854,9 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "form60",
@@ -4757,9 +4865,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "panCardImage",
@@ -4768,9 +4876,9 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       },
       {
         "id": "applicantImage",
@@ -4779,12 +4887,12 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicant/Applicant.js"
+        "group": "group-016"
       }
     ],
-    "applicant/BankAccountAuthentication.js": [
+    "group-017": [
       {
         "id": "paymentAccount",
         "name": "paymentAccount",
@@ -4796,7 +4904,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicant/BankAccountAuthentication.js"
+        "group": "group-017"
       },
       {
         "id": "cusname",
@@ -4807,7 +4915,7 @@
         "disabled": true,
         "label": "Customer Name *",
         "options": [],
-        "source": "applicant/BankAccountAuthentication.js"
+        "group": "group-017"
       },
       {
         "id": "ifscCode",
@@ -4818,7 +4926,7 @@
         "disabled": true,
         "label": "IFSC Code *",
         "options": [],
-        "source": "applicant/BankAccountAuthentication.js"
+        "group": "group-017"
       },
       {
         "id": "accNumber",
@@ -4829,7 +4937,7 @@
         "disabled": true,
         "label": "Bank Account Number *",
         "options": [],
-        "source": "applicant/BankAccountAuthentication.js"
+        "group": "group-017"
       },
       {
         "id": "accNumber",
@@ -4840,7 +4948,7 @@
         "disabled": true,
         "label": "No. Of PDC *",
         "options": [],
-        "source": "applicant/BankAccountAuthentication.js"
+        "group": "group-017"
       },
       {
         "id": "noofSPDC",
@@ -4849,12 +4957,12 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicant/BankAccountAuthentication.js"
+        "group": "group-017"
       }
     ],
-    "applicant/LoginWith.js": [
+    "group-018": [
       {
         "id": "loginKyc",
         "name": "loginKyc",
@@ -4862,9 +4970,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicant/LoginWith.js"
+        "group": "group-018"
       },
       {
         "id": "loginManual",
@@ -4873,12 +4981,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicant/LoginWith.js"
+        "group": "group-018"
       }
     ],
-    "applicationform/AddressDetails.js": [
+    "group-019": [
       {
         "id": "currentAddressLine1",
         "name": "currentAddressLine1",
@@ -4888,7 +4996,7 @@
         "disabled": true,
         "label": "Current Address Line 1 *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "currentAddressLine2",
@@ -4899,7 +5007,7 @@
         "disabled": true,
         "label": "Current Address Line 2 *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "currentAddressPincode",
@@ -4910,7 +5018,7 @@
         "disabled": true,
         "label": "Pin Code *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "currentAddressCity",
@@ -4921,7 +5029,7 @@
         "disabled": true,
         "label": "City *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "currentState",
@@ -4932,7 +5040,7 @@
         "disabled": true,
         "label": "State *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "currentLandmark",
@@ -4943,7 +5051,7 @@
         "disabled": false,
         "label": "Land Mark *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "currentAccomodation",
@@ -4956,7 +5064,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "currentResidence",
@@ -4969,7 +5077,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "currentRent",
@@ -4980,7 +5088,7 @@
         "disabled": false,
         "label": "Rent *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "currentAddressYear",
@@ -5044,7 +5152,7 @@
           "49",
           "50"
         ],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "currentYearCity",
@@ -5108,7 +5216,7 @@
           "49",
           "50"
         ],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "permanentAddressLine1",
@@ -5119,7 +5227,7 @@
         "disabled": false,
         "label": "Permanent Address Line 1 *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "permanentAddressLine2",
@@ -5130,7 +5238,7 @@
         "disabled": false,
         "label": "Permanent Address Line 2 *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "PermanentAddressPincode",
@@ -5141,7 +5249,7 @@
         "disabled": false,
         "label": "Pin Code *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "permanentAddressCity",
@@ -5152,7 +5260,7 @@
         "disabled": false,
         "label": "City *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "permanentState",
@@ -5163,7 +5271,7 @@
         "disabled": false,
         "label": "State *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "permanentLandmark",
@@ -5174,7 +5282,7 @@
         "disabled": false,
         "label": "Landmark *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "permanentAccomodation",
@@ -5187,7 +5295,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "permanentResidence",
@@ -5200,7 +5308,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "permanentRent",
@@ -5211,7 +5319,7 @@
         "disabled": false,
         "label": "Rent *",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "standardOfLiving",
@@ -5224,7 +5332,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "currentAddressMonth",
@@ -5233,9 +5341,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "currentMonthCity",
@@ -5244,9 +5352,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "sameCurrentAddress",
@@ -5255,9 +5363,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "sameApplicantCurrentAddress",
@@ -5266,9 +5374,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "sameApplicantPermanentAddress",
@@ -5277,9 +5385,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       },
       {
         "id": "PermanentAddressLine2",
@@ -5288,12 +5396,12 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/AddressDetails.js"
+        "group": "group-019"
       }
     ],
-    "applicationform/OfficeDetails.js": [
+    "group-020": [
       {
         "id": "officeUdhyamCertificate",
         "name": "officeUdhyamCertificate",
@@ -5307,7 +5415,7 @@
           "Yes",
           "No"
         ],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "udhyamRegistrationNo",
@@ -5318,7 +5426,7 @@
         "disabled": false,
         "label": "Udhyam Registration No *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeOccupation",
@@ -5331,7 +5439,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeNatureOfBusiness",
@@ -5344,7 +5452,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeIndustry",
@@ -5357,7 +5465,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeNatureOfOccupation",
@@ -5370,7 +5478,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeName",
@@ -5381,7 +5489,7 @@
         "disabled": false,
         "label": "Office Name *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeDesignation",
@@ -5392,7 +5500,7 @@
         "disabled": false,
         "label": "Designation *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeAddressLine1",
@@ -5403,7 +5511,7 @@
         "disabled": false,
         "label": "Office Address Line 1 *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeAddressLine2",
@@ -5414,7 +5522,7 @@
         "disabled": false,
         "label": "Office Address Line 2 *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeAddressPincode",
@@ -5425,7 +5533,7 @@
         "disabled": false,
         "label": "Pin Code *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeAddressCity",
@@ -5436,7 +5544,7 @@
         "disabled": false,
         "label": "City *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeState",
@@ -5447,7 +5555,7 @@
         "disabled": false,
         "label": "office State *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeLandmark",
@@ -5458,7 +5566,7 @@
         "disabled": false,
         "label": "Landmark *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeMobileNo",
@@ -5469,7 +5577,7 @@
         "disabled": false,
         "label": "Office Mobile No *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "currentYearOffice",
@@ -5533,7 +5641,7 @@
           "49",
           "50"
         ],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeYearExperience",
@@ -5597,7 +5705,7 @@
           "49",
           "50"
         ],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "yearInCurrentProfession",
@@ -5608,7 +5716,7 @@
         "disabled": false,
         "label": "Year in Current Profession *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "alternativeBusiness",
@@ -5619,7 +5727,7 @@
         "disabled": false,
         "label": "Alternative Business *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "alternativeSoureOfIncome",
@@ -5630,7 +5738,7 @@
         "disabled": false,
         "label": "Alternative Source Of Income *",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "sameCoApplicantCurrentAddress",
@@ -5639,9 +5747,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "sameCoApplicantPermanentAddress",
@@ -5650,9 +5758,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "sameApplicantCurrentAddress",
@@ -5661,9 +5769,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "sameApplicantPermanentAddress",
@@ -5672,9 +5780,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "sameApplicantofficeAddress",
@@ -5683,9 +5791,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "currentMonthOffice",
@@ -5694,9 +5802,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       },
       {
         "id": "officeMonthExperience",
@@ -5705,12 +5813,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/OfficeDetails.js"
+        "group": "group-020"
       }
     ],
-    "applicationform/PersonalInformation.js": [
+    "group-021": [
       {
         "id": "firstname",
         "name": "firstname",
@@ -5720,7 +5828,7 @@
         "disabled": false,
         "label": "First Name *",
         "options": [],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "middlename",
@@ -5731,7 +5839,7 @@
         "disabled": false,
         "label": "Middle Name *",
         "options": [],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "lastname",
@@ -5742,7 +5850,7 @@
         "disabled": false,
         "label": "Last Name *",
         "options": [],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "dob",
@@ -5753,7 +5861,7 @@
         "disabled": true,
         "label": "Date Of Birth *",
         "options": [],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "fatherSpouseName",
@@ -5764,7 +5872,7 @@
         "disabled": false,
         "label": "Father / Spouse Name *",
         "options": [],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "moboileNo",
@@ -5775,7 +5883,7 @@
         "disabled": false,
         "label": "Mobile No *",
         "options": [],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "motherMaidenName",
@@ -5786,7 +5894,7 @@
         "disabled": false,
         "label": "Mother / Maiden Name *",
         "options": [],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "relation",
@@ -5799,7 +5907,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "email",
@@ -5810,7 +5918,7 @@
         "disabled": false,
         "label": "Email Address *",
         "options": [],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "religion",
@@ -5823,7 +5931,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "cast",
@@ -5836,7 +5944,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "education",
@@ -5849,7 +5957,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "resident",
@@ -5862,7 +5970,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "maritalStatus",
@@ -5875,7 +5983,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "spouseName",
@@ -5886,7 +5994,7 @@
         "disabled": false,
         "label": "Spouse Name *",
         "options": [],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "noOfDependents",
@@ -5897,7 +6005,7 @@
         "disabled": false,
         "label": "No Of Dependents *",
         "options": [],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "monthlyIncome",
@@ -5908,7 +6016,7 @@
         "disabled": false,
         "label": "Monthly Income *",
         "options": [],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       },
       {
         "id": "communicationLanguage",
@@ -5921,10 +6029,10 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/PersonalInformation.js"
+        "group": "group-021"
       }
     ],
-    "applicationform/TradeNominee.js": [
+    "group-022": [
       {
         "id": "reference1Name",
         "name": "reference1Name",
@@ -5934,7 +6042,7 @@
         "disabled": false,
         "label": "Name *",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "reference1Relationship",
@@ -5947,7 +6055,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "reference1Mobile",
@@ -5958,7 +6066,7 @@
         "disabled": false,
         "label": "Mobile No *",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "reference2Name",
@@ -5969,7 +6077,7 @@
         "disabled": false,
         "label": "Name *",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "reference2Relationship",
@@ -5982,7 +6090,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "reference2Mobile",
@@ -5993,7 +6101,7 @@
         "disabled": false,
         "label": "Mobile No *",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "nomineeName",
@@ -6004,7 +6112,7 @@
         "disabled": false,
         "label": "Name *",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "nomineeDob",
@@ -6015,7 +6123,7 @@
         "disabled": false,
         "label": "Date Of Birth *",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "nomineeGender",
@@ -6028,7 +6136,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "nomineeRelationship",
@@ -6041,7 +6149,7 @@
         "options": [
           "Select"
         ],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "nomineeAddressLine1",
@@ -6052,7 +6160,7 @@
         "disabled": false,
         "label": "Current Address Line 1 *",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "nomineeAddressLine2",
@@ -6063,7 +6171,7 @@
         "disabled": false,
         "label": "Current Address Line 2 *",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "nomineeAddressPincode",
@@ -6074,7 +6182,7 @@
         "disabled": false,
         "label": "Pin Code *",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "nomineeAddressCity",
@@ -6085,7 +6193,7 @@
         "disabled": false,
         "label": "City *",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "nomineeAddressState",
@@ -6096,7 +6204,7 @@
         "disabled": false,
         "label": "State *",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "sameCoApplicant",
@@ -6105,9 +6213,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       },
       {
         "id": "sameGaurenter",
@@ -6116,12 +6224,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "applicationform/TradeNominee.js"
+        "group": "group-022"
       }
     ],
-    "kyc/Ekyc.js": [
+    "group-023": [
       {
         "id": "loginKyc",
         "name": "loginKyc",
@@ -6129,12 +6237,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "kyc/Ekyc.js"
+        "group": "group-023"
       }
     ],
-    "kyc/PendingKyc.js": [
+    "group-024": [
       {
         "id": "aadharNumber",
         "name": "aadharNumber",
@@ -6144,7 +6252,7 @@
         "disabled": false,
         "label": "Aadhaar Number",
         "options": [],
-        "source": "kyc/PendingKyc.js"
+        "group": "group-024"
       },
       {
         "id": "aadharOtp",
@@ -6155,7 +6263,7 @@
         "disabled": false,
         "label": "Enter 6 Digit Code",
         "options": [],
-        "source": "kyc/PendingKyc.js"
+        "group": "group-024"
       },
       {
         "id": "confirmDetail",
@@ -6164,9 +6272,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "kyc/PendingKyc.js"
+        "group": "group-024"
       },
       {
         "id": "isAgree",
@@ -6175,12 +6283,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": true,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "kyc/PendingKyc.js"
+        "group": "group-024"
       }
     ],
-    "kyc/VaultDedupe.js": [
+    "group-025": [
       {
         "id": "aadharNumber",
         "name": "aadharNumber",
@@ -6190,10 +6298,10 @@
         "disabled": true,
         "label": "Aadhar Number",
         "options": [],
-        "source": "kyc/VaultDedupe.js"
+        "group": "group-025"
       }
     ],
-    "kyc/VidEkyc.js": [
+    "group-026": [
       {
         "id": "aadharNumber",
         "name": "aadharNumber",
@@ -6203,7 +6311,7 @@
         "disabled": false,
         "label": "VID Number",
         "options": [],
-        "source": "kyc/VidEkyc.js"
+        "group": "group-026"
       },
       {
         "id": "aadharOtp",
@@ -6214,7 +6322,7 @@
         "disabled": false,
         "label": "Enter 6 Digit Code",
         "options": [],
-        "source": "kyc/VidEkyc.js"
+        "group": "group-026"
       },
       {
         "id": "confirmDetail",
@@ -6223,9 +6331,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "kyc/VidEkyc.js"
+        "group": "group-026"
       },
       {
         "id": "isAgree",
@@ -6234,12 +6342,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": true,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "kyc/VidEkyc.js"
+        "group": "group-026"
       }
     ],
-    "charges/LeadDocumentCharges.js": [
+    "group-027": [
       {
         "id": "sanctionAsset",
         "name": "sanctionAsset",
@@ -6249,7 +6357,7 @@
         "disabled": true,
         "label": "Sanction On Asset *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "sanctionAmount",
@@ -6260,7 +6368,7 @@
         "disabled": true,
         "label": "Total Sanction Amount *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "sanctionTenure",
@@ -6271,7 +6379,7 @@
         "disabled": true,
         "label": "Sanction Tenure *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "loanAvailed",
@@ -6282,7 +6390,7 @@
         "disabled": false,
         "label": "Loan Availed * (max : )",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "appliedROI",
@@ -6293,7 +6401,7 @@
         "disabled": true,
         "label": "Applied ROI *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "offerdROI",
@@ -6304,7 +6412,7 @@
         "disabled": false,
         "label": "MLR : � Applicable",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "offerdROI",
@@ -6315,7 +6423,7 @@
         "disabled": false,
         "label": "MCLR : Not Applicable",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "offerdROI",
@@ -6326,7 +6434,7 @@
         "disabled": false,
         "label": "Offered ROI * (Min : )",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "justificationROI",
@@ -6337,7 +6445,7 @@
         "disabled": false,
         "label": "Justification If Any (ROI) *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "hospiIsTaken",
@@ -6348,7 +6456,7 @@
         "disabled": false,
         "label": "Taken / Not Taken",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "cliCoverageAmount",
@@ -6359,7 +6467,7 @@
         "disabled": false,
         "label": "CLI Coverage Amount * (min : ( ) | max : )",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "cliCoverageMonths",
@@ -6372,7 +6480,7 @@
         "options": [
           "Select"
         ],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "cliBank",
@@ -6385,7 +6493,7 @@
         "options": [
           "Select"
         ],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "fundedBox",
@@ -6400,7 +6508,7 @@
           "Non Funded",
           "Funded"
         ],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "newCliPremium",
@@ -6411,7 +6519,7 @@
         "disabled": true,
         "label": "CLI Premium Amount",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "cliScheme",
@@ -6422,7 +6530,7 @@
         "disabled": true,
         "label": "CLI Scheme",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "justificationPfKli",
@@ -6433,7 +6541,7 @@
         "disabled": false,
         "label": "Justification If Any(CLI) *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "fundedBox",
@@ -6448,7 +6556,7 @@
           "Non Funded",
           "Funded"
         ],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "chargesHospiTenure",
@@ -6461,7 +6569,7 @@
         "options": [
           "0"
         ],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "chargesHospiPremium",
@@ -6472,7 +6580,7 @@
         "disabled": true,
         "label": "Calculated Premium",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "totalAvailedAmount",
@@ -6483,7 +6591,7 @@
         "disabled": true,
         "label": "Total Availed Amount * (max : )",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "processingFeeExcGst",
@@ -6494,7 +6602,7 @@
         "disabled": true,
         "label": "Actual Processing Fee (Excluding GST) *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "offeredProcessingFee",
@@ -6505,7 +6613,7 @@
         "disabled": false,
         "label": "Offered Processing Fee *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "totalProcessingFee",
@@ -6516,7 +6624,7 @@
         "disabled": true,
         "label": "Total Offered Processing Fee (Include GST) *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "justificationPf",
@@ -6527,7 +6635,7 @@
         "disabled": false,
         "label": "Justification If Any(PF) *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "chargesEmiAmount",
@@ -6538,7 +6646,7 @@
         "disabled": true,
         "label": "EMI Amount *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "subventionCharges",
@@ -6549,7 +6657,7 @@
         "disabled": false,
         "label": "Subvention Charges *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "valuationChargesDoneBy",
@@ -6562,7 +6670,7 @@
         "options": [
           "Select"
         ],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "esignMode",
@@ -6575,7 +6683,7 @@
         "options": [
           "Select"
         ],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "stampCharges",
@@ -6588,7 +6696,7 @@
         "options": [
           "Select"
         ],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "documentChargesWithoutGST",
@@ -6599,7 +6707,7 @@
         "disabled": true,
         "label": "Document Charges Without GST *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "CGSTDocumentCharges",
@@ -6610,7 +6718,7 @@
         "disabled": true,
         "label": "CGST Document Charges *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "SGSTDocumentCharges",
@@ -6621,7 +6729,7 @@
         "disabled": true,
         "label": "SGST Document Charges *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "DocumentChargesWithGST",
@@ -6632,7 +6740,7 @@
         "disabled": true,
         "label": "Document Charges With GST *",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "cliIsTaken",
@@ -6641,9 +6749,9 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       },
       {
         "id": "DocumentChargesCollectedby",
@@ -6652,12 +6760,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "charges/LeadDocumentCharges.js"
+        "group": "group-027"
       }
     ],
-    "disbursement/BodyDisbursementSummary.js": [
+    "group-028": [
       {
         "id": "name",
         "name": "name",
@@ -6667,7 +6775,7 @@
         "disabled": false,
         "label": "Dealer Name *",
         "options": [],
-        "source": "disbursement/BodyDisbursementSummary.js"
+        "group": "group-028"
       },
       {
         "id": "ifscode",
@@ -6678,7 +6786,7 @@
         "disabled": false,
         "label": "IFSC Code",
         "options": [],
-        "source": "disbursement/BodyDisbursementSummary.js"
+        "group": "group-028"
       },
       {
         "id": "accountNo",
@@ -6689,7 +6797,7 @@
         "disabled": false,
         "label": "Account No *",
         "options": [],
-        "source": "disbursement/BodyDisbursementSummary.js"
+        "group": "group-028"
       },
       {
         "id": "poaFrontImage",
@@ -6698,12 +6806,12 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "disbursement/BodyDisbursementSummary.js"
+        "group": "group-028"
       }
     ],
-    "disbursement/BodyNachInitiate.js": [
+    "group-029": [
       {
         "id": "nachType",
         "name": "nachType",
@@ -6718,7 +6826,7 @@
           "E-Nach",
           "SI"
         ],
-        "source": "disbursement/BodyNachInitiate.js"
+        "group": "group-029"
       },
       {
         "id": "poaFrontImage",
@@ -6727,12 +6835,12 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "disbursement/BodyNachInitiate.js"
+        "group": "group-029"
       }
     ],
-    "disbursement/DisbursementForm.js": [
+    "group-030": [
       {
         "id": "newDealer",
         "name": "newDealer",
@@ -6742,7 +6850,7 @@
         "disabled": true,
         "label": "Dealer",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "newDealerAcNo",
@@ -6753,7 +6861,7 @@
         "disabled": true,
         "label": "Dealer A/C No",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "newDealerIfsc",
@@ -6764,7 +6872,7 @@
         "disabled": true,
         "label": "IFSC Code",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "newDisAmount",
@@ -6775,7 +6883,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "newChangeDealer",
@@ -6786,7 +6894,7 @@
         "disabled": false,
         "label": "Change Dealer",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "newSelectDealerDistrict",
@@ -6799,7 +6907,7 @@
         "options": [
           "Select"
         ],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "newSelectDealer",
@@ -6812,7 +6920,7 @@
         "options": [
           "Select"
         ],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "newSelectDealerOutlet",
@@ -6825,7 +6933,7 @@
         "options": [
           "Select"
         ],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "newSelectDealerPerformaInv",
@@ -6836,7 +6944,7 @@
         "disabled": false,
         "label": "Performa Invoice Amount *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "newSelectDealerAcNo",
@@ -6847,7 +6955,7 @@
         "disabled": true,
         "label": "Dealer A/C No",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "newSelectDealerIfsc",
@@ -6858,7 +6966,7 @@
         "disabled": true,
         "label": "IFSC Code",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "newSelectDealerDisAmt",
@@ -6869,7 +6977,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedRefinanceSenctionAmt",
@@ -6880,7 +6988,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedDealerName",
@@ -6891,7 +6999,7 @@
         "disabled": true,
         "label": "Name",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedDealerAcNo",
@@ -6902,7 +7010,7 @@
         "disabled": true,
         "label": "Account Number",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedDealerIfsc",
@@ -6913,7 +7021,7 @@
         "disabled": true,
         "label": "IFSC Code",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedDisAmount",
@@ -6924,7 +7032,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRefDisAmount",
@@ -6935,7 +7043,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRefHpName",
@@ -6946,7 +7054,7 @@
         "disabled": false,
         "label": "Financer Name *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRefHpIfsc",
@@ -6957,7 +7065,7 @@
         "disabled": false,
         "label": "Financer IFSC Code *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRefHpAcNo",
@@ -6968,7 +7076,7 @@
         "disabled": false,
         "label": "BT Loan Account Number *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBTRefDisAmt",
@@ -6979,7 +7087,7 @@
         "disabled": false,
         "label": "Foreclosure Disbursement Amount *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRefName",
@@ -6990,7 +7098,7 @@
         "disabled": true,
         "label": "Name",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRefAccountNo",
@@ -7001,7 +7109,7 @@
         "disabled": true,
         "label": "Account Number",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRefIfsc",
@@ -7012,7 +7120,7 @@
         "disabled": true,
         "label": "IFSC Code",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedRepurchaseDisAmount",
@@ -7023,7 +7131,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedRepurchaseSellerName",
@@ -7034,7 +7142,7 @@
         "disabled": false,
         "label": "Seller Name",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedRepurchaseSellerIfsc",
@@ -7045,7 +7153,7 @@
         "disabled": false,
         "label": "Seller IFSC Code *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedRepurchaseSellerAcNo",
@@ -7056,7 +7164,7 @@
         "disabled": false,
         "label": "Seller Account No *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedRepurchaseSellerDisAmt",
@@ -7067,7 +7175,7 @@
         "disabled": false,
         "label": "Disbursement Amount *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedRepurchaseName",
@@ -7078,7 +7186,7 @@
         "disabled": true,
         "label": "Name",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedRepurchaseAccountNo",
@@ -7089,7 +7197,7 @@
         "disabled": true,
         "label": "Account Number",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedRepurchaseIfsc",
@@ -7100,7 +7208,7 @@
         "disabled": true,
         "label": "IFSC Code",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedRepurchaseNetDisAmount",
@@ -7111,7 +7219,7 @@
         "disabled": true,
         "label": "Balance Amount",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRepurchaseDisAmount",
@@ -7122,7 +7230,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRepurcharHpIfsc",
@@ -7133,7 +7241,7 @@
         "disabled": false,
         "label": "Financer IFSC Code *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRepurcharHpAcNo",
@@ -7144,7 +7252,7 @@
         "disabled": false,
         "label": "BT Loan Account Number *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRepurcharDisAmt",
@@ -7155,7 +7263,7 @@
         "disabled": false,
         "label": "Foreclosure Disbursement Amount *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRepurchaseSellerName",
@@ -7166,7 +7274,7 @@
         "disabled": false,
         "label": "Seller Name",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRepurchaseSellerAcNo",
@@ -7177,7 +7285,7 @@
         "disabled": false,
         "label": "Seller Account No *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRepurchaseSellerIfsc",
@@ -7188,7 +7296,7 @@
         "disabled": false,
         "label": "Seller IFSC Code *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRepurchaseSellerDisAmt",
@@ -7199,7 +7307,7 @@
         "disabled": false,
         "label": "Seller Disbursement Amount *",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRepurchaseName",
@@ -7210,7 +7318,7 @@
         "disabled": true,
         "label": "Name",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRepurchaseAccountNo",
@@ -7221,7 +7329,7 @@
         "disabled": true,
         "label": "Account Number",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRepurchaseIfsc",
@@ -7232,7 +7340,7 @@
         "disabled": true,
         "label": "IFSC Code",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtRepurchaseNetDisAmount",
@@ -7243,7 +7351,7 @@
         "disabled": true,
         "label": "Balance Amount",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       },
       {
         "id": "usedBtBtRepurcharHpName",
@@ -7252,12 +7360,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "disbursement/DisbursementForm.js"
+        "group": "group-030"
       }
     ],
-    "disbursement/NachInitiate.js": [
+    "group-031": [
       {
         "id": "nachType",
         "name": "nachType",
@@ -7272,7 +7380,7 @@
           "E-Nach",
           "SI"
         ],
-        "source": "disbursement/NachInitiate.js"
+        "group": "group-031"
       },
       {
         "id": "poaFrontImage",
@@ -7281,12 +7389,12 @@
         "htmlRequired": true,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "disbursement/NachInitiate.js"
+        "group": "group-031"
       }
     ],
-    "disbursement/SanctionMultiLoanSummary.js": [
+    "group-032": [
       {
         "id": "communicationLanguage",
         "name": "communicationLanguage",
@@ -7298,7 +7406,7 @@
         "options": [
           "Select"
         ],
-        "source": "disbursement/SanctionMultiLoanSummary.js"
+        "group": "group-032"
       },
       {
         "id": "1stEmiDate",
@@ -7311,10 +7419,10 @@
         "options": [
           "Select"
         ],
-        "source": "disbursement/SanctionMultiLoanSummary.js"
+        "group": "group-032"
       }
     ],
-    "disbursement/UsedCarDisbursementDetails.js": [
+    "group-033": [
       {
         "id": "newDealer",
         "name": "newDealer",
@@ -7324,7 +7432,7 @@
         "disabled": true,
         "label": "Dealer",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "newDealerAcNo",
@@ -7335,7 +7443,7 @@
         "disabled": true,
         "label": "Dealer A/C No",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "newDealerIfsc",
@@ -7346,7 +7454,7 @@
         "disabled": true,
         "label": "IFSC Code",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "newDisAmount",
@@ -7357,7 +7465,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "newChangeDealer",
@@ -7368,7 +7476,7 @@
         "disabled": false,
         "label": "Change Dealer",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "newSelectDealerDistrict",
@@ -7381,7 +7489,7 @@
         "options": [
           "Select"
         ],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "newSelectDealer",
@@ -7394,7 +7502,7 @@
         "options": [
           "Select"
         ],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "newDealerOutlet",
@@ -7407,7 +7515,7 @@
         "options": [
           "Select"
         ],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "newExShowRoomPrice",
@@ -7418,7 +7526,7 @@
         "disabled": false,
         "label": "Ex Show Room Price *",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "newSelectDealerPerformaInv",
@@ -7429,7 +7537,7 @@
         "disabled": false,
         "label": "Performa Invoice Amount *",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRefinanceSenctionAmt",
@@ -7440,7 +7548,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedDealerName",
@@ -7451,7 +7559,7 @@
         "disabled": true,
         "label": "Borrower Name",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedDealerIfsc",
@@ -7462,7 +7570,7 @@
         "disabled": true,
         "label": "IFSC Code",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedDealerAcNo",
@@ -7473,7 +7581,7 @@
         "disabled": true,
         "label": "Account Number",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedDisAmount",
@@ -7484,7 +7592,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRefDisAmount",
@@ -7495,7 +7603,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRefFinancerName",
@@ -7506,7 +7614,7 @@
         "disabled": false,
         "label": "Financer Name *",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRefFinancerAcNo",
@@ -7517,7 +7625,7 @@
         "disabled": false,
         "label": "Loan Account Number *",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBTRefDisAmt",
@@ -7528,7 +7636,7 @@
         "disabled": false,
         "label": "Foreclosure Disbursement Amount *",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRefName",
@@ -7539,7 +7647,7 @@
         "disabled": true,
         "label": "Borrower Name",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRefIfsc",
@@ -7550,7 +7658,7 @@
         "disabled": true,
         "label": "IFSC Code",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRefAccountNo",
@@ -7561,7 +7669,7 @@
         "disabled": true,
         "label": "Account Number",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseDisAmount",
@@ -7572,7 +7680,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "repaymentTo",
@@ -7585,7 +7693,7 @@
         "options": [
           "Select"
         ],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseSellerName",
@@ -7596,7 +7704,7 @@
         "disabled": false,
         "label": "Seller Name",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseSellerIfsc",
@@ -7607,7 +7715,7 @@
         "disabled": false,
         "label": "Seller IFSC Code *",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseSellerAcNo",
@@ -7618,7 +7726,7 @@
         "disabled": false,
         "label": "Seller Account No *",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseDSAName",
@@ -7629,7 +7737,7 @@
         "disabled": true,
         "label": "DSA NAME",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseDSAIfsc",
@@ -7640,7 +7748,7 @@
         "disabled": true,
         "label": "DSA IFSC",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseDSAAccountNo",
@@ -7651,7 +7759,7 @@
         "disabled": true,
         "label": "DSA Account No",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseDSAName",
@@ -7662,7 +7770,7 @@
         "disabled": true,
         "label": "DEALER NAME",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseDSAIfsc",
@@ -7673,7 +7781,7 @@
         "disabled": true,
         "label": "DEALER IFSC",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseDSAAccountNo",
@@ -7684,7 +7792,7 @@
         "disabled": true,
         "label": "DEALER Account No",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseSellerDisAmt",
@@ -7695,7 +7803,7 @@
         "disabled": false,
         "label": "Disbursement Amount *",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseName",
@@ -7706,7 +7814,7 @@
         "disabled": true,
         "label": "Borrower Name",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseAccountNo",
@@ -7717,7 +7825,7 @@
         "disabled": true,
         "label": "Account Number",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseIfsc",
@@ -7728,7 +7836,7 @@
         "disabled": true,
         "label": "IFSC Code",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedRepurchaseNetDisAmount",
@@ -7739,7 +7847,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseDisAmount",
@@ -7750,7 +7858,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtBtRepurcharFinancerIFSC",
@@ -7761,7 +7869,7 @@
         "disabled": true,
         "label": "Financer IFSC",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurcharFinancerAcNo",
@@ -7772,7 +7880,7 @@
         "disabled": true,
         "label": "Loan Account Number *",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurcharDisAmt",
@@ -7783,7 +7891,7 @@
         "disabled": false,
         "label": "Foreclosure Disbursement Amount *",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseSellerName",
@@ -7794,7 +7902,7 @@
         "disabled": true,
         "label": "Seller Name",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseSellerIfsc",
@@ -7805,7 +7913,7 @@
         "disabled": false,
         "label": "Seller IFSC Code *",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseSellerAcNo",
@@ -7816,7 +7924,7 @@
         "disabled": false,
         "label": "Seller Account No *",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseDSAName",
@@ -7827,7 +7935,7 @@
         "disabled": true,
         "label": "DSA NAME",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseDSAIfsc",
@@ -7838,7 +7946,7 @@
         "disabled": true,
         "label": "DSA IFSC",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseDSAAccountNo",
@@ -7849,7 +7957,7 @@
         "disabled": true,
         "label": "DSA Account No",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseDSAName",
@@ -7860,7 +7968,7 @@
         "disabled": true,
         "label": "DEALER NAME",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseDSAIfsc",
@@ -7871,7 +7979,7 @@
         "disabled": true,
         "label": "DEALER IFSC",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseDSAAccountNo",
@@ -7882,7 +7990,7 @@
         "disabled": true,
         "label": "DEALER Account No",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseName",
@@ -7893,7 +8001,7 @@
         "disabled": true,
         "label": "Borrower Name",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseAccountNo",
@@ -7904,7 +8012,7 @@
         "disabled": true,
         "label": "Account Number",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseIfsc",
@@ -7915,7 +8023,7 @@
         "disabled": true,
         "label": "IFSC Code",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtRepurchaseNetDisAmount",
@@ -7926,7 +8034,7 @@
         "disabled": true,
         "label": "Disbursement Amount",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       },
       {
         "id": "usedBtBtRepurcharFinancerName",
@@ -7935,12 +8043,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": true,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "disbursement/UsedCarDisbursementDetails.js"
+        "group": "group-033"
       }
     ],
-    "login/Login.js": [
+    "group-034": [
       {
         "id": "username",
         "name": "username",
@@ -7950,7 +8058,7 @@
         "disabled": false,
         "label": "Username",
         "options": [],
-        "source": "login/Login.js"
+        "group": "group-034"
       },
       {
         "id": "password",
@@ -7961,10 +8069,10 @@
         "disabled": false,
         "label": "Password",
         "options": [],
-        "source": "login/Login.js"
+        "group": "group-034"
       }
     ],
-    "dashboard/Dashboard.js": [
+    "group-035": [
       {
         "id": "pieProductList",
         "name": "pieProductList",
@@ -7974,7 +8082,7 @@
         "disabled": false,
         "label": "Product List",
         "options": [],
-        "source": "dashboard/Dashboard.js"
+        "group": "group-035"
       },
       {
         "id": "pieMonth",
@@ -7989,7 +8097,7 @@
           "May",
           "April"
         ],
-        "source": "dashboard/Dashboard.js"
+        "group": "group-035"
       },
       {
         "id": "proApp-startDate",
@@ -8000,7 +8108,7 @@
         "disabled": false,
         "label": "Start Date *",
         "options": [],
-        "source": "dashboard/Dashboard.js"
+        "group": "group-035"
       },
       {
         "id": "proApp-endDate",
@@ -8011,10 +8119,10 @@
         "disabled": false,
         "label": "End Date *",
         "options": [],
-        "source": "dashboard/Dashboard.js"
+        "group": "group-035"
       }
     ],
-    "fleet/FleetFilter.js": [
+    "group-036": [
       {
         "id": "scheme",
         "name": "scheme",
@@ -8026,7 +8134,7 @@
         "options": [
           "Select"
         ],
-        "source": "fleet/FleetFilter.js"
+        "group": "group-036"
       },
       {
         "id": "grade",
@@ -8039,7 +8147,7 @@
         "options": [
           "Select"
         ],
-        "source": "fleet/FleetFilter.js"
+        "group": "group-036"
       },
       {
         "id": "fleetCustomCreation",
@@ -8048,12 +8156,12 @@
         "htmlRequired": false,
         "labelRequired": false,
         "disabled": false,
-        "label": "[No htmlFor-linked label in JSX]",
+        "label": "[No linked label]",
         "options": [],
-        "source": "fleet/FleetFilter.js"
+        "group": "group-036"
       }
     ],
-    "fleet/FleetForm.js": [
+    "group-037": [
       {
         "id": "fleetManufacture",
         "name": "fleetManufacture",
@@ -8065,7 +8173,7 @@
         "options": [
           "Select"
         ],
-        "source": "fleet/FleetForm.js"
+        "group": "group-037"
       },
       {
         "id": "fleetModel",
@@ -8078,7 +8186,7 @@
         "options": [
           "Select"
         ],
-        "source": "fleet/FleetForm.js"
+        "group": "group-037"
       },
       {
         "id": "hpStatus",
@@ -8091,10 +8199,10 @@
         "options": [
           "Select"
         ],
-        "source": "fleet/FleetForm.js"
+        "group": "group-037"
       }
     ],
-    "viability/ViabilityCreate.js": [
+    "group-038": [
       {
         "id": "viabilityType",
         "name": "viabilityType",
@@ -8106,199 +8214,9 @@
         "options": [
           "Select"
         ],
-        "source": "viability/ViabilityCreate.js"
+        "group": "group-038"
       }
     ]
   },
-  "workflowMenu": [
-    {
-      "id": "2",
-      "route": "/pendingkyc/list/:id",
-      "component": "PendingKycList",
-      "detail": "KYC queue"
-    },
-    {
-      "id": "3",
-      "route": "/loandetails/applicant/:id",
-      "component": "LeadPersonalLoanDetails",
-      "detail": "Sourcing Details; conditional Asset Details; Loan Details"
-    },
-    {
-      "id": "4",
-      "route": "/lead/scorecard/:id",
-      "component": "LeadScoreCard",
-      "detail": "Scorecard"
-    },
-    {
-      "id": "5",
-      "route": "/fleet/:id",
-      "component": "FleetList / FleetForm",
-      "detail": "Fleet"
-    },
-    {
-      "id": "6",
-      "route": "/createviability/:id/:viability",
-      "component": "ViabilityCreate",
-      "detail": "Viability"
-    },
-    {
-      "id": "7",
-      "route": "/lead/application/:id",
-      "component": "ApplicationForm",
-      "detail": "Application form"
-    },
-    {
-      "id": "8",
-      "route": "/lead/charges/:id",
-      "component": "LeadDocumentCharges",
-      "detail": "Charges route; journey UI also prints POST DISBURSEMENT STAGE before MenuID 8, so ordering/name conflict requires confirmation"
-    },
-    {
-      "id": "9",
-      "route": "/bkverify/:id",
-      "component": "BankAccountAuthentication",
-      "detail": "Bank verification"
-    },
-    {
-      "id": "11",
-      "route": "/lead/document/request/:id",
-      "component": "RequestDocument",
-      "detail": "Document request"
-    },
-    {
-      "id": "13",
-      "route": "/lead/document/rcu/:id",
-      "component": "RcuQuery",
-      "detail": "RCU"
-    },
-    {
-      "id": "28",
-      "route": "/lead/document/upload/:id",
-      "component": "LeadDocument",
-      "detail": "Document upload"
-    }
-  ],
-  "policyAreas": [
-    {
-      "name": "Age and applicant eligibility",
-      "status": "Confirmation Required",
-      "detail": "No approved age thresholds or customer-category rules in supplied sources."
-    },
-    {
-      "name": "Income and customer category",
-      "status": "Confirmation Required",
-      "detail": "Monthly Income field exists in the application form; acceptable income sources and thresholds are not supplied."
-    },
-    {
-      "name": "Loan amount, tenure and rate",
-      "status": "Dynamic / confirmation required",
-      "detail": "Forms show dynamic term, ROI and amount fields; effective product/scheme limits and rate tables are API/master-driven."
-    },
-    {
-      "name": "LTV and asset valuation",
-      "status": "Confirmation Required",
-      "detail": "New car labels show LTV percentages dynamically; used asset forms use grid/valuation fields. Approved limits and grids are not supplied."
-    },
-    {
-      "name": "CLI coverage",
-      "status": "UI rule observed; bank approval required",
-      "detail": "Frontend uses a minimum coverage of ₹100,000 for ProductId 2 and 7 and ₹300,000 for ProductId >7, with maximum equal to loan availed. Validate current policy and boundary behavior with Suryoday."
-    },
-    {
-      "name": "Charges and taxes",
-      "status": "Dynamic / confirmation required",
-      "detail": "Processing, document, GST, stamp, valuation, CLI and Hospi fields/calculations are represented; charge masters and signed values are absent."
-    },
-    {
-      "name": "Bureau, scorecard and dedupe",
-      "status": "Confirmation Required",
-      "detail": "Dynamic scorecard, bureau and dedupe modules exist; thresholds, responses and override authorities are absent."
-    },
-    {
-      "name": "Documents and KYC",
-      "status": "Confirmation Required",
-      "detail": "KYC and upload modules exist; product/member/stage mandatory document matrix and provider contracts are absent."
-    },
-    {
-      "name": "Deviation and approval",
-      "status": "Confirmation Required",
-      "detail": "Legacy page names indicate deviation/approval/QC surfaces; active rules, authorities and roles are not verified."
-    },
-    {
-      "name": "Disbursement",
-      "status": "Confirmation Required",
-      "detail": "Dealer, payee, account, IFSC, NACH and balance transfer controls exist; payout limits, approval rules and host contracts are absent."
-    }
-  ],
-  "integrations": [
-    {
-      "name": "Login",
-      "paths": "api/Login/GetUserName; api/Login/CheckUserAccess",
-      "detail": "Credential check and token/session validation."
-    },
-    {
-      "name": "Masters",
-      "paths": "api/Application/GetMasterDataV1; api/Application/GetChannelList",
-      "detail": "Product, scheme, state, district, branch, channel and other dynamic options."
-    },
-    {
-      "name": "Journey and lead",
-      "paths": "api/Application/GetJourney; api/Application/GetLeadDetail; api/Application/UpdateStageStatus",
-      "detail": "Dynamic stage menu/status, case data and stage transition."
-    },
-    {
-      "name": "Applicant / KYC / documents",
-      "paths": "api/Application/CheckValidatedMobileNo; UploadDocAPI plus KYC modules",
-      "detail": "Mobile validation, applicant KYC and uploads; full contracts unavailable."
-    },
-    {
-      "name": "Scorecard",
-      "paths": "api/Application/GetFilledScoreCard; api/Application/UpdatedScore",
-      "detail": "Dynamic controls and score submission."
-    },
-    {
-      "name": "Bank account",
-      "paths": "api/application/GetIFSC; api/Application/GetBankStatus",
-      "detail": "IFSC lookup and bank account verification."
-    },
-    {
-      "name": "Charges / disbursement",
-      "paths": "Charge and api/Disbursement calls in component source",
-      "detail": "Pricing and payout details are server-owned; complete endpoint/payload inventory required."
-    }
-  ],
-  "sourceReferences": [
-    {
-      "path": "SuryodayWeb/src/component/login/Login.js",
-      "detail": "Credential/ADID authentication and session mapping."
-    },
-    {
-      "path": "SuryodayWeb/src/component/lead/LeadJourney.js",
-      "detail": "GetJourney response and dynamic MenuID routes."
-    },
-    {
-      "path": "SuryodayWeb/src/component/lead/LeadPersonalLoanDetails.js",
-      "detail": "ProductId branches and form selection."
-    },
-    {
-      "path": "SuryodayWeb/src/component/lead/LeadCreateLogin.js",
-      "detail": "Lead sourcing fields and master dependencies."
-    },
-    {
-      "path": "SuryodayWeb/src/component/lead/LeadDocumentCharges.js",
-      "detail": "Charges and observed CLI validation."
-    },
-    {
-      "path": "SuryodayaBank/App_Code/Elegality.cs",
-      "detail": "Legacy source includes mixed Suryoday/ESAF references; verify provenance."
-    },
-    {
-      "path": "suryodayscreen.zip",
-      "detail": "90 timestamped APPX screen images; not individually indexed."
-    },
-    {
-      "path": "optimscreen.zip",
-      "detail": "287 timestamped OPTIM screen images; not individually indexed."
-    }
-  ]
+  "notice": "Policy schedules, service-side validations and exact lookup lists require confirmation with Suryoday before official use."
 }
