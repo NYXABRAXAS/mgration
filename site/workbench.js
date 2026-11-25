@@ -8,6 +8,12 @@
   const storeKey='suryoday-migration-tracker-v1';
   let data=null, view='dashboard', records=[], overrideMap={}, activeId='', currentPage=1, selectedStage='login-and-authentication', activeProduct='all', objectUrls=[];
   let sourceCatalog=null, sourceCatalogPromise=null, sourceModule='underwriting', sourceProduct='new-car', sourceScreenId='', sourceSearch='', sourcePage=1;
+  let screenStageId='login-and-authentication',screenModule='other-screens',screenPageId='',screenUrls={appx:'',optim:''};
+  const screenMapKey='suryoday-screen-walkthrough-v1';
+  let captureArchives={appx:null,optim:null},captureObjectUrls={appx:'',optim:''},captureRenderToken={appx:0,optim:0};
+  const captureMapKey='suryoday-screen-capture-map-v1';
+  const stageModuleMap={'login-and-authentication':'other-screens','dashboard':'workflow-queues','lead-creation-sourcing':'application-intake','customer-details':'application-intake','applicant-and-co-applicant':'application-intake','kyc-and-identity':'application-intake','personal-details':'application-intake','address-details':'application-intake','employment-business':'application-intake','asset-details':'application-intake','loan-details':'application-intake','scheme-and-product':'scheme-configuration','charges':'repayment','document-upload':'document-operations','application-summary':'application-intake','bureau-credit':'bureau-scorecard','dedupe-risk':'bureau-scorecard','fvr-verification':'fi-verification','application-form':'application-intake','due-diligence':'document-audit','credit-queue':'workflow-queues','cam-preparation':'underwriting','deviation':'credit-deviation','credit-approval':'underwriting','deal-structure':'deal-structure','asm-approval':'auth-approval','business-approval':'business-deviation','qc-maker':'qc-maker','qc-checker':'qc-checker','disbursement-details':'disbursement','disbursement-update':'disbursement','disbursement-authorisation':'auth-approval','auth-done':'auth-approval'};
+  const stageScreenMap={'login-and-authentication':'login','dashboard':'dashboardhome','lead-creation-sourcing':'leaddetail','scheme-and-product':'createscheme','document-upload':'uploaddocument','bureau-credit':'bureaupolicy','deviation':'autodeviation','cam-preparation':'camreport','business-approval':'camreport','qc-maker':'bodyqc','qc-checker':'auditorapprovallist','disbursement-details':'disbursementsupdate','disbursement-update':'disbursementsupdate','disbursement-authorisation':'authpending','auth-done':'authapprovedlist'};
   let filters={search:'',product:'all',stage:'all',module:'all',priority:'all',status:'all'};
 
   function loadOverrides(){try{return JSON.parse(localStorage.getItem(storeKey)||'{}')}catch{return {}}}
@@ -103,7 +109,7 @@
 
   function setView(next){
     view=next;
-    for(const id of ['dashboard-view','comparison-view','inventory-view','tracker-view','evidence-view']) $(`#${id}`).hidden=true;
+    for(const id of ['dashboard-view','comparison-view','screens-view','inventory-view','tracker-view','evidence-view']) $(`#${id}`).hidden=true;
     const landing=$('#landing'), productView=$('#product-view');
     if(next==='products'){
       if(window.suryodayProductSelected){landing.hidden=true;productView.hidden=false}
@@ -114,6 +120,7 @@
     if(!data)return;
     if(next==='dashboard')renderDashboard();
     if(next==='comparison')renderComparison();
+    if(next==='screens')renderScreenWalkthrough();
     if(next==='inventory')renderSourceInventory();
     if(next==='tracker')renderTracker();
     if(next==='evidence')renderEvidence();
@@ -300,6 +307,69 @@
   }
   function importTracker(event){
     const file=event.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const imported=JSON.parse(String(reader.result));if(!imported.overrides||typeof imported.overrides!=='object')throw new Error('Tracker JSON must contain an overrides object.');overrideMap={...overrideMap,...imported.overrides};persist();renderTracker()}catch(err){alert(`Import failed: ${err.message}`)}finally{event.target.value=''}};reader.readAsText(file);
+  }
+
+  async function readScreenshotZip(file){
+    const bytes=await file.arrayBuffer(),view=new DataView(bytes),decoder=new TextDecoder();let eocd=-1;
+    for(let i=Math.max(0,bytes.byteLength-65557);i<=bytes.byteLength-22;i++)if(view.getUint32(i,true)===0x06054b50)eocd=i;
+    if(eocd<0)throw new Error('Could not find the ZIP directory. Please choose the original .zip archive.');
+    const total=view.getUint16(eocd+10,true),directory=view.getUint32(eocd+16,true),entries=[];let at=directory;
+    for(let i=0;i<total&&at<bytes.byteLength;i++){
+      if(view.getUint32(at,true)!==0x02014b50)break;
+      const method=view.getUint16(at+10,true),compressedSize=view.getUint32(at+20,true),uncompressedSize=view.getUint32(at+24,true),nameLength=view.getUint16(at+28,true),extraLength=view.getUint16(at+30,true),commentLength=view.getUint16(at+32,true),localOffset=view.getUint32(at+42,true),name=decoder.decode(new Uint8Array(bytes,at+46,nameLength));
+      at+=46+nameLength+extraLength+commentLength;
+      if(!/\.(png|jpe?g|webp)$/i.test(name)||name.endsWith('/'))continue;
+      if(method!==0&&method!==8)continue;
+      const localName=view.getUint16(localOffset+26,true),localExtra=view.getUint16(localOffset+28,true),start=localOffset+30+localName+localExtra;
+      entries.push({name,method,compressedSize,uncompressedSize,start});
+    }
+    return {bytes,entries:entries.sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true,sensitivity:'base'}))};
+  }
+  async function renderCapture(side,stageKey,captureMap){
+    const archive=captureArchives[side],entries=archive?.entries||[],select=$(`#walk-${side}-capture`),preview=$(`#walk-${side}-preview`),label=$(`#walk-${side}-archive-label`);if(!select||!preview)return;
+    if(label)label.textContent=entries.length?`${entries.length} images loaded in this browser`:'Choose the matching screenshot ZIP';
+    select.innerHTML=entries.length?entries.map(x=>`<option value="${esc(x.name)}">${esc(x.name.split('/').pop())}</option>`).join(''):'<option value="">Load a ZIP archive first</option>';
+    const saved=captureMap[`${stageKey}|${side}`]||'';const selected=entries.some(x=>x.name===saved)?saved:(entries[0]?.name||'');if(selected)select.value=selected;
+    if(!selected){preview.textContent='Load the relevant ZIP archive, then select a capture';return}
+    captureMap[`${stageKey}|${side}`]=selected;const entry=entries.find(x=>x.name===selected),token=++captureRenderToken[side];preview.textContent='Loading selected capture…';const compressed=archive.bytes.slice(entry.start,entry.start+entry.compressedSize);let imageBytes;
+    if(entry.method===0)imageBytes=compressed;else if(typeof DecompressionStream!=='undefined')imageBytes=await new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer();else{preview.textContent='This browser cannot open compressed ZIP files. Use a current version of Chrome or Edge.';return}
+    if(entry.uncompressedSize&&imageBytes.byteLength!==entry.uncompressedSize)return;if(token!==captureRenderToken[side])return;
+    const type=/\.jpe?g$/i.test(entry.name)?'image/jpeg':/\.webp$/i.test(entry.name)?'image/webp':'image/png';if(captureObjectUrls[side])URL.revokeObjectURL(captureObjectUrls[side]);captureObjectUrls[side]=URL.createObjectURL(new Blob([imageBytes],{type}));preview.innerHTML=`<img src="${captureObjectUrls[side]}" alt="${esc(side.toUpperCase())} capture ${esc(selected.split('/').pop())}">`;
+  }
+  function renderScreenWalkthrough(){
+    const box=$('#screens-view');if(!box||!data)return;
+    if(!sourceCatalog){box.innerHTML='<div class="wb-detail"><h3>Loading the screen and field index…</h3></div>';loadSourceCatalog().then(renderScreenWalkthrough).catch(err=>{box.innerHTML=`<div class="wb-note warn">${esc(err.message)} Check that the APPX screen catalog is deployed.</div>`});return}
+    const stages=data.comparisonStages||[];const current=stages.find(s=>s.id===screenStageId)||stages[0];screenStageId=current?.id||'';
+    const product=data.products.find(p=>p.key===sourceProduct)||data.products[0];sourceProduct=product?.key||'';
+    const modules=data.moduleAssessments||[];const module=modules.find(m=>m.id===screenModule)||modules[0];screenModule=module?.id||'';
+    const screens=sourceCatalog.screens.filter(s=>(module?.appxScreenIds||[]).includes(s.id));
+    if(!screenPageId||!screens.some(s=>s.id===screenPageId))screenPageId=(screens.find(s=>s.id===stageScreenMap[screenStageId])||screens[0])?.id||'';
+    const screen=screens.find(s=>s.id===screenPageId);const mappings=(()=>{try{return JSON.parse(localStorage.getItem(screenMapKey)||'{}')}catch{return {}}})();const captureMap=(()=>{try{return JSON.parse(localStorage.getItem(captureMapKey)||'{}')}catch{return {}}})();const captureStageKey=`${product.id}|${current.id}`;
+    const moduleOptions=modules.map(m=>`<option value="${esc(m.id)}" ${m.id===module?.id?'selected':''}>${esc(m.name)}</option>`).join('');
+    const productOptions=data.products.map(p=>`<option value="${esc(p.key)}" ${p.key===product?.key?'selected':''}>${esc(p.name)} · ID ${esc(p.id)}</option>`).join('');
+    const screenOptions=screens.map(s=>`<option value="${esc(s.id)}" ${s.id===screen?.id?'selected':''}>${esc(s.title)} · ${esc(s.page)}</option>`).join('');
+    const rows=(screen?.fields||[]).map((f,i)=>{const key=[product.id,current.id,module.id,screen.id,i].join('|');const saved=mappings[key]||{};const validation=[...(f.validatorEvidence||[]).map(v=>`${v.rule}${v.message?`: ${v.message}`:''}`),...(f.clientRuleEvidence||[]),...(f.serverValidationEvidence||[])].join('; ')||f.validationStatus||'No explicit field validator found; runtime/server rules unknown.';const lookup=(f.lookupOptions||[]).join(', ')||f.lookupEvidence||'Not listed';return `<tr><td>${String(i+1).padStart(3,'0')}</td><td>${esc(f.label||'[No linked label]')}<small class="wb-mini">${esc(f.id||'No control ID')}</small></td><td>${esc(f.control||'Not identified')}</td><td>${f.required?badge('Required validator'):badge('No explicit required validator')}<small class="wb-mini">${esc(validation)}</small></td><td>${esc(lookup)}</td><td><input class="screen-target-field" data-map-key="${esc(key)}" value="${esc(saved.target||'')}" placeholder="OPTIM field / N/A / pending" aria-label="OPTIM counterpart for ${esc(f.label||f.id)}"><select class="screen-target-status" data-map-key="${esc(key)}" aria-label="Parity status for ${esc(f.label||f.id)}">${selectOptions(statusOptions,saved.status||'OPTIM Mapping Unverified')}</select></td></tr>`}).join('');
+    box.innerHTML=`<div class="wb-heading"><div><div class="wb-kicker">Side-by-side process review · six product contexts</div><h1>APPX / OPTIM screen walkthrough</h1><p>Choose a candidate stage, then inspect its APPX field lines and record the OPTIM counterpart line by line. Choose screenshots from your computer for visual review; images stay in this browser session and are not published or uploaded.</p></div>${badge('Evidence-based mapping')}</div>
+      <div class="wb-note warn"><b>Capture status:</b> archived screenshots are not yet indexed to stages or products. This walkthrough shows the selected APPX source page and fields; use the image pickers to review corresponding screen captures. Stage sequence remains a candidate pending approved workflow confirmation.</div>
+      <section class="panel"><div class="wb-controls"><label class="wb-mini">Product <select id="walk-product">${productOptions}</select></label><label class="wb-mini">Candidate stage <select id="walk-stage">${stages.map(s=>`<option value="${esc(s.id)}" ${s.id===current.id?'selected':''}>${String(s.sequence).padStart(2,'0')} · ${esc(s.title)}</option>`).join('')}</select></label><label class="wb-mini">APPX module <select id="walk-module">${moduleOptions}</select></label><label class="wb-mini">APPX source screen <select id="walk-screen">${screenOptions||'<option value="">No linked screen indexed</option>'}</select></label></div>
+      <div class="wb-split"><article class="wb-compare-card"><div class="wb-preview-title"><h3>APPX screen capture</h3><label class="wb-btn">Load APPX ZIP<input id="walk-appx-zip" type="file" accept=".zip,application/zip" hidden></label></div><label class="wb-mini">Screenshot from ZIP <select id="walk-appx-capture"></select></label><p id="walk-appx-archive-label" class="wb-mini"></p><div id="walk-appx-preview" class="wb-preview-box">Load your APPX screenshot ZIP to browse captures</div><p class="wb-mini">${esc(screen?`${screen.title} · ${screen.page} · ${screen.fields.length} indexed lines`:'No linked APPX source screen for this module')}</p></article><article class="wb-compare-card"><div class="wb-preview-title"><h3>OPTIM screen capture</h3><label class="wb-btn">Load OPTIM ZIP<input id="walk-optim-zip" type="file" accept=".zip,application/zip" hidden></label></div><label class="wb-mini">Screenshot from ZIP <select id="walk-optim-capture"></select></label><p id="walk-optim-archive-label" class="wb-mini"></p><div id="walk-optim-preview" class="wb-preview-box">Load your OPTIM screenshot ZIP to browse captures</div><p class="wb-mini">Choose the corresponding screen for comparison.</p></article></div>
+      <div class="wb-source-screen"><h2>${esc(current?.title||'Stage')}</h2><p><b>APPX:</b> ${esc(current?.appxBehavior||'')}<br><b>OPTIM:</b> ${esc(current?.optimBehavior||'')}</p><p class="wb-mini">APPX page: ${esc(screen?.page||'Not mapped')} · ${screen?.fields.length||0} indexed field/control lines · Product context: ${esc(product?.name||'')}</p></div>
+      <div class="wb-coverage">${screen?.fields.length||0} APPX field/control lines · counterpart and status edits save in this browser</div><div class="wb-table-wrap"><table class="wb-table wb-source-table"><thead><tr><th>#</th><th>APPX label / control ID</th><th>UI type</th><th>Required / validation</th><th>Lookup / list</th><th>OPTIM field counterpart / parity</th></tr></thead><tbody>${rows||'<tr><td colspan="6">Select an APPX module and source screen to see indexed field lines.</td></tr>'}</tbody></table></div>
+      <div class="wb-pager"><button class="wb-btn" id="walk-prev" ${current.sequence<=1?'disabled':''}>← Previous stage</button><span>Stage ${current.sequence} / ${stages.length}</span><button class="wb-btn" id="walk-next" ${current.sequence>=stages.length?'disabled':''}>Next stage →</button></div>
+      <button class="wb-btn" id="walk-open-index">Open full APPX screen &amp; field index →</button></section>`;
+    $('#walk-product').addEventListener('change',e=>{sourceProduct=e.target.value;renderScreenWalkthrough()});
+    $('#walk-stage').addEventListener('change',e=>{screenStageId=e.target.value;screenModule=stageModuleMap[screenStageId]||screenModule;screenPageId=stageScreenMap[screenStageId]||'';renderScreenWalkthrough()});
+    $('#walk-module').addEventListener('change',e=>{screenModule=e.target.value;screenPageId='';renderScreenWalkthrough()});
+    $('#walk-screen').addEventListener('change',e=>{screenPageId=e.target.value;renderScreenWalkthrough()});
+    $('#walk-prev').addEventListener('click',()=>{screenStageId=stages[Math.max(0,current.sequence-2)].id;screenModule=stageModuleMap[screenStageId]||screenModule;screenPageId=stageScreenMap[screenStageId]||'';renderScreenWalkthrough()});
+    $('#walk-next').addEventListener('click',()=>{screenStageId=stages[Math.min(stages.length-1,current.sequence)].id;screenModule=stageModuleMap[screenStageId]||screenModule;screenPageId=stageScreenMap[screenStageId]||'';renderScreenWalkthrough()});
+    $('#walk-open-index').addEventListener('click',()=>{sourceProduct=product.key;sourceModule=module.id;sourceScreenId=screen?.id||'';setView('inventory')});
+    box.querySelectorAll('.screen-target-field,.screen-target-status').forEach(input=>input.addEventListener('change',()=>{const all=(()=>{try{return JSON.parse(localStorage.getItem(screenMapKey)||'{}')}catch{return {}}})();const rec=all[input.dataset.mapKey]||{};if(input.classList.contains('screen-target-field'))rec.target=input.value;else rec.status=input.value;all[input.dataset.mapKey]=rec;try{localStorage.setItem(screenMapKey,JSON.stringify(all))}catch{}}));
+    for(const side of ['appx','optim']){
+      $(`#walk-${side}-zip`).addEventListener('change',async ev=>{const file=ev.target.files?.[0];if(!file)return;try{captureArchives[side]=await readScreenshotZip(file);if(!captureArchives[side].entries.length)throw new Error('No PNG, JPG or WebP screenshots were found in this ZIP.');renderScreenWalkthrough()}catch(err){alert(err.message)}});
+      $(`#walk-${side}-capture`).addEventListener('change',e=>{captureMap[`${captureStageKey}|${side}`]=e.target.value;try{localStorage.setItem(captureMapKey,JSON.stringify(captureMap))}catch{}renderCapture(side,captureStageKey,captureMap)});
+      renderCapture(side,captureStageKey,captureMap);
+    }
   }
 
   function renderEvidence(){

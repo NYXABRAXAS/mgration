@@ -16,6 +16,8 @@ Open `http://localhost:8000` in a browser. The site fetches `data/migration-data
 
 The tracker saves edits in the current browser's local storage. Use JSON export/import to hand off a review snapshot. There is no shared database or API behind this static site. “OPTIM Mapping Unverified” means the target evidence is not indexed; it is not a confirmed OPTIM defect.
 
+In **Screen walkthrough**, load the APPX and OPTIM ZIP archives to browse their screenshots by filename and compare a selected capture for each candidate stage. ZIPs are read and images are decoded in the browser; they are not sent to the site host. The stage-to-capture assignment and field counterpart edits are saved only in that browser.
+
 ## Deploy to Render
 
 The repository's `render.yaml` configures a Render static site with `site/` as the publish directory. Push changes to the connected Git repository; Render can then deploy the static files from that branch.
