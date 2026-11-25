@@ -1,11 +1,13 @@
 (() => {
   const $ = selector => document.querySelector(selector);
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const statusOptions=['Available in OPTIM','Configuration Required','Partially Available','Enhancement Required','New Development Required','API Integration Required','Policy Confirmation Required','Source Information Missing'];
+  const statusOptions=['OPTIM Mapping Unverified','Available in OPTIM','Configuration Required','Partially Available','Enhancement Required','New Development Required','API Integration Required','Policy Confirmation Required','Source Information Missing'];
   const workflowOptions=['Not Started','In Progress','Blocked','Done'];
   const priorityOptions=['Unassigned','P0','P1','P2','P3'];
+  const preferredSourcePage={underwriting:'CamReport.aspx','credit-deviation':'AutoDeviation.aspx','business-deviation':'CamReport.aspx','deal-structure':'Sanction.aspx',sanction:'Sanction.aspx',repayment:'ENach.aspx',enach:'ENach.aspx',disbursement:'DisbursementsUpdate.aspx','qc-maker':'BodyQC.aspx','qc-checker':'AuditorApprovalList.aspx','document-audit':'AuditorApprovalList.aspx','auth-approval':'AuthPending.aspx','approval-matrix':'AdminWebMaster.aspx',rcu:'CamReport.aspx','fi-verification':'FIAllocation.aspx','bureau-scorecard':'BureauPolicy.aspx','scheme-configuration':'CreateScheme.aspx','application-intake':'LeadDetail.aspx','workflow-queues':'AdminWebMaster.aspx','document-operations':'UploadDocument.aspx','other-screens':'AdminWebMaster.aspx','eligibility-deviation':'CreateScheme.aspx'};
   const storeKey='suryoday-migration-tracker-v1';
   let data=null, view='dashboard', records=[], overrideMap={}, activeId='', currentPage=1, selectedStage='login-and-authentication', activeProduct='all', objectUrls=[];
+  let sourceCatalog=null, sourceCatalogPromise=null, sourceModule='underwriting', sourceProduct='new-car', sourceScreenId='', sourceSearch='', sourcePage=1;
   let filters={search:'',product:'all',stage:'all',module:'all',priority:'all',status:'all'};
 
   function loadOverrides(){try{return JSON.parse(localStorage.getItem(storeKey)||'{}')}catch{return {}}}
@@ -16,7 +18,7 @@
     if(status==='Available in OPTIM'||status==='Done')return 'available';
     if(status==='Partially Available'||status==='In Progress')return 'partial';
     if(status==='Policy Confirmation Required'||status==='Configuration Required'||status==='Unassigned')return 'confirm';
-    if(status==='Source Information Missing'||status==='Blocked')return 'missing';
+    if(status==='Source Information Missing'||status==='OPTIM Mapping Unverified'||status==='Blocked')return 'missing';
     if(status==='New Development Required'||status==='Enhancement Required'||status==='API Integration Required')return 'development';
     return '';
   }
@@ -42,7 +44,7 @@
             optim:'Target screen and field not indexed.',gap:'Map the OPTIM counterpart and compare type, required state, lookup values, editability, conditional behavior and server validation.',
             action:'Inspect the corresponding OPTIM screen/configuration, then classify as available, configuration, integration, enhancement or new development.',
             acceptance:'For each applicable product/scheme, the mapped target field matches the approved label, type, lookup, required/editable rules and positive/negative validation cases.',
-            evidence:evidence,field:{...field},group:field.group,defaultStatus:'Source Information Missing',defaultPriority:'Unassigned',
+            evidence:evidence,field:{...field},group:field.group,defaultStatus:'OPTIM Mapping Unverified',defaultPriority:'Unassigned',
             defaultDevelopmentStatus:'Not Started',defaultTestingStatus:'Not Started',dependency:'OPTIM field catalog and Suryoday product/scheme owner.'
           });
         }
@@ -54,7 +56,7 @@
           appx:s.appxBehavior,optim:s.optimBehavior,gap:s.gapRequirement,
           action:'Confirm stage applicability and order from the approved journey export; then inspect the corresponding OPTIM screen and workflow capabilities.',
           acceptance:`Approved APPX and OPTIM stage names, order, actor, entry/exit conditions, fields, actions and product applicability are signed off. ${s.gapRequirement}`,
-          evidence:s.appxReferences||[],optimReferences:s.optimReferences||[],defaultStatus:login?'Partially Available':'Source Information Missing',
+          evidence:s.appxReferences||[],optimReferences:s.optimReferences||[],defaultStatus:login?'Partially Available':'OPTIM Mapping Unverified',
           defaultPriority:'Unassigned',defaultDevelopmentStatus:'Not Started',defaultTestingStatus:'Not Started',dependency:'Approved GetJourney/workflow export and OPTIM screen/configuration walkthrough.'
         });
       }
@@ -76,9 +78,9 @@
           gap:`Complete the ${m.name} capability assessment for ${p.name}. Do not infer support from the presence of a screen name.`,
           action:'Review the APPX behavior, approved policy, OPTIM screen/configuration and service capability; classify and record the exact implementation action.',
           acceptance:`Product/scheme applicability and each functional item are mapped; decision, evidence, positive/negative test cases and owner are recorded.`,
-          evidence:m.appxReferences||[],defaultStatus:'Source Information Missing',defaultPriority:'Unassigned',
+          evidence:m.appxReferences||[],defaultStatus:m.id==='operational-deviation'?'Source Information Missing':'OPTIM Mapping Unverified',defaultPriority:'Unassigned',
           defaultDevelopmentStatus:'Not Started',defaultTestingStatus:'Not Started',dependency:'APPX policy/configuration owner, OPTIM module owner and applicable product matrix.',
-          openItems:m.openItems||[]
+          openItems:m.openItems||[],sourceFindings:m.sourceFindings||[],ruleStatus:m.ruleStatus||'',optimAssessment:m.optimAssessment||m.optimEvidence||''
         });
       }
     }
@@ -101,7 +103,7 @@
 
   function setView(next){
     view=next;
-    for(const id of ['dashboard-view','comparison-view','tracker-view','evidence-view']) $(`#${id}`).hidden=true;
+    for(const id of ['dashboard-view','comparison-view','inventory-view','tracker-view','evidence-view']) $(`#${id}`).hidden=true;
     const landing=$('#landing'), productView=$('#product-view');
     if(next==='products'){
       if(window.suryodayProductSelected){landing.hidden=true;productView.hidden=false}
@@ -112,19 +114,20 @@
     if(!data)return;
     if(next==='dashboard')renderDashboard();
     if(next==='comparison')renderComparison();
+    if(next==='inventory')renderSourceInventory();
     if(next==='tracker')renderTracker();
     if(next==='evidence')renderEvidence();
   }
   function statusTotals(list){const result=Object.fromEntries(statusOptions.map(s=>[s,0]));for(const row of list){const s=stateOf(row).status;if(s in result)result[s]++}return result}
-  function assessmentPercent(list){if(!list.length)return 0;const open=new Set(['Source Information Missing','Policy Confirmation Required']);return Math.round(100*list.filter(r=>!open.has(stateOf(r).status)).length/list.length)}
+  function assessmentPercent(list){if(!list.length)return 0;const open=new Set(['Source Information Missing','Policy Confirmation Required','OPTIM Mapping Unverified']);return Math.round(100*list.filter(r=>!open.has(stateOf(r).status)).length/list.length)}
   function progressBar(label,percent,count){return `<div class="wb-bar-row"><span>${esc(label)}</span><div class="wb-bar-track"><div class="wb-bar-fill" style="width:${percent}%"></div></div><b>${count}</b></div>`}
   function renderDashboard(){
     const box=$('#dashboard-view'); if(!box||!data)return;
-    const totals=statusTotals(records); const mapped=records.length-totals['Source Information Missing']-totals['Policy Confirmation Required'];
+    const totals=statusTotals(records); const mapped=records.length-totals['Source Information Missing']-totals['Policy Confirmation Required']-totals['OPTIM Mapping Unverified'];
     const productRows=data.products.map(p=>{const rows=records.filter(r=>r.product===p.key);const pct=assessmentPercent(rows);return {p,rows,pct}});
     const stages=records.filter(r=>r.type==='Stage comparison');
-    const stageRows=(data.comparisonStages||[]).map(s=>{const rr=stages.filter(r=>r.stageId===s.id);const done=rr.filter(r=>!['Source Information Missing','Policy Confirmation Required'].includes(stateOf(r).status)).length;return {s,rr,done}}).sort((a,b)=>a.done-b.done).slice(0,8);
-    box.innerHTML=`<div class="wb-heading"><div><div class="wb-kicker">Suryoday migration workspace</div><h1>Migration readiness dashboard</h1><p>Metrics below are calculated from the product field, stage, policy and module records. OPTIM capability remains unverified until mapped evidence is entered.</p></div><button class="wb-btn" data-view="tracker">Open gap tracker →</button></div>
+    const stageRows=(data.comparisonStages||[]).map(s=>{const rr=stages.filter(r=>r.stageId===s.id);const done=rr.filter(r=>!['Source Information Missing','Policy Confirmation Required','OPTIM Mapping Unverified'].includes(stateOf(r).status)).length;return {s,rr,done}}).sort((a,b)=>a.done-b.done).slice(0,8);
+    box.innerHTML=`<div class="wb-heading"><div><div class="wb-kicker">Suryoday migration workspace</div><h1>Migration readiness dashboard</h1><p>Metrics below are calculated from the product field, stage, policy and module records. OPTIM capability remains unverified until mapped evidence is entered.</p></div><div><button class="wb-btn" data-view="inventory">Open APPX screen &amp; field index →</button> <button class="wb-btn" data-view="tracker">Open gap tracker →</button></div></div>
       <div class="wb-stats">
         <article class="wb-stat"><span>Products</span><strong>${data.products.length}</strong><small>Product IDs in the catalog</small></article>
         <article class="wb-stat"><span>Tracked requirements</span><strong>${records.length.toLocaleString('en-IN')}</strong><small>Generated from field, stage, policy, module and readiness records</small></article>
@@ -175,12 +178,70 @@
         <article class="wb-compare-card"><h3>OPTIM · ${esc(p.name)}</h3><p>${esc(current.optimBehavior)}</p><details><summary>Target evidence references</summary><ul class="wb-source-list">${optimRefs}</ul></details></article>
       </div>
       <section class="panel" style="margin-top:12px"><div class="panel-title-row"><div><h2>${esc(current.title)} · field comparison</h2><p class="panel-subtitle">${fieldRows.length} APPX field(s) linked from the current catalog for this stage candidate. Target matches remain unverified unless explicitly recorded.</p></div><button class="wb-btn primary" data-open-requirement="${req?esc(req.id):''}">Track this stage</button></div>${fieldRows.length?`<div class="wb-table-wrap"><table class="wb-table"><thead><tr><th>#</th><th>APPX field key</th><th>APPX label</th><th>Type</th><th>Required marker</th><th>APPX lookup</th><th>OPTIM match</th></tr></thead><tbody>${fields}</tbody></table></div>`:'<div class="wb-note">No labelled field group is linked to this candidate stage. Review the APPX behavior and add the target mapping during a guided walkthrough.</div>'}</section>
-      <div class="wb-split"><section class="wb-compare-card"><h3>Gap / next action</h3><p>${esc(current.gapRequirement)}</p><p><b>Acceptance:</b> ${esc(req?.acceptance||'Confirm product applicability, sequence, roles, fields, rules and positive/negative test paths.')}</p></section><section class="wb-compare-card"><h3>Current status</h3><p>${badge(state.status||current.status)} &nbsp; ${badge(state.priority||'Unassigned')}</p><p>OPTIM mapping is incomplete where the target capture/catalog is not indexed. Status changes are local to this browser and exportable.</p><button class="wb-btn" data-open-requirement="${req?esc(req.id):''}">Open requirement detail →</button></section></div>`;
+      <div class="wb-split"><section class="wb-compare-card"><h3>Gap / next action</h3><p>${esc(current.gapRequirement)}</p><p><b>Acceptance:</b> ${esc(req?.acceptance||'Confirm product applicability, sequence, roles, fields, rules and positive/negative test paths.')}</p></section><section class="wb-compare-card"><h3>Current status</h3><p>${badge(state.status||current.status)} &nbsp; ${badge(state.priority||'Unassigned')}</p><p>OPTIM mapping is incomplete where the target capture/catalog is not indexed. Status changes are local to this browser and exportable.</p><button class="wb-btn" data-open-requirement="${req?esc(req.id):''}">Open requirement detail →</button></section></div>
+      <section class="panel" style="margin-top:12px"><div class="panel-title-row"><div><h2>Module details · APPX fields and rules</h2><p class="panel-subtitle">Open a module to review its indexed APPX screens, field controls, lookup hints, validation evidence and OPTIM evidence status for ${esc(p.name)}.</p></div></div><div class="wb-module-grid">${(data.moduleAssessments||[]).map(m=>`<button class="wb-module-card" type="button" data-open-module="${esc(m.id)}"><strong>${esc(m.name)}</strong><span>${esc(m.ruleStatus||'Review APPX behavior and target evidence')}</span><small>${(m.appxScreenIds||[]).length} linked APPX screen(s) · ${m.openItems?.length||0} items to confirm</small></button>`).join('')}</div></section>`;
     $('#comparison-product').addEventListener('change',e=>{activeProduct=e.target.value;renderComparison()});
     box.querySelectorAll('[data-stage-candidate]').forEach(b=>b.addEventListener('click',()=>{selectedStage=b.dataset.stageCandidate;renderComparison()}));
+    box.querySelectorAll('[data-open-module]').forEach(b=>b.addEventListener('click',()=>{sourceModule=b.dataset.openModule;sourceProduct=p.key;sourceScreenId='';sourceSearch='';sourcePage=1;setView('inventory')}));
     box.querySelectorAll('[data-open-requirement]').forEach(b=>b.addEventListener('click',()=>{if(!b.dataset.openRequirement)return;activeId=b.dataset.openRequirement;filters.product=p.key;filters.stage='all';setView('tracker')}));
   }
-  function badgeText(status){return status==='Partially Available'?'Partial':status==='Source Information Missing'?'Unmapped':status}
+  function badgeText(status){return status==='Partially Available'?'Partial':status==='Source Information Missing'?'Unmapped':status==='OPTIM Mapping Unverified'?'Unverified':status}
+
+  function loadSourceCatalog(){
+    if(sourceCatalog)return Promise.resolve(sourceCatalog);
+    if(!sourceCatalogPromise)sourceCatalogPromise=fetch('./data/appx-screen-catalog.json').then(r=>{if(!r.ok)throw new Error('APPX screen catalog could not be loaded.');return r.json()}).then(c=>(sourceCatalog=c));
+    return sourceCatalogPromise;
+  }
+  function renderSourceInventory(){
+    const box=$('#inventory-view');if(!box||!data)return;
+    if(!sourceCatalog){box.innerHTML='<div class="wb-detail"><h3>Loading APPX screen and field index…</h3></div>';loadSourceCatalog().then(renderSourceInventory).catch(err=>{box.innerHTML=`<div class="wb-note warn">${esc(err.message)} Check that <code>data/appx-screen-catalog.json</code> is deployed.</div>`});return}
+    const modules=data.moduleAssessments||[];
+    const module=modules.find(m=>m.id===sourceModule)||modules[0];sourceModule=module?.id||'';
+    const product=data.products.find(p=>p.key===sourceProduct)||data.products[0];sourceProduct=product?.key||'';
+    const sourceIds=module?.appxScreenIds||[];
+    const screens=sourceCatalog.screens.filter(s=>sourceIds.includes(s.id));
+    if(!sourceScreenId||!screens.some(s=>s.id===sourceScreenId)){const preferred=preferredSourcePage[module.id]?.toLowerCase();sourceScreenId=(screens.find(s=>s.page.toLowerCase().endsWith(preferred||'__none__'))||screens[0])?.id||'';sourcePage=1}
+    const screen=screens.find(s=>s.id===sourceScreenId);
+    const query=sourceSearch.trim().toLowerCase();
+    const sourceEditCount=Object.keys(overrideMap).filter(id=>id.startsWith(`SRC-${product.id}-`)).length;
+    const matches=(screen?.fields||[]).filter(f=>!query||`${f.id} ${f.label} ${f.control} ${f.lookupEvidence} ${f.lookupOptions?.join(' ')} ${f.dataFields?.join(' ')} ${JSON.stringify(f.validatorEvidence)} ${f.clientRuleEvidence?.join(' ')} ${f.serverValidationEvidence?.join(' ')}`.toLowerCase().includes(query));
+    const size=35,pageCount=Math.max(1,Math.ceil(matches.length/size));sourcePage=Math.min(sourcePage,pageCount);
+    const rows=matches.slice((sourcePage-1)*size,sourcePage*size).map((f,i)=>{
+      const recordIndex=screen.fields.indexOf(f);const fieldId=`SRC-${product.id}-${slug(screen.id)}-${recordIndex}-${slug(f.id)}`;const fieldStatus=overrideMap[fieldId]?.status||'OPTIM Mapping Unverified';
+      const validators=(f.validatorEvidence||[]).map(v=>`${v.rule}${v.minimum||v.maximum?` (${v.minimum||'…'} to ${v.maximum||'…'})`:''}${v.message?`: ${v.message}`:''}`);
+      const rules=[...validators,...(f.clientRuleEvidence||[]),...(f.serverValidationEvidence||[])];
+      const lookup=(f.lookupOptions||[]).join(', ')||f.lookupEvidence||'Not listed';
+      const attributes=Object.entries(f.fieldAttributes||{}).map(([k,v])=>`${k}: ${v}`).join('; ');
+      const detail=`<details class="wb-field-detail"><summary>Field evidence</summary><div><b>Validation:</b> ${esc(rules.join('; ')||f.validationStatus||'No explicit field rule indexed.')}</div><div><b>Lookup:</b> ${esc(f.lookupEvidence||'Not specified.')}</div>${f.lookupOptions?.length?`<div><b>Static options:</b> ${esc(f.lookupOptions.join(', '))}</div>`:''}${f.lookupValues?.length?`<div><b>Stored option values:</b> ${esc(f.lookupValues.join(', '))}</div>`:''}${f.dataFields?.length?`<div><b>Bound database fields:</b> ${esc(f.dataFields.join(', '))}</div>`:''}${attributes?`<div><b>Input attributes:</b> ${esc(attributes)}</div>`:''}<div><b>Source control:</b> ${esc(f.id)} · ${esc(fieldId)}</div></details>`;
+      return `<tr><td>${String((sourcePage-1)*size+i+1).padStart(3,'0')}</td><td><span class="wb-id">${esc(f.id)}</span></td><td>${esc(f.label)}</td><td>${esc(f.control)}</td><td>${f.required?badge('Required validator'):badge('No explicit required validator')}</td><td>${esc(lookup)}</td><td>${detail}</td><td><select class="wb-source-status" data-source-assessment="${esc(fieldId)}" aria-label="Field parity status">${selectOptions(statusOptions,fieldStatus)}</select></td></tr>`
+    }).join('');
+    const pEvidence=(sourceCatalog.review.productBranchEvidence||[]).find(x=>x.productId===product.id);
+    const applicability=screen?(screen.productIds.includes(product.id)?`Explicit code branch for Product ID ${product.id}.`:(screen.productIds.length?`This screen has branches for Product IDs ${screen.productIds.join(', ')}. The selected product may still be handled by database data or another screen; confirm applicability.`:'No ProductId branch is visible on this page. Applicability is likely case/role/master driven and is not proven by this markup.')):'No linked APPX screens are indexed for this module.';
+    const review=module?.sourceFindings||[];
+    const optStatus=module?.optimAssessment||'OPTIM screen/field match has not been indexed for this module.';
+    const moduleChoices=modules.map(m=>`<option value="${esc(m.id)}" ${m.id===module?.id?'selected':''}>${esc(m.name)}</option>`).join('');
+    const productChoices=data.products.map(p=>`<option value="${esc(p.key)}" ${p.key===product.key?'selected':''}>${esc(p.name)} · Product ID ${esc(p.id)}</option>`).join('');
+    const screenChoices=screens.map(s=>`<option value="${esc(s.id)}" ${s.id===screen?.id?'selected':''}>${esc(s.title)} · ${esc(s.page)}</option>`).join('');
+    box.innerHTML=`<div class="wb-heading"><div><div class="wb-kicker">Latest APPX source inventory</div><h1>APPX screen and field index</h1><p>Screen controls, output columns, static lookup values, explicit validators and validation references indexed from the supplied SuryodayaBank application. Product context is shown separately when it is explicit in the page code.</p></div>${badge(`${sourceCatalog.review.webformsPageCount} screens`)}</div>
+      <div class="wb-stats wb-stats-4"><article class="wb-stat"><span>APPX screens</span><strong>${sourceCatalog.review.webformsPageCount}</strong><small>Legacy WebForms pages indexed</small></article><article class="wb-stat"><span>Controls / output fields</span><strong>${Number(sourceCatalog.review.cataloguedControlCount).toLocaleString('en-IN')}</strong><small>Inputs, actions, hidden fields and grid columns</small></article><article class="wb-stat"><span>Explicit validators</span><strong>${sourceCatalog.review.explicitValidatorCount}</strong><small>Declared validator controls in markup</small></article><article class="wb-stat"><span>Database rule boundary</span><strong>Open</strong><small>Stored procedure definitions and live master rows were not supplied</small></article></div>
+      <div class="wb-note warn"><b>Product ID check:</b> the six-product catalog uses IDs ${sourceCatalog.review.productIdsInCurrentProductCatalog.join(', ')}. The legacy source also contains Product ID ${sourceCatalog.review.legacyProductIdConflicts.join(' and ')} branches outside that list. Confirm their meaning with the active product master before mapping them.</div>
+      <section class="panel"><div class="wb-controls"><label class="wb-mini">Product <select id="source-product">${productChoices}</select></label><label class="wb-mini">Module <select id="source-module">${moduleChoices}</select></label><label class="wb-mini">APPX screen <select id="source-screen" ${screens.length?'':'disabled'}>${screenChoices||'<option value="">No linked screen indexed</option>'}</select></label><input id="source-search" type="search" placeholder="Search field, type, lookup or validator" value="${esc(sourceSearch)}"></div>
+      <div class="wb-split"><article class="wb-compare-card"><h3>APPX evidence · ${esc(product.name)} (ID ${esc(product.id)})</h3><p>${esc(module?.appxEvidence||'Review the selected APPX screen and field evidence.')}</p><p><b>Product branch:</b> ${esc(pEvidence?.evidence||'Product branch evidence not separately recorded.')}</p><p><b>Current page applicability:</b> ${esc(applicability)}</p>${review.length?`<details><summary>Observed process behavior and rule ownership</summary><ul>${review.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><p>${esc(module.ruleStatus||'')}</p></details>`:''}</article><article class="wb-compare-card"><h3>OPTIM capability / gap status</h3><p>${esc(optStatus)}</p><p>Capture archive: 287 timestamped OPTIM images are present but not indexed screen-by-screen. Until the relevant OPTIM screen and field are matched, label the item <b>Unverified</b>, not a confirmed missing capability.</p><div>${badge('OPTIM Mapping Unverified')}</div></article></div>
+      ${screen?`<div class="wb-source-screen"><div><h2>${esc(screen.title)}</h2><p>APPX screen: ${esc(screen.page)} · ${screen.fieldCount} indexed controls/columns · ${screen.validatorsCount} explicit validator(s)</p></div>${screen.lineage.startsWith('Mixed')||screen.testArtifact?`<div class="wb-note warn">${esc(screen.testArtifact?'Test/sample page; production status unverified.':screen.lineage)}${screen.testArtifact&&screen.lineage.startsWith('Mixed')?' '+esc(screen.lineage):''}</div>`:''}<p class="wb-mini">${esc(applicability)} ${screen.productIds.length?`Code also references Product ID branch(es): ${screen.productIds.join(', ')}.`:''}</p></div>`:`<div class="wb-note warn">No screen source is mapped to this module yet. It is not evidence that the functionality is absent in APPX or OPTIM.</div>`}
+      <div class="wb-coverage">${matches.length.toLocaleString('en-IN')} matching field/control entries <span>·</span> page ${sourcePage} of ${pageCount} <span>·</span> ${sourceEditCount} field assessments saved in this browser</div>
+      <div class="wb-table-wrap"><table class="wb-table wb-source-table"><thead><tr><th>#</th><th>Control ID</th><th>APPX label / field</th><th>UI type</th><th>Required</th><th>Lookup / output</th><th>Validation detail</th><th>Field parity status</th></tr></thead><tbody>${rows||'<tr><td colspan="8">No controls match this search for the selected screen.</td></tr>'}</tbody></table></div>
+      <div class="wb-pager"><button class="wb-btn" id="source-prev" ${sourcePage<=1?'disabled':''}>← Previous fields</button><span>Page ${sourcePage} / ${pageCount}</span><button class="wb-btn" id="source-next" ${sourcePage>=pageCount?'disabled':''}>Next fields →</button></div>
+      <div class="wb-note warn"><b>Rule boundary:</b> the APPX source loads scores, FOIR/obligations, deviations, authority, pricing, LTV, scheme, document and workflow data through database procedures or dynamic masters. This index reports visible UI rules and fields only; it does not invent missing database policy values. Field parity statuses save in this browser; export them from Gap tracker → Export JSON.</div>
+      <button class="wb-btn" id="source-open-gap">Open this module’s product gap tracker →</button></section>`;
+    $('#source-product').addEventListener('change',e=>{sourceProduct=e.target.value;renderSourceInventory()});
+    $('#source-module').addEventListener('change',e=>{sourceModule=e.target.value;sourceScreenId='';sourcePage=1;renderSourceInventory()});
+    $('#source-screen')?.addEventListener('change',e=>{sourceScreenId=e.target.value;sourcePage=1;renderSourceInventory()});
+    $('#source-search').addEventListener('input',e=>{sourceSearch=e.target.value;sourcePage=1;renderSourceInventory();$('#source-search')?.focus();$('#source-search')?.setSelectionRange(sourceSearch.length,sourceSearch.length)});
+    $('#source-prev')?.addEventListener('click',()=>{sourcePage=Math.max(1,sourcePage-1);renderSourceInventory()});
+    $('#source-next')?.addEventListener('click',()=>{sourcePage=Math.min(pageCount,sourcePage+1);renderSourceInventory()});
+    box.querySelectorAll('[data-source-assessment]').forEach(el=>el.addEventListener('change',()=>{const id=el.dataset.sourceAssessment;overrideMap[id]={...(overrideMap[id]||{}),status:el.value};persist();renderSourceInventory()}));
+    $('#source-open-gap')?.addEventListener('click',()=>{filters={...filters,product:product.key,module:module?.name||'all',stage:'all',search:''};activeId=records.find(r=>r.type==='Module parity'&&r.product===product.key&&r.module===module?.name)?.id||'';setView('tracker')});
+  }
 
   function filteredRecords(){
     const term=filters.search.trim().toLowerCase();
@@ -213,13 +274,15 @@
     const r=stateOf(base);const refs=[...(r.evidence||[]),...(r.optimReferences||[])];
     const field=r.field?`<div class="wb-split"><div class="wb-note"><b>APPX field</b><br>${esc(r.field.label||r.field.name||r.field.id)} · ${esc(r.field.control)}<br>Required: ${r.field.htmlRequired?'HTML required':r.field.labelRequired?'label * marker':'no marker'}</div><div class="wb-note"><b>OPTIM field</b><br>${esc(r.optim)}</div></div><p><b>APPX lookup:</b> ${esc(r.appxLookup||'Not applicable')}</p><p><b>APPX validation:</b> ${esc(r.appxValidation||'See field catalog; server validation not verified.')}</p>`:'';
     const openItems=r.openItems?.length?`<h3>Items to confirm</h3><ul>${r.openItems.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`:'';
+    const sourceFindings=r.sourceFindings?.length?`<h3>Findings from APPX behavior</h3><ul>${r.sourceFindings.map(v=>`<li>${esc(v)}</li>`).join('')}</ul><div class="wb-note warn"><b>Rule source:</b> ${esc(r.ruleStatus||'Runtime and database rules may need confirmation.')}</div>`:'';
+    const optimAssessment=r.optimAssessment?`<div class="wb-note warn"><b>OPTIM evidence status:</b> ${esc(r.optimAssessment)}</div>`:'';
     return `<div class="wb-detail"><h3><span class="wb-id">${esc(r.id)}</span> · ${esc(r.module)}</h3><div class="wb-mini">${esc(r.productName)} / ${esc(r.stage)} / ${esc(r.type)}</div><div class="wb-detail-grid" style="margin-top:10px">
       <label>Assessment status<select data-edit="status" data-id="${esc(r.id)}">${selectOptions(statusOptions,r.status)}</select></label>
       <label>Priority<select data-edit="priority" data-id="${esc(r.id)}">${selectOptions(priorityOptions,r.priority)}</select></label>
       <label>Development status<select data-edit="developmentStatus" data-id="${esc(r.id)}">${selectOptions(workflowOptions,r.developmentStatus)}</select></label>
       <label>Testing status<select data-edit="testingStatus" data-id="${esc(r.id)}">${selectOptions(workflowOptions,r.testingStatus)}</select></label>
       <label class="wide">Project remarks<textarea data-edit="remarks" data-id="${esc(r.id)}" placeholder="Owner, decision, next action">${esc(r.remarks||'')}</textarea></label>
-    </div><hr><h3>APPX behavior</h3><p>${esc(r.appx)}</p>${field}<h3>OPTIM capability</h3><p>${esc(r.optim)}</p><h3>Gap</h3><p>${esc(r.gap)}</p><h3>Required action</h3><p>${esc(r.action)}</p>${openItems}<h3>Acceptance criteria</h3><p>${esc(r.acceptance)}</p><h3>Dependencies</h3><p>${esc(r.dependency||'Confirm with product and OPTIM owners.')}</p><details><summary>Evidence references</summary>${refs.length?`<ul class="wb-source-list">${refs.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'<p class="wb-mini">No screen-level or file-level evidence is mapped yet. Use Evidence workspace to preview the relevant screen captures locally.</p>'}</details><p class="wb-storage">Edits in this tracker are saved in local browser storage.</p></div>`;
+      </div><hr><h3>APPX behavior</h3><p>${esc(r.appx)}</p>${field}${sourceFindings}<h3>OPTIM capability</h3><p>${esc(r.optim)}</p>${optimAssessment}<h3>Gap</h3><p>${esc(r.gap)}</p><h3>Required action</h3><p>${esc(r.action)}</p>${openItems}<h3>Acceptance criteria</h3><p>${esc(r.acceptance)}</p><h3>Dependencies</h3><p>${esc(r.dependency||'Confirm with product and OPTIM owners.')}</p><details><summary>Evidence references</summary>${refs.length?`<ul class="wb-source-list">${refs.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'<p class="wb-mini">No screen-level or file-level evidence is mapped yet. Use Evidence workspace to preview the relevant screen captures locally.</p>'}</details><p class="wb-storage">Edits in this tracker are saved in local browser storage.</p></div>`;
   }
   function attachTrackerEvents(){
     const bind=(sel,key,event='change')=>{const el=$(sel);if(el)el.addEventListener(event,()=>{filters[key]=el.value;currentPage=1;renderTracker();if(key==='search'){const inp=$('#tracker-search');inp?.focus();inp?.setSelectionRange(inp.value.length,inp.value.length)}})};
@@ -232,7 +295,7 @@
     document.querySelectorAll('[data-edit]').forEach(el=>el.addEventListener(el.tagName==='TEXTAREA'?'change':'change',()=>{const id=el.dataset.id;overrideMap[id]={...(overrideMap[id]||{}),[el.dataset.edit]:el.value};persist();renderTracker()}));
   }
   function exportTracker(){
-    const payload={schemaVersion:1,exportedAt:new Date().toISOString(),storage:'Browser-local tracker snapshot',overrides:overrideMap,requirementCount:records.length};
+    const payload={schemaVersion:1,exportedAt:new Date().toISOString(),storage:'Browser-local tracker snapshot',overrides:overrideMap,requirementCount:records.length,sourceFieldAssessmentCount:Object.keys(overrideMap).filter(id=>id.startsWith('SRC-')).length};
     const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='suryoday-migration-tracker.json';a.click();URL.revokeObjectURL(url);
   }
   function importTracker(event){
@@ -259,8 +322,12 @@
     data=d;records=createRecords();overrideMap=loadOverrides();
     document.querySelectorAll('.workspace-tab').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
     document.addEventListener('click',ev=>{
+      const viewButton=ev.target.closest('[data-view]:not(.workspace-tab)');
+      if(viewButton){setView(viewButton.dataset.view);return}
       const productCard=ev.target.closest('[data-product]');
       if(productCard){window.suryodayProductSelected=true;setView('products');return}
+      const sourceOpen=ev.target.closest('[data-open-source-inventory]');
+      if(sourceOpen){sourceProduct=sourceOpen.dataset.openSourceInventory;sourceModule='underwriting';sourceScreenId='';sourceSearch='';sourcePage=1;setView('inventory');return}
       if(ev.target.closest('#back-to-products')){window.suryodayProductSelected=false;setView('products');return}
       const stageJump=ev.target.closest('.stage-button,.stage-jump');if(stageJump&&view==='products')setView('products');
     });

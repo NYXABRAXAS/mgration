@@ -9116,7 +9116,27 @@
         "FOIR/NFCF formula",
         "Credit recommendation and conditions"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "bureaupolicy",
+        "camreport",
+        "creditdop",
+        "gradings",
+        "underwriting",
+        "underwritingallocation",
+        "underwritingc",
+        "underwritingp",
+        "underwritingtracker",
+        "underwritingv1",
+        "validatescorecard"
+      ],
+      "sourceFindings": [
+        "CAM exposes applicant/co-applicant/guarantor, financial and obligation summaries, score/grading, FOIR, loan terms, asset/LTV, deviations, conditions, recommendation and risk categories.",
+        "Underwriting pages support save/update actions for CAM, deviations, special conditions, decline reasons, grading and reassignment.",
+        "FOIR, eligibility cut-offs, scorecard formulas and final recommendation thresholds are returned through data-layer/database calls; this source folder has no procedure definitions or approved policy tables."
+      ],
+      "ruleStatus": "Screen behavior confirmed; calculation formulas and policy thresholds are database-owned / unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "credit-deviation",
@@ -9137,7 +9157,20 @@
         "Approval levels and escalation",
         "Reject/return/resubmit/history"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "autodeviation",
+        "creditdop",
+        "deviationhistory",
+        "deviationmaster"
+      ],
+      "sourceFindings": [
+        "Auto-deviation reads product-specific parameter rows and calculates status; deviation rows can be saved through a database procedure.",
+        "MLR and processing-fee deviation assignment uses score, product ID, entered ROI/fee, cap and discount parameters, then queries the authority assignment.",
+        "Deviation master/history routes exist, but active trigger values, severity, authorities and effective dates are not included in this source folder."
+      ],
+      "ruleStatus": "Workflow surfaces confirmed; thresholds and authority matrix unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "business-deviation",
@@ -9157,7 +9190,18 @@
         "Remarks/evidence",
         "Return/reject/escalation/history"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "camreport",
+        "deviationhistory"
+      ],
+      "sourceFindings": [
+        "CAM loads business deviations separately from level/credit deviations.",
+        "Business deviation data and decision status are obtained and updated through stored-procedure/data-layer calls; remarks and mitigants are carried separately.",
+        "The active business trigger catalogue, authority limits and approval outcomes are database-owned and unavailable."
+      ],
+      "ruleStatus": "Separate business-deviation path confirmed; policy matrix unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "operational-deviation",
@@ -9171,7 +9215,9 @@
         "Confirm whether this category exists",
         "If applicable, obtain triggers, owners and approvals"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [],
+      "optimAssessment": "No distinct APPX operational-deviation catalogue was verified. OPTIM capability and Suryoday applicability require confirmation."
     },
     {
       "id": "document-deviation",
@@ -9189,7 +9235,28 @@
         "Approver and expiry",
         "Replacement and audit history"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "auditorapprovallist",
+        "auditorapprovallistpdd",
+        "bulkupload",
+        "bulkupload_price",
+        "casesforaudit",
+        "casesforauditleadwise",
+        "documentpending",
+        "underwitingdoc",
+        "uploaddocument",
+        "uploadfi",
+        "uploadgridvalue",
+        "viewbody",
+        "viewdocnew",
+        "viewimages",
+        "viewloanpdd",
+        "viewrcuimages",
+        "viewrejectedimage",
+        "viewunderwitingdoc"
+      ],
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "eligibility-deviation",
@@ -9207,7 +9274,41 @@
         "Override authority",
         "Evidence/remarks and re-computation"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "addressverification",
+        "applicationdetails",
+        "bureaupolicy",
+        "cafapplication",
+        "camreport",
+        "caseedit",
+        "casesforauditleadwise",
+        "createmodel",
+        "createpincode",
+        "createrate",
+        "createscheme",
+        "createvariant",
+        "creditdop",
+        "gradings",
+        "kyc_form",
+        "leaddedupe",
+        "leaddetail",
+        "leaddetailsummary",
+        "leaddetailsummaryhistory",
+        "leaddetailsummaryv1",
+        "modelpricecapping_dealer",
+        "onlinelead",
+        "underwriting",
+        "underwritingallocation",
+        "underwritingc",
+        "underwritingp",
+        "underwritingtracker",
+        "underwritingv1",
+        "uploadgridvalue",
+        "validatescorecard",
+        "vl_applicationform"
+      ],
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "deal-structure",
@@ -9227,7 +9328,46 @@
         "Net disbursement and allocations",
         "First EMI date and schedule"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "applicationdetails",
+        "bank_esign",
+        "cafapplication",
+        "camreport",
+        "caseedit",
+        "clagreement",
+        "cv_loan_agreement",
+        "cvloanagreement",
+        "cvloanagreement1",
+        "cvloanagreement2",
+        "cvloanagreement3",
+        "cvloanagreement4",
+        "cvloanagreement5",
+        "cvloanagreement6",
+        "eagreement",
+        "esaf_loan_sanction_terms",
+        "esaf_loan_sanction_termsold",
+        "esafagreement",
+        "esign",
+        "esigns",
+        "internalform",
+        "internalformkfs",
+        "leaddetail",
+        "leaddetailsummary",
+        "leaddetailsummaryhistory",
+        "leaddetailsummaryv1",
+        "loan_sanction_terms",
+        "sanction",
+        "sanletter",
+        "vl_applicationform"
+      ],
+      "sourceFindings": [
+        "CAM/sanction outputs include approved amount, asset and funding breakdown, margin, EMI, tenure, ROI, moratorium/EMI count, advance EMI, LTV, CLI and Hospicash/insurance amounts.",
+        "New/used vehicle and commercial-vehicle/CE sanction branches render different asset/funding structures.",
+        "Amount, rate, repayment schedule, margin and LTV computations are populated from case/database data; the complete calculation procedures and active policy masters are absent."
+      ],
+      "ruleStatus": "Output fields and product branches confirmed; calculation policy unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "repayment",
@@ -9246,7 +9386,19 @@
         "Repayment account/IFSC",
         "Mandate status, consent and failure handling"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "enach",
+        "nach",
+        "print documents--nach"
+      ],
+      "sourceFindings": [
+        "NACH pages expose mandate initiation/status and reporting/re-initiation actions.",
+        "Request, status, callback and update flows call database procedures and external mandate services.",
+        "Mandate eligibility, account rules, retries, callback-code meaning and production failure handling are not present as complete policy/service contracts."
+      ],
+      "ruleStatus": "Workflow surfaces confirmed; mandate policy/service contracts unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "sanction",
@@ -9265,7 +9417,38 @@
         "Generation, download and print",
         "Consistency with approved deal"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "bank_esign",
+        "cafapplication",
+        "clagreement",
+        "cv_loan_agreement",
+        "cvloanagreement",
+        "cvloanagreement1",
+        "cvloanagreement2",
+        "cvloanagreement3",
+        "cvloanagreement4",
+        "cvloanagreement5",
+        "cvloanagreement6",
+        "eagreement",
+        "esaf_loan_sanction_terms",
+        "esaf_loan_sanction_termsold",
+        "esafagreement",
+        "esign",
+        "esigns",
+        "internalform",
+        "internalformkfs",
+        "loan_sanction_terms",
+        "sanction",
+        "sanletter"
+      ],
+      "sourceFindings": [
+        "Sanction code has distinct branches for ProductId 2 (NCL), 7 (UCL), 9/13 (new commercial vehicle branch) and 10/14 (used commercial vehicle branch).",
+        "Sanction/loan terms expose product-dependent asset cost, funding, fees, insurance, LTV, tenure, moratorium, EMI and ROI values.",
+        "Suryoday-named sanction terms are separate from explicitly ESAF-named agreement/sanction pages; mixed-provenance pages are marked for confirmation."
+      ],
+      "ruleStatus": "Template branches confirmed; approved wording, values and signatory rules require current production templates.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "enach",
@@ -9284,7 +9467,18 @@
         "Consent and registration",
         "Success/failure/retry/status updates"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "enach",
+        "nach",
+        "print documents--nach"
+      ],
+      "sourceFindings": [
+        "eNACH request, status, callback logging and update paths exist; mandate state is retrieved and persisted by data-layer calls.",
+        "The full bank/gateway contract, status dictionary, retries, expiry and allowed products/accounts are not supplied."
+      ],
+      "ruleStatus": "Integration path confirmed; exact rules and service contract unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "document-audit",
@@ -9303,7 +9497,24 @@
         "Audit remarks and history",
         "PDD and pre-disbursement gating"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "auditorapprovallist",
+        "auditorapprovallistpdd",
+        "casesforaudit",
+        "casesforauditleadwise",
+        "documentpending",
+        "viewbody",
+        "viewdocnew",
+        "viewloanpdd",
+        "viewrejectedimage"
+      ],
+      "sourceFindings": [
+        "Audit and PDD queues, document preview and rejected-image/document routes exist.",
+        "Mandatory checklist and document state are populated from master/case data; waiver and closure effects require runtime policy."
+      ],
+      "ruleStatus": "Audit workflow surfaces confirmed; current checklist and waiver policy unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "qc-maker",
@@ -9320,7 +9531,16 @@
         "Locking and resubmission",
         "Segregation from checker"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "bodyqc"
+      ],
+      "sourceFindings": [
+        "Body QC queue supports allocation and status actions.",
+        "Document status data and maker actions are loaded through workflow/database records."
+      ],
+      "ruleStatus": "Maker queue confirmed; state dictionary and permissions are database-driven.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "qc-checker",
@@ -9338,7 +9558,18 @@
         "Maker-checker segregation",
         "Final QC status and audit"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "approvedlistpdd",
+        "auditorapprovallist",
+        "auditorapprovallistpdd"
+      ],
+      "sourceFindings": [
+        "Auditor approval and PDD queues expose review/status/update actions and document flags.",
+        "Checker authority, mandatory checks, return/reject conditions and final QC outcomes are database-driven."
+      ],
+      "ruleStatus": "Checker surfaces confirmed; detailed check policy unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "disbursement",
@@ -9357,7 +9588,20 @@
         "UTR/date/status/failure",
         "Partial/multiple payment and reversal"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "disbursementsupdate",
+        "disbursmentstatus",
+        "finalapproval",
+        "financeapprovallist"
+      ],
+      "sourceFindings": [
+        "Disbursement update, status and view pages provide queue, edit/update and export actions.",
+        "Payee, account, IFSC, amount, instrument and payout state are supplied by case/database services.",
+        "Bank limits, maker/checker ownership, payout order, reversal and status transition rules are not included."
+      ],
+      "ruleStatus": "Screen/workflow presence confirmed; payout rules and authority matrix unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "approval-matrix",
@@ -9378,7 +9622,33 @@
         "Return/reject/resubmit rules",
         "Effective dates and audit history"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "auditorapprovallist",
+        "auditorapprovallistpdd",
+        "authapprovedlist",
+        "authpending",
+        "bodyauthapprovedlist",
+        "casesearch",
+        "casetrack",
+        "channeltracker",
+        "cibilpending",
+        "dashboardhome",
+        "dashboardnew",
+        "documentpending",
+        "dotracker",
+        "dsaallocation",
+        "fiallocation",
+        "finalapproval",
+        "financeapprovallist",
+        "salesdone",
+        "salesreceive",
+        "underwritingallocation",
+        "underwritingtracker",
+        "viewauthapproved",
+        "viewtracker"
+      ],
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     },
     {
       "id": "auth-approval",
@@ -9397,7 +9667,413 @@
         "Maker-checker and authority limits",
         "Audit trail and terminal state"
       ],
-      "status": "Source Information Missing"
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "authapprovedlist",
+        "authpending",
+        "bodyauthapprovedlist",
+        "finalapproval",
+        "viewauthapproved"
+      ],
+      "sourceFindings": [
+        "Pending and approved authorization queues are present.",
+        "Authorization details include CIF creation checks, collateral/SPDC and disbursement readiness indicators.",
+        "Approval authority, role assignment, required conditions and final host posting are database/service controlled."
+      ],
+      "ruleStatus": "Authorization pathway confirmed; authority and host-posting rules unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
+    },
+    {
+      "id": "rcu",
+      "name": "RCU and verification",
+      "appxEvidence": "RCU status, asset/customer verification and RCU deviation are surfaced in the CAM/verification workflow. The queue, assignment and final rule outcomes are database/workflow driven.",
+      "appxReferences": [
+        "CamReport.aspx",
+        "CasesForAudit.aspx",
+        "CasesForAuditLeadWise.aspx",
+        "ViewRCUImages.aspx",
+        "ViewUnderwitingdoc.aspx"
+      ],
+      "openItems": [
+        "RCU applicability by product/customer/asset",
+        "Allocation and agency rules",
+        "Status and re-initiation rules",
+        "Mandatory evidence and image checklist",
+        "RCU fail/exception authority and effect on credit decision"
+      ],
+      "optimEvidence": "OPTIM screenshot archive is not mapped to this module. Capability is unverified; do not classify as a confirmed gap yet.",
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "creditfireport",
+        "verificationreport",
+        "viewrcuimages"
+      ],
+      "sourceFindings": [
+        "RCU/verification outcomes and RCU deviation are surfaced to CAM; case and evidence review routes are present.",
+        "Allocation, status decisions and re-initiation rules depend on operational masters and data-layer procedures."
+      ],
+      "ruleStatus": "RCU workflow signals confirmed; complete verification policy unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
+    },
+    {
+      "id": "fi-verification",
+      "name": "FI allocation, report and waiver",
+      "appxEvidence": "FI agency allocation, report upload/review and FI waiver policy pages exist. Customer type, visit type, assignment and waiver records load from application masters/services.",
+      "appxReferences": [
+        "FIAllocation.aspx",
+        "FIReport.aspx",
+        "UploadFI.aspx",
+        "FIWaiverPolicy.aspx",
+        "CreateFIAgency.aspx",
+        "CreditFiReport.aspx",
+        "AddressVerification.aspx"
+      ],
+      "openItems": [
+        "FI trigger and product/customer applicability",
+        "Agency/branch allocation and SLA",
+        "Report outcomes and acceptable evidence",
+        "Waiver eligibility, approver, expiry and audit trail"
+      ],
+      "optimEvidence": "OPTIM screenshot archive is not mapped to this module. Capability is unverified; do not classify as a confirmed gap yet.",
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "addressverification",
+        "createfiagency",
+        "creditfireport",
+        "fiallocation",
+        "fireport",
+        "fiwaiverpolicy",
+        "uploadfi"
+      ],
+      "sourceFindings": [
+        "FI allocation, report, agency and waiver-policy screens are present.",
+        "Customer type, visit type, waiver and assignment options are dynamically loaded."
+      ],
+      "ruleStatus": "FI process screens confirmed; triggers, waiver limits and authority are database/master-owned.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
+    },
+    {
+      "id": "bureau-scorecard",
+      "name": "Bureau, dedupe and scorecard",
+      "appxEvidence": "Bureau policy, CIBIL/bureau views, dedupe and scorecard validation surfaces are present. CAM displays grading/score outputs; full thresholds, provider responses and score formulas are server/database owned.",
+      "appxReferences": [
+        "BureauPolicy.aspx",
+        "ViewBureau.aspx",
+        "ViewCibil.aspx",
+        "CIBILPending.aspx",
+        "DeDupe.aspx",
+        "LeadDedupe.aspx",
+        "ValidateScorecard.aspx"
+      ],
+      "openItems": [
+        "Bureau provider and response mapping",
+        "Scorecard inputs, weights and cut-offs",
+        "Dedupe match rules and disposition",
+        "Override roles and audit",
+        "Product/scheme effective dates"
+      ],
+      "optimEvidence": "OPTIM screenshot archive is not mapped to this module. Capability is unverified; do not classify as a confirmed gap yet.",
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "bureaupolicy",
+        "cibilpending",
+        "dedupe",
+        "leaddedupe",
+        "validatescorecard",
+        "viewbureau",
+        "viewcibil"
+      ],
+      "sourceFindings": [
+        "Bureau policy, CIBIL, dedupe and scorecard validation screens are present; CAM shows grading and score output.",
+        "Provider responses, score formulas, cut-offs and overrides are server/database owned."
+      ],
+      "ruleStatus": "Surfaces confirmed; decision rules and provider contracts unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
+    },
+    {
+      "id": "scheme-configuration",
+      "name": "Product, scheme, rate and asset masters",
+      "appxEvidence": "Administrative masters exist for product schemes, rates, vehicle/asset models, variants, dealer price capping and asset grid values. APPX pages read/write master rows through application/database calls.",
+      "appxReferences": [
+        "CreateScheme.aspx",
+        "CreateRate.aspx",
+        "CreateModel.aspx",
+        "CreateVariant.aspx",
+        "ModelPriceCapping_Dealer.aspx",
+        "UploadGridValue.aspx",
+        "CreateDealer.aspx"
+      ],
+      "openItems": [
+        "Approved active product/scheme matrix for all six IDs",
+        "Effective-dated rates, tenure, amount and LTV limits",
+        "Asset/model/grid valuation source and refresh",
+        "Charge/insurance/fee masters",
+        "Production baseline, version history and authorization"
+      ],
+      "optimEvidence": "OPTIM screenshot archive is not mapped to this module. Capability is unverified; do not classify as a confirmed gap yet.",
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "createmodel",
+        "createpincode",
+        "createrate",
+        "createscheme",
+        "createvariant",
+        "modelpricecapping_dealer",
+        "uploadgridvalue"
+      ],
+      "sourceFindings": [
+        "Scheme, rate, model, variant, dealer price capping and asset grid master screens exist.",
+        "These masters are the source of dynamic product lookups/limits; exported active rows and approval history are absent."
+      ],
+      "ruleStatus": "Configuration surfaces confirmed; current approved values unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
+    },
+    {
+      "id": "document-operations",
+      "name": "Document upload and checklist",
+      "appxEvidence": "Application document upload, underwriting documents, pending document and document-view workflows are present. Required document rows and stage applicability are data-driven.",
+      "appxReferences": [
+        "UploadDocument.aspx",
+        "DocumentPending.aspx",
+        "ViewDocNew.aspx",
+        "Underwitingdoc.aspx",
+        "ViewUnderwitingdoc.aspx",
+        "ViewLoanPDD.aspx"
+      ],
+      "openItems": [
+        "Product/member/stage mandatory-document matrix",
+        "Conditional documents and original/copy rules",
+        "File type/size/quality validations",
+        "Replacement, rejection, PDD and audit state transitions"
+      ],
+      "optimEvidence": "OPTIM screenshot archive is not mapped to this module. Capability is unverified; do not classify as a confirmed gap yet.",
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "bulkupload",
+        "bulkupload_price",
+        "documentpending",
+        "underwitingdoc",
+        "uploaddocument",
+        "uploadfi",
+        "uploadgridvalue",
+        "viewimages",
+        "viewrcuimages",
+        "viewunderwitingdoc"
+      ],
+      "sourceFindings": [
+        "Upload, pending-document, underwriting-document and PDD view routes exist.",
+        "Document controls and workflow states are populated by dynamic case/stage data."
+      ],
+      "ruleStatus": "Screen presence confirmed; full product-stage document matrix unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
+    },
+    {
+      "id": "workflow-queues",
+      "name": "Workflow, roles and approvals",
+      "appxEvidence": "User-role menu and queue visibility are loaded dynamically from role/user/service records. Approval stages and actions are exposed across credit, finance, auditor, QC and authorization queues.",
+      "appxReferences": [
+        "AdminWebMaster.aspx",
+        "RoleRightsMap.aspx",
+        "CreditDOP.aspx",
+        "FinanceApprovalList.aspx",
+        "FinalApproval.aspx",
+        "AuditorApprovalList.aspx",
+        "BodyQC.aspx",
+        "AuthPending.aspx"
+      ],
+      "openItems": [
+        "Approved role-to-screen/action matrix",
+        "Stage transition and entry/exit conditions",
+        "Delegation and amount authority matrix",
+        "SLA/escalation, return/reject/re-initiate rules",
+        "Effective dates and audit history"
+      ],
+      "optimEvidence": "OPTIM screenshot archive is not mapped to this module. Capability is unverified; do not classify as a confirmed gap yet.",
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "auditorapprovallist",
+        "auditorapprovallistpdd",
+        "authpending",
+        "casesearch",
+        "casetrack",
+        "channeltracker",
+        "cibilpending",
+        "dashboardhome",
+        "dashboardnew",
+        "documentpending",
+        "dotracker",
+        "dsaallocation",
+        "fiallocation",
+        "finalapproval",
+        "financeapprovallist",
+        "salesdone",
+        "salesreceive",
+        "underwritingallocation",
+        "underwritingtracker",
+        "viewtracker"
+      ],
+      "sourceFindings": [
+        "Menu availability is role/user/service-dependent and loaded dynamically.",
+        "Credit, finance, auditor, QC and authorization queues expose separate actions and status updates.",
+        "Production stage order, roles, delegation, transitions and SLAs are not defined in this local source snapshot."
+      ],
+      "ruleStatus": "Role-aware queue surfaces confirmed; authoritative workflow matrix unavailable.",
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
+    },
+    {
+      "id": "other-screens",
+      "name": "Other APPX and administrative screens",
+      "appxEvidence": "Other screens include product/role masters, operational queues, reports, audit/history views and legacy utility pages. Use the screen-level lineage marker before treating them as an active Suryoday production baseline.",
+      "appxReferences": [],
+      "openItems": [
+        "Confirm screen is active in the current production baseline",
+        "Confirm role and product applicability",
+        "Confirm any report/utility data and business rules with the owner"
+      ],
+      "optimEvidence": "OPTIM screenshot archive is not mapped to this module. Capability is unverified; do not classify as a confirmed gap yet.",
+      "status": "Source Information Missing",
+      "appxScreenIds": [
+        "a_test_datatable",
+        "abc_datatables",
+        "addresstest",
+        "adminwebmaster",
+        "allocatetoagency",
+        "apilogs",
+        "applicationformmaster",
+        "approvedlist",
+        "bankreport",
+        "bre",
+        "caselook",
+        "casereport",
+        "caseswapping",
+        "changepassword",
+        "completemisreport",
+        "consignments",
+        "createbranch",
+        "createcompany",
+        "createdealer",
+        "createmanufacture",
+        "createmanufacturemaster",
+        "createrole",
+        "createuser",
+        "creditreport",
+        "customerror",
+        "cvag1",
+        "cvag2",
+        "cvag3",
+        "cvag4",
+        "cvag5",
+        "cvag6",
+        "cvag7",
+        "cvag8",
+        "default",
+        "deliveryorder",
+        "departmenttatreport",
+        "downloadreport",
+        "endorsementform",
+        "expiredvkyc",
+        "externaluser",
+        "fcu",
+        "form34",
+        "formirr",
+        "formlogout",
+        "formmisreport",
+        "holidaymaster",
+        "imageprocessor",
+        "internalouter",
+        "la_format",
+        "login",
+        "mapfiagency",
+        "mastermerge",
+        "misreport",
+        "outlet",
+        "perfiosreport",
+        "promisreport",
+        "psl",
+        "rao_laf",
+        "relook",
+        "reports",
+        "rolerightsmap",
+        "rotatezoomv3--zoom1",
+        "sample",
+        "searchcase",
+        "showcaptcha",
+        "singlenumbersearch",
+        "so_report",
+        "soa",
+        "swapping",
+        "temp--default",
+        "temp--submitimprest",
+        "tvrinitiation",
+        "updations",
+        "verifymobile",
+        "verifyresponse",
+        "viewdisburmentupdate",
+        "viewhistory",
+        "viewloan",
+        "viewsamplenew",
+        "vl-welcomeletter-final",
+        "zoomrotate"
+      ],
+      "optimAssessment": "Not mapped in the module-level OPTIM evidence index. This means evidence is missing, not that the module is confirmed absent from OPTIM."
     }
-  ]
+  ],
+  "appxSourceReview": {
+    "sourceBaseline": "SuryodayaBank folder supplied in the workspace",
+    "webformsPageCount": 185,
+    "cataloguedControlCount": 10286,
+    "explicitValidatorCount": 63,
+    "serverValidationReferenceCount": 12,
+    "csharpSourceFileCount": 288,
+    "productBranchEvidence": [
+      {
+        "productId": "2",
+        "product": "New Car Loan",
+        "evidence": "Sanction source contains the NCL branch; CAM source distinguishes ProductId 2."
+      },
+      {
+        "productId": "7",
+        "product": "Used Car Loan",
+        "evidence": "Sanction source contains the UCL branch; CAM source distinguishes ProductId 7."
+      },
+      {
+        "productId": "9",
+        "product": "New Commercial Vehicle",
+        "evidence": "Sanction source combines IDs 9/13 in the new commercial vehicle branch; product name is taken from the six-product APPX catalog."
+      },
+      {
+        "productId": "10",
+        "product": "Used Commercial Vehicle",
+        "evidence": "Sanction source combines IDs 10/14 in the used commercial vehicle branch; product name is taken from the six-product APPX catalog."
+      },
+      {
+        "productId": "13",
+        "product": "New Construction Equipment",
+        "evidence": "APPX product branch ID 13; sanction source groups it with ID 9 for the new commercial vehicle form."
+      },
+      {
+        "productId": "14",
+        "product": "Used Construction Equipment",
+        "evidence": "APPX product branch ID 14; sanction source groups it with ID 10 for the used commercial vehicle form."
+      }
+    ],
+    "productIdsInCurrentProductCatalog": [
+      "2",
+      "7",
+      "9",
+      "10",
+      "13",
+      "14"
+    ],
+    "legacyProductIdConflicts": [
+      "1",
+      "6"
+    ],
+    "knownLimitations": [
+      "Runtime database schema, stored procedure definitions and live master rows are not present; calculations, limits and workflow transitions owned by them remain unverified.",
+      "The folder contains explicitly ESAF-named pages and other mixed legacy references; those screens are marked for lineage confirmation and must not be treated as Suryoday policy without approval.",
+      "ASP.NET markup controls and validators are catalogued from source; runtime-created controls and service-side validation can be absent from markup.",
+      "No OPTIM application source was supplied. Screenshot captures are not an indexed screen-by-screen target catalog."
+    ]
+  }
 }
