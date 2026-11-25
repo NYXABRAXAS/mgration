@@ -8218,5 +8218,1186 @@
       }
     ]
   },
-  "notice": "Policy schedules, service-side validations and exact lookup lists"
+  "notice": "Policy schedules, service-side validations and exact lookup lists",
+  "comparisonStages": [
+    {
+      "id": "login-and-authentication",
+      "sequence": 1,
+      "title": "Login and Authentication",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "Login.js: ProHorizon credential, ADID redirect, token validation; session role/branch/team fields.",
+      "appxReferences": [
+        "SuryodayWeb/src/component/login/Login.js"
+      ],
+      "optimBehavior": "OPTIM screenshot: username, password, captcha; next screen six-digit OTP.",
+      "optimReferences": [
+        "optim_screens/optimscreen/Screenshot 2026-08-06 112903.png",
+        "optim_screens/optimscreen/Screenshot 2026-08-06 112924.png"
+      ],
+      "gapRequirement": "C01 Confirm auth parity, role claims, retries, expiry, session and error handling.",
+      "status": "Partially Available",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "dashboard",
+      "sequence": 2,
+      "title": "Dashboard",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "Dashboard.js and Sidebar.js; widgets/queues require runtime.",
+      "appxReferences": [
+        "SuryodayWeb/src/component/dashboard/Dashboard.js",
+        "SuryodayWeb/src/component/sidebar/Sidebar.js"
+      ],
+      "optimBehavior": "No indexed target screen.",
+      "optimReferences": [],
+      "gapRequirement": "C02 Map widgets, queues, filters, rights and drill-down.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "lead-creation-sourcing",
+      "sequence": 3,
+      "title": "Lead Creation / Sourcing",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "LeadCreateLogin.js, LeadPersonalLoanDetails.js; master APIs for product/scheme/geography/channel/branch.",
+      "appxReferences": [
+        "LeadCreateLogin.js, LeadPersonalLoanDetails.js",
+        "master APIs for product/scheme/geography/channel/branch."
+      ],
+      "optimBehavior": "Screen/fields not indexed.",
+      "optimReferences": [],
+      "gapRequirement": "C03 Configure sourced fields and dependent masters.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "customer-details",
+      "sequence": 4,
+      "title": "Customer Details",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "Lead mobile verification and Applicant API flow.",
+      "appxReferences": [
+        "Lead mobile verification and Applicant API flow."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C04 Map identity, contacts, consent and dedupe.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "applicant-and-co-applicant",
+      "sequence": 5,
+      "title": "Applicant and Co-Applicant",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "LeadSelectMember.js; Co-Applicant/Guarantor options; skip switch when DEStatus=3.",
+      "appxReferences": [
+        "LeadSelectMember.js",
+        "Co-Applicant/Guarantor options",
+        "skip switch when DEStatus=3."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C05 Preserve member types, cardinality and conditional skip.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "kyc-and-identity",
+      "sequence": 6,
+      "title": "KYC and Identity",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "Ekyc, VidEkyc, VaultDedupe; applicant upload flow.",
+      "appxReferences": [
+        "Ekyc, VidEkyc, VaultDedupe",
+        "applicant upload flow."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C06 Map methods, identifiers, status and exception paths.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "personal-details",
+      "sequence": 7,
+      "title": "Personal Details",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "PersonalInformation.js and Applicant.js.",
+      "appxReferences": [
+        "PersonalInformation.js and Applicant.js."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C07 Complete field/required/editability catalog.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "address-details",
+      "sequence": 8,
+      "title": "Address Details",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "AddressDetails.js; address lines, pin, city/state, landmark, accommodation/residence, rent, duration fields.",
+      "appxReferences": [
+        "AddressDetails.js",
+        "address lines, pin, city/state, landmark, accommodation/residence, rent, duration fields."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C08 Map lookup, copy, read-only, rent and duration rules.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "employment-business",
+      "sequence": 9,
+      "title": "Employment / Business",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "OfficeDetails.js.",
+      "appxReferences": [
+        "OfficeDetails.js."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C09 Map type, income, proofs and policy inputs.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "asset-details",
+      "sequence": 10,
+      "title": "Asset Details",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "LeadUsedAssetDetails.js, LeadUsedCarAssetDetails.js, LeadUsedCEAssetDetails.js.",
+      "appxReferences": [
+        "LeadUsedAssetDetails.js, LeadUsedCarAssetDetails.js, LeadUsedCEAssetDetails.js."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C10 Map asset hierarchy, age/valuation and product branches.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "loan-details",
+      "sequence": 11,
+      "title": "Loan Details",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "LeadPersonalLoanDetails.js routes six variants; term/insurance/CLI/Hospi controls.",
+      "appxReferences": [
+        "LeadPersonalLoanDetails.js routes six variants",
+        "term/insurance/CLI/Hospi controls."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C11 Reconcile calculations, terms, defaults and validation.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "scheme-and-product",
+      "sequence": 12,
+      "title": "Scheme and Product",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "GetMasterDataV1 and schemeCode passed to product forms.",
+      "appxReferences": [
+        "GetMasterDataV1 and schemeCode passed to product forms."
+      ],
+      "optimBehavior": "Config capability unverified.",
+      "optimReferences": [],
+      "gapRequirement": "C12 Load approved matrix and bind rules.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "charges",
+      "sequence": 13,
+      "title": "Charges",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "LeadDocumentCharges.js calls charge APIs; CLI and valuation conditional branches.",
+      "appxReferences": [
+        "LeadDocumentCharges.js calls charge APIs",
+        "CLI and valuation conditional branches."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C13 Reconcile fees, coverage, waivers, taxes and rounding.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "document-upload",
+      "sequence": 14,
+      "title": "Document Upload",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "LeadDocument.js, Applicant.js UploadDocAPI, Document.js.",
+      "appxReferences": [
+        "LeadDocument.js, Applicant.js UploadDocAPI, Document.js."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C14 Map matrix, formats, size, viewing, audit and waivers.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "application-summary",
+      "sequence": 15,
+      "title": "Application Summary",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "LeadView.js, LeadJourney.js, ApplicationForm.js.",
+      "appxReferences": [
+        "LeadView.js, LeadJourney.js, ApplicationForm.js."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C15 Map content, locks and recalculation.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "bureau-credit",
+      "sequence": 16,
+      "title": "Bureau / Credit",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "LeadScoreCard.js; legacy ViewCibil, ViewBureau, CIBILPending.",
+      "appxReferences": [
+        "LeadScoreCard.js",
+        "legacy ViewCibil, ViewBureau, CIBILPending."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C16 Map triggers, consent, payload, retries and outcomes.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "dedupe-risk",
+      "sequence": 17,
+      "title": "Dedupe / Risk",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "VaultDedupe.js; LeadDedupe.aspx, DeDupe.aspx.",
+      "appxReferences": [
+        "VaultDedupe.js",
+        "LeadDedupe.aspx, DeDupe.aspx."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C17 Map match keys, overrides, audit and retries.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "fvr-verification",
+      "sequence": 18,
+      "title": "FVR / Verification",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "AddressVerification.aspx, CreditFiReport.aspx, FIWaiverPolicy.aspx.",
+      "appxReferences": [
+        "AddressVerification.aspx, CreditFiReport.aspx, FIWaiverPolicy.aspx."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C18 Confirm types, roles, outcomes, waivers, rework.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "application-form",
+      "sequence": 19,
+      "title": "Application Form",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "ApplicationForm.js, PersonalInformation, AddressDetails, OfficeDetails, TradeNominee.",
+      "appxReferences": [
+        "ApplicationForm.js, PersonalInformation, AddressDetails, OfficeDetails, TradeNominee."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C19 Map generation, signatures, nominee and locks.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "due-diligence",
+      "sequence": 20,
+      "title": "Due Diligence",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "Review/verification modules exist; state graph absent.",
+      "appxReferences": [
+        "Review/verification modules exist",
+        "state graph absent."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C20 Define checklist, actor, evidence and exits.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "credit-queue",
+      "sequence": 21,
+      "title": "Credit Queue",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "CreditDOP.aspx, CreditReport.aspx, FinanceApprovalList.aspx.",
+      "appxReferences": [
+        "CreditDOP.aspx, CreditReport.aspx, FinanceApprovalList.aspx."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C21 Confirm queue, prioritisation and TAT.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "cam-preparation",
+      "sequence": 22,
+      "title": "CAM Preparation",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "CamReport.aspx and viability/report components.",
+      "appxReferences": [
+        "CamReport.aspx and viability/report components."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C22 Map fields, auto-population, output and versioning.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "deviation",
+      "sequence": 23,
+      "title": "Deviation",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "AutoDeviation, DeviationMaster, DeviationHistory pages.",
+      "appxReferences": [
+        "AutoDeviation, DeviationMaster, DeviationHistory pages."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C23 Map triggers, levels, expiry, comments and resubmit.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "credit-approval",
+      "sequence": 24,
+      "title": "Credit Approval",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "FinalApproval.aspx, CreditDOP.aspx, FinanceApprovalList.aspx.",
+      "appxReferences": [
+        "FinalApproval.aspx, CreditDOP.aspx, FinanceApprovalList.aspx."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C24 Confirm authority, changes, conditions, decline/return.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "deal-structure",
+      "sequence": 25,
+      "title": "Deal Structure",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "SanctionMultiLoan, SanctionLetter components.",
+      "appxReferences": [
+        "SanctionMultiLoan, SanctionLetter components."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C25 Map approved terms, multi-loan, consistency and output.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "asm-approval",
+      "sequence": 26,
+      "title": "ASM Approval",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "No explicit role/stage evidence.",
+      "appxReferences": [],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C26 Confirm whether stage exists and routing.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "business-approval",
+      "sequence": 27,
+      "title": "Business Approval",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "No explicit universal stage evidence.",
+      "appxReferences": [],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C27 Confirm stage and authority.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "qc-maker",
+      "sequence": 28,
+      "title": "QC Maker",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "BodyQC.aspx exists; role split unknown.",
+      "appxReferences": [
+        "BodyQC.aspx exists",
+        "role split unknown."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C28 Confirm checklist, correction rights, lock and routing.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "qc-checker",
+      "sequence": 29,
+      "title": "QC Checker",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "Auditor/PDD pages exist; cannot equate auditor with checker.",
+      "appxReferences": [
+        "Auditor/PDD pages exist",
+        "cannot equate auditor with checker."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C29 Confirm segregation and outcomes.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "disbursement-details",
+      "sequence": 30,
+      "title": "Disbursement Details",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "DisbursementForm.js, UsedCarDisbursementDetails.js.",
+      "appxReferences": [
+        "DisbursementForm.js, UsedCarDisbursementDetails.js."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C30 Map account, payee, tranche, amount and product data.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "disbursement-update",
+      "sequence": 31,
+      "title": "Disbursement Update",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "DisbursementUpdate components, DisbursementsUpdate.aspx.",
+      "appxReferences": [
+        "DisbursementUpdate components, DisbursementsUpdate.aspx."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C31 Map response/status/date/ref/failure/reversal.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "disbursement-authorisation",
+      "sequence": 32,
+      "title": "Disbursement Authorisation",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "AuthPending.aspx, AuthApprovedList.aspx.",
+      "appxReferences": [
+        "AuthPending.aspx, AuthApprovedList.aspx."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C32 Confirm maker-checker and transaction controls.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    },
+    {
+      "id": "auth-done",
+      "sequence": 33,
+      "title": "Auth Done",
+      "productScope": "All six; verify product and scheme applicability",
+      "sequenceConfidence": "Candidate sequence; exact live order is dynamic and requires approved workflow export",
+      "appxBehavior": "Authorised list evidence only; exact terminal behavior unconfirmed.",
+      "appxReferences": [
+        "Authorised list evidence only",
+        "exact terminal behavior unconfirmed."
+      ],
+      "optimBehavior": "Confirmation Required.",
+      "optimReferences": [],
+      "gapRequirement": "C33 Define terminal state, notification and read-only behavior.",
+      "status": "Source Information Missing",
+      "priority": "Unassigned"
+    }
+  ],
+  "evidenceCatalog": {
+    "group-001": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadCreateLogin.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-002": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadMobileVerfication.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-003": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadNewCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadNewVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LoanNewCarLoanForm.js",
+        "SuryodayWeb/src/component/lead/LoanUsedCarLoanForm.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.old.js",
+        "SuryodayWeb/src/component/fleet/FleetForm.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-004": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadNewCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadNewVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LoanNewCarLoanForm.js",
+        "SuryodayWeb/src/component/lead/LoanUsedCarLoanForm.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.old.js",
+        "SuryodayWeb/src/component/fleet/FleetForm.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-005": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadPersonalLoanDetails.js",
+        "SuryodayWeb/src/component/lead/LeadProfileLoanDetails.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-006": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadPersonalLoanDetails.js",
+        "SuryodayWeb/src/component/lead/LeadProfileLoanDetails.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-007": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadScoreCard.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-008": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadSelectMember.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-009": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadUsedAssetDetails.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCarAssetDetails.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCEAssetDetails.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-010": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadUsedAssetDetails.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCarAssetDetails.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCEAssetDetails.js",
+        "SuryodayWeb/src/component/lead/LoanNewCarLoanForm.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-011": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadUsedAssetDetails.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCarAssetDetails.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCEAssetDetails.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-012": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadNewCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadNewVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LoanNewCarLoanForm.js",
+        "SuryodayWeb/src/component/lead/LoanUsedCarLoanForm.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.old.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-013": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadNewCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadNewVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LoanNewCarLoanForm.js",
+        "SuryodayWeb/src/component/lead/LoanUsedCarLoanForm.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.old.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-014": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadNewCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadNewVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCarAssetDetails.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LoanNewCarLoanForm.js",
+        "SuryodayWeb/src/component/lead/LoanUsedCarLoanForm.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.old.js",
+        "SuryodayWeb/src/component/fleet/FleetForm.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-015": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadNewCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadNewVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LoanNewCarLoanForm.js",
+        "SuryodayWeb/src/component/lead/LoanUsedCarLoanForm.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.old.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-016": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/applicant/Applicant.js",
+        "SuryodayWeb/src/component/disbursement/BodyDisbursementSummary.js",
+        "SuryodayWeb/src/component/disbursement/BodyNachInitiate.js",
+        "SuryodayWeb/src/component/disbursement/NachInitiate.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-017": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/applicant/BankAccountAuthentication.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-018": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/applicant/LoginWith.js",
+        "SuryodayWeb/src/component/kyc/Ekyc.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-019": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/applicationform/AddressDetails.js",
+        "SuryodayWeb/src/component/applicationform/OfficeDetails.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-020": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/applicationform/AddressDetails.js",
+        "SuryodayWeb/src/component/applicationform/OfficeDetails.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-021": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/applicationform/PersonalInformation.js",
+        "SuryodayWeb/src/component/disbursement/SanctionMultiLoanSummary.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-022": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/applicationform/TradeNominee.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-023": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/applicant/LoginWith.js",
+        "SuryodayWeb/src/component/kyc/Ekyc.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-024": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/kyc/PendingKyc.js",
+        "SuryodayWeb/src/component/kyc/VidEkyc.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-025": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/kyc/VaultDedupe.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-026": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/kyc/PendingKyc.js",
+        "SuryodayWeb/src/component/kyc/VidEkyc.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-027": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadNewCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadNewVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadUsedVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LoanNewCarLoanForm.js",
+        "SuryodayWeb/src/component/lead/LoanUsedCarLoanForm.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.old.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-028": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/applicant/Applicant.js",
+        "SuryodayWeb/src/component/disbursement/BodyDisbursementSummary.js",
+        "SuryodayWeb/src/component/disbursement/BodyNachInitiate.js",
+        "SuryodayWeb/src/component/disbursement/NachInitiate.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-029": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/applicant/Applicant.js",
+        "SuryodayWeb/src/component/disbursement/BodyDisbursementSummary.js",
+        "SuryodayWeb/src/component/disbursement/BodyNachInitiate.js",
+        "SuryodayWeb/src/component/disbursement/NachInitiate.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-030": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/disbursement/DisbursementForm.js",
+        "SuryodayWeb/src/component/disbursement/UsedCarDisbursementDetails.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-031": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/applicant/Applicant.js",
+        "SuryodayWeb/src/component/disbursement/BodyDisbursementSummary.js",
+        "SuryodayWeb/src/component/disbursement/BodyNachInitiate.js",
+        "SuryodayWeb/src/component/disbursement/NachInitiate.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-032": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/applicationform/PersonalInformation.js",
+        "SuryodayWeb/src/component/disbursement/SanctionMultiLoanSummary.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-033": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/disbursement/DisbursementForm.js",
+        "SuryodayWeb/src/component/disbursement/UsedCarDisbursementDetails.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-034": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/login/Login.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-035": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/dashboard/Dashboard.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-036": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/fleet/FleetFilter.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-037": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/lead/LeadNewCEVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LeadNewVehicleForm.js",
+        "SuryodayWeb/src/component/lead/LoanNewCarLoanForm.js",
+        "SuryodayWeb/src/component/fleet/FleetForm.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    },
+    "group-038": {
+      "appxComponents": [
+        "SuryodayWeb/src/component/viability/ViabilityCreate.js"
+      ],
+      "optimScreen": "Not mapped to a field-level target screen"
+    }
+  },
+  "screenEvidence": {
+    "appx": {
+      "count": 90,
+      "status": "Timestamped capture archive; stage index not supplied",
+      "firstCapture": "suryoday_screens/suryodayscreen/Screenshot 2026-11-20 144353.png"
+    },
+    "optim": {
+      "count": 287,
+      "status": "Timestamped capture archive; field/stage index not supplied",
+      "loginCaptures": [
+        "optim_screens/optimscreen/Screenshot 2026-08-06 112903.png",
+        "optim_screens/optimscreen/Screenshot 2026-08-06 112924.png"
+      ]
+    }
+  },
+  "storageNote": "This static site has no shared database or application API. Tracker edits are saved in this browser only; use JSON export/import to carry a review snapshot between team members.",
+  "moduleAssessments": [
+    {
+      "id": "underwriting",
+      "name": "Underwriting and CAM",
+      "appxEvidence": "CAM report exposes underwriting summary, grading, business deviations and a FOIR result grid. Stored formulas and approved cut-offs are not present in the supplied schema.",
+      "appxReferences": [
+        "SuryodayaBank/CamReport.aspx",
+        "SuryodayaBank/CamReport.aspx.cs",
+        "SuryodayaBank/Underwriting.aspx",
+        "SuryodayaBank/Underwritingv1.aspx"
+      ],
+      "optimEvidence": "No screen/capability mapping recorded.",
+      "openItems": [
+        "Income assessment rules",
+        "Existing obligations formula",
+        "Applicant/co-applicant treatment",
+        "Bureau/score cut-offs",
+        "Eligibility and repayment capacity",
+        "FOIR/NFCF formula",
+        "Credit recommendation and conditions"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "credit-deviation",
+      "name": "Credit / policy deviation",
+      "appxEvidence": "Separate credit underwriting route, AutoDeviation, DeviationMaster and DeviationHistory surfaces are present; trigger thresholds and authorities are database-owned and unavailable.",
+      "appxReferences": [
+        "SuryodayaBank/AutoDeviation.aspx",
+        "SuryodayaBank/DeviationMaster.aspx",
+        "SuryodayaBank/DeviationHistory.aspx",
+        "SuryodayaBank/AdminWebMaster.aspx"
+      ],
+      "optimEvidence": "No screen/capability mapping recorded.",
+      "openItems": [
+        "Deviation name/code",
+        "Triggering condition and threshold",
+        "Severity and expiry",
+        "Mandatory remarks/documents",
+        "Approval levels and escalation",
+        "Reject/return/resubmit/history"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "business-deviation",
+      "name": "Business deviation",
+      "appxEvidence": "A distinct Business Deviation route uses underwriting Type=1; CAM renders business deviation rows. Rules and approver matrix are database-owned and unavailable.",
+      "appxReferences": [
+        "SuryodayaBank/AdminWebMaster.aspx",
+        "SuryodayaBank/CamReport.aspx",
+        "SuryodayaBank/CamReport.aspx.cs",
+        "SuryodayaBank/App_Code/BusinessDeviations.cs"
+      ],
+      "optimEvidence": "No screen/capability mapping recorded.",
+      "openItems": [
+        "Business trigger catalogue",
+        "Threshold and severity",
+        "Business approval authority",
+        "Remarks/evidence",
+        "Return/reject/escalation/history"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "operational-deviation",
+      "name": "Operational deviation",
+      "appxEvidence": "A separate operational deviation category is not verified in the available workflow or rule records.",
+      "appxReferences": [
+        "SuryodayaBank/AdminWebMaster.aspx"
+      ],
+      "optimEvidence": "No screen/capability mapping recorded.",
+      "openItems": [
+        "Confirm whether this category exists",
+        "If applicable, obtain triggers, owners and approvals"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "document-deviation",
+      "name": "Document deviation",
+      "appxEvidence": "Document audit, QC and waiver pages exist; a distinct document-deviation policy catalogue is not verified.",
+      "appxReferences": [
+        "SuryodayaBank/BodyQC.aspx",
+        "SuryodayaBank/AuditorApprovalList.aspx",
+        "SuryodayaBank/FIWaiverPolicy.aspx"
+      ],
+      "optimEvidence": "No screen/capability mapping recorded.",
+      "openItems": [
+        "Mandatory document matrix",
+        "Waiver/deferral eligibility",
+        "Approver and expiry",
+        "Replacement and audit history"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "eligibility-deviation",
+      "name": "Eligibility deviation",
+      "appxEvidence": "Product forms expose dynamic amount, tenure, ROI, CLI and asset/valuation fields; no approved eligibility-deviation thresholds are present.",
+      "appxReferences": [
+        "SuryodayWeb/src/component/lead/LeadPersonalLoanDetails.js",
+        "SuryodayWeb/src/component/lead/LeadDocumentCharges.js",
+        "SuryodayaBank/CamReport.aspx"
+      ],
+      "optimEvidence": "No screen/capability mapping recorded.",
+      "openItems": [
+        "Product/scheme eligibility thresholds",
+        "Trigger formulas",
+        "Override authority",
+        "Evidence/remarks and re-computation"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "deal-structure",
+      "name": "Deal structure",
+      "appxEvidence": "Loan, charges and sanction/multi-loan screens expose amount, ROI, tenure, margin/fees, insurance and summary fields. The approved calculation and payment allocation schedules are not available.",
+      "appxReferences": [
+        "SuryodayWeb/src/component/lead/LeadPersonalLoanDetails.js",
+        "SuryodayWeb/src/component/charges/LeadDocumentCharges.js",
+        "SuryodayWeb/src/component/disbursement/SanctionMultiLoanSummary.js",
+        "SuryodayWeb/src/component/disbursement/SanctionLetter.js"
+      ],
+      "optimEvidence": "No field-level match recorded.",
+      "openItems": [
+        "Approved/final amount",
+        "ROI, tenure, EMI and margin",
+        "Down payment and fee/insurance",
+        "Net disbursement and allocations",
+        "First EMI date and schedule"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "repayment",
+      "name": "Repayment configuration",
+      "appxEvidence": "Bank verification and NACH initiation fields exist; visible NACH choices include Physical NACH, E-Nach and SI. Mandate service behavior and full repayment rules require confirmation.",
+      "appxReferences": [
+        "SuryodayWeb/src/component/disbursement/NachInitiate.js",
+        "SuryodayWeb/src/component/disbursement/BodyNachInitiate.js",
+        "SuryodayWeb/src/component/applicant/BankAccountAuthentication.js",
+        "SuryodayaBank/Nach.aspx"
+      ],
+      "optimEvidence": "No field-level match recorded.",
+      "openItems": [
+        "Repayment mode/frequency",
+        "Instalment amount and dates",
+        "Repayment account/IFSC",
+        "Mandate status, consent and failure handling"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "sanction",
+      "name": "Sanction letter",
+      "appxEvidence": "Sanction letter and multi-loan summary screens exist. Product template matrix, terms versioning and generated output behavior require confirmation.",
+      "appxReferences": [
+        "SuryodayWeb/src/component/disbursement/SanctionLetter.js",
+        "SuryodayWeb/src/component/disbursement/SanctionMultiLoan.js",
+        "SuryodayaBank/Sanction.aspx",
+        "SuryodayaBank/Loan_Sanction_Terms.aspx"
+      ],
+      "optimEvidence": "No template/capability mapping recorded.",
+      "openItems": [
+        "Product templates and dynamic fields",
+        "Terms/conditions versioning",
+        "Generation, download and print",
+        "Consistency with approved deal"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "enach",
+      "name": "eNACH",
+      "appxEvidence": "NACH initiation and legacy eNACH pages are present; provider contract, consent, status transitions, retry and failure handling are not established.",
+      "appxReferences": [
+        "SuryodayWeb/src/component/disbursement/NachInitiate.js",
+        "SuryodayWeb/src/component/disbursement/Nach.js",
+        "SuryodayaBank/ENach.aspx",
+        "SuryodayaBank/Nach.aspx"
+      ],
+      "optimEvidence": "No provider/capability mapping recorded.",
+      "openItems": [
+        "Account/IFSC and holder",
+        "Mandate amount/frequency",
+        "Consent and registration",
+        "Success/failure/retry/status updates"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "document-audit",
+      "name": "Document audit",
+      "appxEvidence": "Auditor approval and PDD audit pages exist. Product checklist, mandatory documents and exact audit decision rules require the active matrix.",
+      "appxReferences": [
+        "SuryodayaBank/AuditorApprovalList.aspx",
+        "SuryodayaBank/AuditorApprovalListPDD.aspx",
+        "SuryodayaBank/ApprovedList.aspx",
+        "SuryodayaBank/ApprovedListPDD.aspx"
+      ],
+      "optimEvidence": "No checklist/capability mapping recorded.",
+      "openItems": [
+        "Product/member/stage document matrix",
+        "View/reject/replace/waive",
+        "Audit remarks and history",
+        "PDD and pre-disbursement gating"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "qc-maker",
+      "name": "QC Maker",
+      "appxEvidence": "BodyQC credit QC module exists; maker permissions and distinct maker-checker routing require role configuration.",
+      "appxReferences": [
+        "SuryodayaBank/BodyQC.aspx",
+        "SuryodayaBank/BodyQC.aspx.cs"
+      ],
+      "optimEvidence": "No role/capability mapping recorded.",
+      "openItems": [
+        "Maker checklist and edit rights",
+        "Return/replace/remarks",
+        "Locking and resubmission",
+        "Segregation from checker"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "qc-checker",
+      "name": "QC Checker",
+      "appxEvidence": "Auditor/PDD approval surfaces exist; do not assume auditor role equals QC checker. Exact split requires role matrix.",
+      "appxReferences": [
+        "SuryodayaBank/AuditorApprovalList.aspx",
+        "SuryodayaBank/AuditorApprovalListPDD.aspx",
+        "SuryodayaBank/AdminWebMaster.aspx"
+      ],
+      "optimEvidence": "No role/capability mapping recorded.",
+      "openItems": [
+        "Checker checklist",
+        "Approve/reject/return",
+        "Maker-checker segregation",
+        "Final QC status and audit"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "disbursement",
+      "name": "Disbursement details and update",
+      "appxEvidence": "React disbursement captures payee/dealer and payment details; legacy pages include disbursement update and auth queues. UTR, response contracts and reversals require confirmation.",
+      "appxReferences": [
+        "SuryodayWeb/src/component/disbursement/DisbursementForm.js",
+        "SuryodayWeb/src/component/disbursement/UsedCarDisbursementDetails.js",
+        "SuryodayaBank/DisbursementsUpdate.aspx",
+        "SuryodayaBank/App_Code/Disbursement.cs"
+      ],
+      "optimEvidence": "No field-level match recorded.",
+      "openItems": [
+        "Beneficiary/account/IFSC/payment mode",
+        "Charges, allocation and net amount",
+        "UTR/date/status/failure",
+        "Partial/multiple payment and reversal"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "approval-matrix",
+      "name": "Approval matrix and delegation",
+      "appxEvidence": "Approval queues and named approval routes are present in the available application pages. Product/scheme authority limits, delegation, escalation and effective dates are not available as an authoritative matrix.",
+      "appxReferences": [
+        "SuryodayaBank/AdminWebMaster.aspx",
+        "SuryodayaBank/FinalApproval.aspx",
+        "SuryodayaBank/FinanceApprovalList.aspx",
+        "SuryodayaBank/CreditDOP.aspx"
+      ],
+      "optimEvidence": "No screen/capability mapping recorded.",
+      "openItems": [
+        "Approval level by product and scheme",
+        "Amount and risk authority limits",
+        "Role/user mapping and delegation",
+        "Escalation and SLA",
+        "Return/reject/resubmit rules",
+        "Effective dates and audit history"
+      ],
+      "status": "Source Information Missing"
+    },
+    {
+      "id": "auth-approval",
+      "name": "Authorisation approval",
+      "appxEvidence": "Auth pending/approved lists and separate chassis/body authorisation lists exist. Exact transaction controls, roles and final checklist require confirmation.",
+      "appxReferences": [
+        "SuryodayaBank/AuthPending.aspx",
+        "SuryodayaBank/AuthApprovedList.aspx",
+        "SuryodayaBank/BodyAuthApprovedList.aspx",
+        "SuryodayaBank/FinanceApprovalList.aspx"
+      ],
+      "optimEvidence": "No workflow/capability mapping recorded.",
+      "openItems": [
+        "Authorisation queue and checklist",
+        "Approve/reject/return",
+        "Maker-checker and authority limits",
+        "Audit trail and terminal state"
+      ],
+      "status": "Source Information Missing"
+    }
+  ]
 }

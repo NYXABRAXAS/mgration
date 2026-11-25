@@ -1,7 +1,11 @@
 (() => {
   const money = n => '₹' + new Intl.NumberFormat('en-IN').format(n);
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  let data, product, stageId='overview', searchTerm='';
+  let data, product, stageId='overview', searchTerm='', workspaceView='dashboard', selectedComparison='login-and-authentication', activeRequirementId='', trackerPage=1;
+  const TRACKER_STORAGE_KEY='suryoday-migration-tracker-v1';
+  const requirementStatuses=['Available in OPTIM','Configuration Required','Partially Available','Enhancement Required','New Development Required','API Integration Required','Policy Confirmation Required','Source Information Missing'];
+  const workflowStatuses=['Not Started','In Progress','Blocked','Done'];
+  const priorities=['Unassigned','P0','P1','P2','P3'];
   const stageById = id => data.stages.find(s => s.id === id);
   const stageIndex = id => String(data.stages.findIndex(s => s.id === id) + 1).padStart(2,'0');
   const allProductFields = p => {
@@ -28,6 +32,7 @@
     return `<button class="stage-button ${active?'active':''}" type="button" data-stage="${esc(s.id)}" aria-current="${active?'page':'false'}"><span class="stage-number">${n}</span><span>${esc(s.title)}</span></button>`;
   }
   function renderLanding(){
+    product=null; document.dispatchEvent(new CustomEvent('migration-view-change',{detail:'products'}));
     document.querySelector('#landing').hidden=false;
     document.querySelector('#product-view').hidden=true;
     const grid=data.products.map((p,i)=>`<button class="product-card" type="button" data-product="${esc(p.key)}">
@@ -44,7 +49,7 @@
       <p class="landing-footnote">Confirm the active product inventory and effective policies with Suryoday before implementation sign-off.</p>`;
     document.querySelectorAll('[data-product]').forEach(b=>b.addEventListener('click',()=>openProduct(data.products.find(p=>p.key===b.dataset.product))));
   }
-  function openProduct(p){ product=p; stageId='overview'; searchTerm=''; document.querySelector('#landing').hidden=true; document.querySelector('#product-view').hidden=false; renderProduct(); }
+  function openProduct(p){ product=p; stageId='overview'; searchTerm=''; document.dispatchEvent(new CustomEvent('migration-view-change',{detail:'products'})); document.querySelector('#landing').hidden=true; document.querySelector('#product-view').hidden=false; renderProduct(); }
   function renderProduct(){
     document.querySelector('#product-sidebar-card').innerHTML=`<div class="side-product"><div><div class="side-product-id">APPX PRODUCT ID ${esc(product.id)}</div><h2>${esc(product.name)}</h2><p>${esc(product.family)}</p></div></div>`;
     document.querySelector('#stage-nav').innerHTML=`<button class="stage-button ${stageId==='overview'?'active':''}" data-stage="overview"><span class="stage-number">00</span><span>Product overview</span></button>`+data.stages.map(stageButtonMarkup).join('');
@@ -151,6 +156,6 @@
   document.querySelector('#global-search').addEventListener('input',e=>{searchTerm=e.target.value;if(stageId==='overview')stageId='login';renderSearch();});
   document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();document.querySelector('#global-search').focus();}});
   fetch('./data/migration-data.json').then(r=>{if(!r.ok)throw new Error('Migration data could not be loaded.');return r.json();}).then(d=>{
-    data=d;document.querySelector('#notice').textContent=d.notice;renderLanding();
+    data=d;window.suryodayMigrationData=d;document.querySelector('#notice').textContent=d.notice;renderLanding();document.dispatchEvent(new CustomEvent('migration-data-ready',{detail:d}));
   }).catch(err=>{document.querySelector('#notice').textContent=err.message+' Use a static web server or deploy the site to Render.';document.querySelector('#landing').innerHTML='<h1>Could not load migration data</h1><p>Serve this folder over HTTP instead of opening index.html directly.</p>';});
 })();

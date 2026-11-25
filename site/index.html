@@ -7,6 +7,7 @@
   <meta name="description" content="Stage-wise APPX to OPTIM migration field reference for six Suryoday product branches.">
   <title>Suryoday LOS Migration Hub</title>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./workbench.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -20,7 +21,15 @@
   </header>
 
   <main id="main">
+    <nav id="workspace-nav" class="workspace-nav" aria-label="Migration workspace">
+      <button type="button" data-view="dashboard" class="workspace-tab">Dashboard</button>
+      <button type="button" data-view="products" class="workspace-tab">Products</button>
+      <button type="button" data-view="comparison" class="workspace-tab">APPX vs OPTIM</button>
+      <button type="button" data-view="tracker" class="workspace-tab">Gap tracker</button>
+      <button type="button" data-view="evidence" class="workspace-tab">Evidence workspace</button>
+    </nav>
     <div id="notice" class="source-notice" role="note"></div>
+    <section id="dashboard-view" class="workbench-view" hidden></section>
     <section id="landing" class="landing"></section>
     <section id="product-view" class="product-view" hidden>
       <aside class="sidebar">
@@ -39,9 +48,13 @@
         <div id="stage-content" class="stage-content"></div>
       </div>
     </section>
+    <section id="comparison-view" class="workbench-view" hidden></section>
+    <section id="tracker-view" class="workbench-view" hidden></section>
+    <section id="evidence-view" class="workbench-view" hidden></section>
   </main>
   <footer class="site-footer"><span>Suryoday APPX → OPTIM Migration Hub</span><span>Product and journey reference</span></footer>
 
   <script src="./app.js" defer></script>
+  <script src="./workbench.js" defer></script>
 </body>
 </html>
