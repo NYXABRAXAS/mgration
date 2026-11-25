@@ -105,17 +105,31 @@
       const req=f.htmlRequired||f.labelRequired;
       const reqText=f.htmlRequired?'HTML required':f.labelRequired?'Label marked *':'No required marker';
       const options=f.options.length?f.options.filter(x=>x.toLowerCase()!=='select').join(', '):'';
-      const lookup=f.control==='select'?(options?`Options: ${options}`:'Dynamic lookup; allowed values require confirmation.'):(f.disabled?'Read-only in this stage.':'No dropdown lookup shown.');
+      const lookup=f.control==='select'?(options?`Options: ${options}`:'Dynamic lookup; open the field for source and dependency details.'):(f.disabled?'Read-only in this stage.':'No dropdown lookup shown.');
       const custom=customValidation(f);
       const key=`fld-${f.stageId||stageId}-${i}`;
-      return `<tbody class="field-body"><tr class="field-row" data-field-search="${esc([f.id,f.name,f.label,f.control,lookup,custom].join(' ').toLowerCase())}" data-confirm="${(!f.htmlRequired&&!f.labelRequired)||!options?'true':'false'}">
-        <td class="index-cell">${String(i+1).padStart(3,'0')}</td><td><button class="field-expand" type="button" aria-expanded="false" aria-controls="${key}" data-expand="${key}"><span class="field-id">${esc(f.id||f.name||'Unindexed')}</span></button></td><td class="field-label">${esc(f.label||'[No linked label]')}</td><td class="field-type">${esc(f.control)}</td><td><span class="req-chip ${req?'':'none'}">${esc(reqText)}</span></td><td>${esc(lookup)}</td><td>${esc(custom)}</td>
+      const profile=dropdownLookupProfile(f);
+      const valueList=options?`<ol class="dropdown-values">${f.options.filter(x=>x.toLowerCase()!=='select').map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`:'';
+      const dynamicDetail=profile?`<div class="detail-item wide"><b>Dropdown source and dependency</b><span>${esc(profile.summary)}</span><span><b>API:</b> ${esc(profile.api)} · <b>Lookup type:</b> ${esc(profile.type)}</span><span><b>Request:</b> ${esc(profile.request)}</span><span><b>Response mapping:</b> ${esc(profile.response)}</span><span><b>Source:</b> <code>${esc(profile.source)}</code></span><span class="lookup-unavailable">${esc(profile.valuesStatus)}</span></div>`:'';
+      const listDetail=f.control==='select'?`<div class="detail-item wide"><b>Dropdown values in supplied source</b>${valueList||`<span>${esc(profile?.valuesStatus||'Values are populated from a runtime lookup; the supplied source does not include the returned master rows.')}</span>`}</div>`:'';
+      return `<tbody class="field-body"><tr class="field-row" data-field-search="${esc([f.id,f.name,f.label,f.control,lookup,custom,profile?.summary||''].join(' ').toLowerCase())}" data-confirm="${(!f.htmlRequired&&!f.labelRequired)||!options?'true':'false'}">
+        <td class="index-cell">${String(i+1).padStart(3,'0')}</td><td><button class="field-expand" type="button" aria-expanded="false" aria-controls="${key}" data-expand="${key}"><span class="field-id">${esc(f.id||f.name||'Unindexed')}</span></button></td><td class="field-label"><button class="field-expand field-label-expand" type="button" aria-expanded="false" aria-controls="${key}" data-expand="${key}">${esc(f.label||'[No linked label]')}</button></td><td class="field-type">${esc(f.control)}</td><td><span class="req-chip ${req?'':'none'}">${esc(reqText)}</span></td><td>${esc(lookup)}</td><td>${esc(custom)}</td>
       </tr><tr id="${key}" class="detail-row" hidden><td colspan="7"><div class="detail-grid">
         <div class="detail-item"><b>Field name</b><span>${esc(f.name||'Not available')}</span></div><div class="detail-item"><b>Control state</b><span>${f.disabled?'Read-only; confirm editability by role and stage.':'Editability may depend on role and stage.'}</span></div><div class="detail-item"><b>Required evidence</b><span>HTML required: ${f.htmlRequired?'Yes':'Not set'} · label star: ${f.labelRequired?'Yes':'No'}</span></div>
-        <div class="detail-item"><b>Dropdown values</b><span>${esc(options|| (f.control==='select'?'Dynamic list; confirm master values.':'Not applicable'))}</span></div><div class="detail-item"><b>Validation</b><span>${esc(custom)}</span></div>
+        ${listDetail}${dynamicDetail}<div class="detail-item"><b>Validation</b><span>${esc(custom)}</span></div>
       </div></td></tr></tbody>`;
     }).join('');
     return `<div class="table-scroll"><table class="field-table"><thead><tr><th>#</th><th>APPX field id</th><th>APPX label</th><th>Type</th><th>Required</th><th>Lookup / options</th><th>Validation evidence</th></tr></thead>${rows}</table></div>`;
+  }
+  function dropdownLookupProfile(f){
+    const source='SuryodayWeb/src/component/applicationform/PersonalInformation.js';
+    const profiles={
+      cast:{summary:'Caste options are dependent on the selected religion and product.',api:'api/Application/GetMasterDataV1',type:'42',request:`ProductId=${product?.id||'selected product ID'}, UserId=logged-in user, Value=selected religion key`,response:'result[].Value is displayed as the option label; result[].Key is stored as the selected value.',source,valuesStatus:'Exact caste labels and keys are not hardcoded in the supplied frontend. They come from the authenticated runtime master API; its response/database rows were not supplied.'},
+      religion:{summary:'Religion options are loaded for the selected product.',api:'api/Application/GetMasterDataV1',type:'40',request:`ProductId=${product?.id||'selected product ID'}, UserId=logged-in user, Value=0`,response:'result[].Value is displayed as the option label; result[].Key is stored as the selected value.',source,valuesStatus:'Exact religion labels and keys come from the runtime master API; its response/database rows were not supplied.'},
+      education:{summary:'Education options are loaded for the selected product.',api:'api/Application/GetMasterDataV1',type:'41',request:`ProductId=${product?.id||'selected product ID'}, UserId=logged-in user, Value=0`,response:'result[].Value is displayed as the option label; result[].Key is stored as the selected value.',source,valuesStatus:'Exact education labels and keys come from the runtime master API; its response/database rows were not supplied.'},
+      relation:{summary:'Relationship options are loaded for the selected product.',api:'api/Application/GetMasterDataV1',type:'22',request:`ProductId=${product?.id||'selected product ID'}, UserId=logged-in user, Value=0`,response:'result[].Value is displayed as the option label; result[].Key is stored as the selected value.',source,valuesStatus:'Exact relationship labels and keys come from the runtime master API; its response/database rows were not supplied.'}
+    };
+    const id=String(f.id||f.name||'').toLowerCase();return f.control==='select'?profiles[id]||null:null;
   }
   function customValidation(f){
     const id=f.id||''; const label=f.label||''; const notes=[];
