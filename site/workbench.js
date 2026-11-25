@@ -91,7 +91,12 @@
     ].entries()){
       out.push({id:`BASE-${String(i+1).padStart(2,'0')}`,type:'Readiness dependency',product:'all',productName:'All six products',productId:'ALL',stage:'Migration readiness',stageId:'readiness',module:item[0],appx:item[1],optim:'Not assessed.',gap:item[1],action:'Assign an owner and attach the authoritative evidence and completion criteria.',acceptance:'Owner, evidence, decision and testing/cutover sign-off are recorded.',evidence:[],defaultStatus:'Source Information Missing',defaultPriority:'Unassigned',defaultDevelopmentStatus:'Not Started',defaultTestingStatus:'Not Started',dependency:item[2]});
     }
-    return out;
+    return out.map(r=>({...r,
+      status:r.defaultStatus,
+      priority:r.defaultPriority,
+      developmentStatus:r.defaultDevelopmentStatus,
+      testingStatus:r.defaultTestingStatus
+    }));
   }
 
   function setView(next){
@@ -129,7 +134,7 @@
       </div>
       <div class="wb-grid-2">
         <section class="panel"><div class="panel-title-row"><div><h2>Requirement status</h2><p class="panel-subtitle">Current tracker state, including this browser’s saved edits.</p></div></div><div class="wb-bars">${statusOptions.map(s=>{const n=totals[s]||0;return progressBar(s,records.length?Math.round(100*n/records.length):0,n)}).join('')}</div></section>
-        <section class="panel"><div class="panel-title-row"><div><h2>Product assessment coverage</h2><p class="panel-subtitle">Coverage is based on records assigned a reviewed status.</p></div></div><div class="wb-bars">${productRows.map(x=>progressBar(x.p.name,x.pct,x.rows.length)).join('')}</div></section>
+        <section class="panel"><div class="panel-title-row"><div><h2>Product assessment coverage</h2><p class="panel-subtitle">Coverage is based on records assigned a reviewed status.</p></div></div><div class="wb-bars">${productRows.map(x=>progressBar(`${x.p.name} · ID ${x.p.id}`,x.pct,x.rows.length)).join('')}</div></section>
       </div>
       <div class="wb-grid-2">
         <section class="panel"><div class="panel-title-row"><div><h2>Stages with unverified mapping</h2><p class="panel-subtitle">Candidate-stage list; sequence and product applicability require an approved journey export.</p></div></div><div class="wb-bars">${stageRows.map(x=>progressBar(x.s.title,x.rr.length?Math.round(100*x.done/x.rr.length):0,`${x.done}/${x.rr.length}`)).join('')}</div><button class="wb-btn" data-view="comparison">Open all stage comparisons →</button></section>
@@ -172,7 +177,7 @@
       <section class="panel" style="margin-top:12px"><div class="panel-title-row"><div><h2>${esc(current.title)} · field comparison</h2><p class="panel-subtitle">${fieldRows.length} APPX field(s) linked from the current catalog for this stage candidate. Target matches remain unverified unless explicitly recorded.</p></div><button class="wb-btn primary" data-open-requirement="${req?esc(req.id):''}">Track this stage</button></div>${fieldRows.length?`<div class="wb-table-wrap"><table class="wb-table"><thead><tr><th>#</th><th>APPX field key</th><th>APPX label</th><th>Type</th><th>Required marker</th><th>APPX lookup</th><th>OPTIM match</th></tr></thead><tbody>${fields}</tbody></table></div>`:'<div class="wb-note">No labelled field group is linked to this candidate stage. Review the APPX behavior and add the target mapping during a guided walkthrough.</div>'}</section>
       <div class="wb-split"><section class="wb-compare-card"><h3>Gap / next action</h3><p>${esc(current.gapRequirement)}</p><p><b>Acceptance:</b> ${esc(req?.acceptance||'Confirm product applicability, sequence, roles, fields, rules and positive/negative test paths.')}</p></section><section class="wb-compare-card"><h3>Current status</h3><p>${badge(state.status||current.status)} &nbsp; ${badge(state.priority||'Unassigned')}</p><p>OPTIM mapping is incomplete where the target capture/catalog is not indexed. Status changes are local to this browser and exportable.</p><button class="wb-btn" data-open-requirement="${req?esc(req.id):''}">Open requirement detail →</button></section></div>`;
     $('#comparison-product').addEventListener('change',e=>{activeProduct=e.target.value;renderComparison()});
-    box.querySelectorAll('[data-stage-candidate]').forEach(b=>b.addEventListener('click',()=>{selectedStage=b.dataset.stage;renderComparison()}));
+    box.querySelectorAll('[data-stage-candidate]').forEach(b=>b.addEventListener('click',()=>{selectedStage=b.dataset.stageCandidate;renderComparison()}));
     box.querySelectorAll('[data-open-requirement]').forEach(b=>b.addEventListener('click',()=>{if(!b.dataset.openRequirement)return;activeId=b.dataset.openRequirement;filters.product=p.key;filters.stage='all';setView('tracker')}));
   }
   function badgeText(status){return status==='Partially Available'?'Partial':status==='Source Information Missing'?'Unmapped':status}
@@ -193,9 +198,9 @@
     const box=$('#tracker-view');if(!box||!data)return;
     const list=filteredRecords();const pageSize=25;const pageCount=Math.max(1,Math.ceil(list.length/pageSize));currentPage=Math.min(currentPage,pageCount);
     const rows=list.slice((currentPage-1)*pageSize,currentPage*pageSize);
-    const productOptions=[['all','All products'],...data.products.map(p=>[p.key,p.name]),['all-products','Shared readiness']];
+    const productOptions=[['all','All products'],...data.products.map(p=>[p.key,`${p.name} · ID ${p.id}`]),['all-products','Shared readiness']];
     const stages=[...new Map(records.map(r=>[r.stageId,r.stage])).entries()];const modules=[...new Set(records.map(r=>r.module))].sort();
-    const body=rows.map(r=>`<tr><td><span class="wb-id">${esc(r.id)}</span></td><td>${esc(r.productName)}</td><td>${esc(r.stage)}</td><td><button data-requirement="${esc(r.id)}">${esc(r.module)}</button><div class="wb-mini">${esc(r.type)}</div></td><td>${badge(r.status)}</td><td>${badge(r.priority)}</td><td>${badge(r.developmentStatus)}</td><td>${badge(r.testingStatus)}</td></tr>`).join('');
+    const body=rows.map(r=>`<tr><td><span class="wb-id">${esc(r.id)}</span></td><td>${esc(r.productName)}${r.productId!=='ALL'?`<div class="wb-mini">Product ID ${esc(r.productId)}</div>`:''}</td><td>${esc(r.stage)}</td><td><button data-requirement="${esc(r.id)}">${esc(r.module)}</button><div class="wb-mini">${esc(r.type)}</div></td><td>${badge(r.status)}</td><td>${badge(r.priority)}</td><td>${badge(r.developmentStatus)}</td><td>${badge(r.testingStatus)}</td></tr>`).join('');
     box.innerHTML=`<div class="wb-heading"><div><div class="wb-kicker">${records.length.toLocaleString('en-IN')} generated requirements</div><h1>APPX vs OPTIM gap tracker</h1><p>Filter by product, stage, module, priority and assessment status. Search requirement ID, field, policy or gap. Defaults indicate missing evidence; they do not assert an OPTIM defect.</p></div><div><button class="wb-btn" id="export-tracker">Export JSON</button> <label class="wb-btn">Import JSON<input id="import-tracker" type="file" accept=".json,application/json" hidden></label></div></div>
       <div class="wb-note warn">Status edits and remarks save to this browser only. The workspace has no shared database/API; export/import a JSON snapshot for team handoff until a central store is connected.</div>
       <div class="wb-controls"><input id="tracker-search" type="search" placeholder="Search requirement, field, policy or ID" value="${esc(filters.search)}"><select id="filter-product">${productOptions.map(([v,l])=>`<option value="${esc(v)}" ${filters.product===v?'selected':''}>${esc(l)}</option>`).join('')}</select><select id="filter-stage"><option value="all">All stages</option>${stages.map(([v,l])=>`<option value="${esc(v)}" ${filters.stage===v?'selected':''}>${esc(l)}</option>`).join('')}</select><select id="filter-module"><option value="all">All modules</option>${modules.map(v=>`<option value="${esc(v)}" ${filters.module===v?'selected':''}>${esc(v)}</option>`).join('')}</select><select id="filter-priority"><option value="all">All priorities</option>${priorityOptions.map(v=>`<option value="${esc(v)}" ${filters.priority===v?'selected':''}>${esc(v)}</option>`).join('')}</select><select id="filter-status"><option value="all">All statuses</option>${statusOptions.map(v=>`<option value="${esc(v)}" ${filters.status===v?'selected':''}>${esc(v)}</option>`).join('')}</select><button class="wb-btn" id="reset-filters">Reset</button></div>
