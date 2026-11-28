@@ -84,17 +84,17 @@
     if(!archiveIndex)return [];
     const all=archiveIndex[side]||[];
     if(side==='optim')return all;
-    const [start,end]=appxCaptureRanges[index]||[1,90];
-    return all.slice(start-1,end);
+    return all;
   }
   function capturePanel(side,stageIndex){
     const list=stageCaptureList(side,stageIndex), stage=stages[stageIndex];
     if(!list.length)return `<section class="nc-screen-panel"><h3>${side==='appx'?'Suryoday APPX':'OPTIM'} screen capture</h3><div class="nc-screen-empty">Loading hosted screens…</div></section>`;
     const key=stage.id;let choice=captureChoice[side][key];
-    if(!Number.isInteger(choice)||choice<0||choice>=list.length)choice=side==='appx'?Math.min(appxCaptureStarts[stageIndex]||0,list.length-1):Math.min(optimCaptureStarts[stageIndex]||0,list.length-1);
+    const appxStart=appxCaptureRanges[stageIndex]?.[0]||1;
+    if(!Number.isInteger(choice)||choice<0||choice>=list.length)choice=side==='appx'?Math.min(appxStart-1+(appxCaptureStarts[stageIndex]||0),list.length-1):Math.min(optimCaptureStarts[stageIndex]||0,list.length-1);
     captureChoice[side][key]=choice;
     const item=list[choice];
-    const indexed=side==='appx'?`Stage-linked Suryoday captures · ${list.length} image(s)`:`Hosted OPTIM archive · ${list.length} images · stage match must be selected`;
+    const indexed=side==='appx'?`All hosted Suryoday captures · ${list.length} images · stage starts at its linked capture`:`Hosted OPTIM archive · ${list.length} images · stage match must be selected`;
     return `<section class="nc-screen-panel"><div class="nc-screen-title"><div><h3>${side==='appx'?'Suryoday APPX screen':'OPTIM screen'}</h3><small>${indexed}</small></div><span>${choice+1} / ${list.length}</span></div><label class="nc-capture-picker">Select ${side==='appx'?'Suryoday':'OPTIM'} screen<select data-capture-select="${side}" data-stage-index="${stageIndex}">${list.map((x,i)=>`<option value="${i}" ${i===choice?'selected':''}>${esc(x.name)}</option>`).join('')}</select></label><div class="nc-image-frame"><img src="${esc(item.path)}" alt="${esc(side==='appx'?'Suryoday APPX':'OPTIM')} capture ${esc(item.name)}" loading="lazy"></div><div class="nc-image-nav"><button type="button" data-capture-step="-1" data-capture-side="${side}" data-stage-index="${stageIndex}" ${choice===0?'disabled':''}>← Previous ${side==='appx'?'Suryoday':'OPTIM'}</button><span>${esc(item.name)}</span><button type="button" data-capture-step="1" data-capture-side="${side}" data-stage-index="${stageIndex}" ${choice===list.length-1?'disabled':''}>Next ${side==='appx'?'Suryoday':'OPTIM'} →</button></div>${side==='optim'?'<p class="nc-capture-caveat">OPTIM captures are hosted and browseable, but their archive has no approved stage-to-image index. Choose the matching image here; do not treat the initial image as an approved stage mapping.</p>':''}</section>`;
   }
   function sourceFieldsForStage(index){
