@@ -30,6 +30,101 @@
   const esc = x => String(x ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const host = $('#newcar-view');
   let search='', filter='all', openId='';
+  let archiveIndex=null, appxCatalog=null, migrationData=window.suryodayMigrationData||null;
+  const captureChoice={appx:{},optim:{}};
+  const appxCaptureRanges=[[1,2],[14,16],[10,13],[17,17],[18,18],[19,20],[21,23],[24,26],[27,28],[29,35],[35,43],[36,55],[44,55],[51,68],[57,68],[56,81],[69,74],[75,78],[79,81],[79,83],[82,83],[84,87],[88,90],[90,90]];
+  const appxCaptureStarts=[0,0,0,0,0,0,0,0,0,0,1,6,8,0,2,23,0,0,0,2,0,0,0,0];
+  const optimCaptureStarts=[0,26,10,32,32,33,40,115,19,32,26,104,115,72,214,219,166,224,224,228,270,280,286,286];
+  const sourceGroups=[['login','lead','mobile'],['dedupe'],['applicant','kyc'],['product-sourcing'],['loan'],['loan'],['loan'],['scorecard'],['documents'],['personal','address','employment','references'],[],[],[],[],[],[],['charges'],['bank'],['sanction'],['repayment'],['disbursement'],['documents'],['disbursement'],['disbursement']];
+  const appxModules=['other-screens','bureau-scorecard','application-intake','scheme-configuration','application-intake','application-intake','repayment','bureau-scorecard','document-operations','application-intake','application-intake','underwriting','underwriting','underwriting','credit-deviation','underwriting','deal-structure','repayment','deal-structure','repayment','disbursement','document-operations','disbursement','auth-approval'];
+  const appxModuleScreens={11:['underwriting'],12:['underwriting'],13:['underwriting'],14:['credit-deviation','underwriting'],15:['business-deviation','underwriting'],16:['deal-structure']};
+  const appxStageScreenIds={
+    11:['bureaupolicy','camreport','underwriting','underwritingallocation','underwritingc','underwritingp','underwritingtracker','underwritingv1','validatescorecard'],
+    12:['camreport','underwritingc','underwritingp','underwritingv1','validatescorecard'],
+    13:['underwriting','underwritingallocation','underwritingtracker'],
+    14:['autodeviation','creditdop','deviationhistory','deviationmaster'],
+    15:['camreport','deviationhistory'],
+    16:['applicationdetails','camreport','caseedit','esaf_loan_sanction_terms','esaf_loan_sanction_termsold','leaddetail','leaddetailsummary','leaddetailsummaryv1','loan_sanction_terms','sanction','vl_applicationform']
+  };
+  const selectedAppxScreen={};
+  const optimDetailedFields={
+    0:['Channel','Application Type','Product','Mobile No','Enter OTP','Verify OTP'],
+    1:['Bureau status','Dedupe status','Bureau summary','Bureau report','Continue / return outcome'],
+    2:['POI Type','POI Number','First Name','Middle Name','Last Name','DOB','Gender','Father Name','POA Type','POA Number','Address Line 1','Address Line 2','Address Line 3','PIN Code','District','State','Capture Photo','PAN Number','Loan Amount'],
+    3:['Scheme','Dealer','Dealer Outlet','Sourcing details'],
+    4:['Manufacturer','Model','Variant','Car Loan Type','Fuel Type'],
+    5:['Asset Cost','Discount','Ex-showroom Price','Road Tax','Insurance Amount','Registration Charges','Other Charges','On-road Price (auto calculate)','Accessories Cost','Extended Warranty Charges','Total Asset Cost (auto calculate)','Applied Loan Amount','Margin Money (auto calculate)','Tenure','Offered ROI'],
+    6:['Processing Fee','PF funded / non-funded','CLI Calculation','CLI Taken / Not Taken','CLI Coverage Amount','CLI Tenure','CLI Funded / Non-funded','Actual CLI Premium','Offered CLI','Hospi Premium','Hospi Taken / Not Taken','Hospi Tenure','Motor Insurance','Funded / Non-funded','Finance Amount','Moratorium','EMI'],
+    7:['Score Type','Business Experience','Applicant Age','Residence','Education','FOIR','Income Mode','Other Income Source','CIBIL Score','Repayment Track','Cheque Bounce','Guarantor','Vehicle Category','LTV','Applicant Monthly Income','Total Liability'],
+    8:['Bank Statement','Insurance','Proforma Invoice','RC','Additional Document','Document Type','Upload File'],
+    9:['First Name','Middle Name','Last Name','Date of Birth','Father / Spouse Name','Mobile No','Mother / Maiden Name','Email','Religion','Caste','Nationality','Dependents','Current Address','Permanent Address','PIN Code','District','State','Accommodation','Rent / Paying Amount','Residence','Office Name','Designation','Occupation','Nature of Business','Industry','Udyam Registration','Office Address','Office PIN Code','Office District','Office State','Office Mobile','Reference 1 Name / Relationship / Mobile / Address','Reference 2 Name / Relationship / Mobile / Address','Nominee Name / Date of Birth / Gender / Relationship'],
+    10:['Application Form submission','Due Diligence stage','Credit stage','Case status / handoff'],
+    11:['Case allocation','Case summary','Customer details','Loan summary','Asset summary','CAM Preparation','TVR','FI','RCU','Income Validation','Bank Account Validation','Banking Summary','Average Monthly Balance','Obligations','FOIR','Bureau Summary','Bureau Report','Scorecard','Verification','Documents','Exposure','Asset vs Liability','Risk and Mitigants','Credit Observations','Credit Recommendation','Deviation','Authority','Credit Approval','Approval History','Remarks','Return / rework outcome'],
+    12:['Case Summary','Loan Summary','Applicant Profile','Customer Background','Business Vintage','End Use','CIBIL Observations','Credit Recommendation','TVR / PD Information','Credit Guarantee','Trade Reference','Risk and Mitigants','Income and Financials','Banking and Average Monthly Balance','Obligations','Asset vs Liability','Exposure','Credit Assessment','Remarks'],
+    13:['Due Diligence','TVR','FI','RCU','Income Validation','Document Audit','Verification Outcome','Document Request / Rework','Case History'],
+    14:['Deviation Type','Deviation Reason','Deviation Authority','Deviation Approval Status','Special Conditions','Approver Remarks','Approval History'],
+    15:['Credit Approval','Business Approval','Approval Role','Approval Status','Approval Remarks','Approval History','Return / reject outcome'],
+    16:['Loan Availed','Document Charges','Processing Fee','CLI','Hospi','ROI','EMI','Tenure','Sanction Amount','Justification / remarks'],
+    17:['Repayment Account','Customer Name','IFSC Code','Bank Account Number','No. of PDC','Verification Result'],
+    18:['Sanction Letter','Sanction Terms','First EMI Date'],
+    19:['NACH Method: ENACH / SI / Physical NACH','Mandate Details','Customer Consent','Mandate Status'],
+    20:['Disbursement Details','Nominee Details','Pre-disbursement Documents','Dealer / Payee','Account / IFSC','Disbursement Amount'],
+    21:['Document QC','Document Audit','QC Maker','QC Checker','QC Status','Remarks / rework'],
+    22:['Disbursement Update','Auth Approval','Authorization Status','Maker / Checker','CBS / disbursement result'],
+    23:['Disbursed status','Final case status','Reconciliation / CBS response']
+  };
+  function loadScreenSources(){
+    if(archiveIndex&&appxCatalog)return Promise.resolve();
+    return Promise.all([
+      fetch('./data/screen-archive-index.json').then(r=>{if(!r.ok)throw new Error('Hosted screenshot index is unavailable');return r.json()}),
+      fetch('./data/appx-screen-catalog.json').then(r=>{if(!r.ok)throw new Error('APPX field catalog is unavailable');return r.json()})
+    ]).then(([a,c])=>{archiveIndex=a;appxCatalog=c;render()}).catch(()=>{});
+  }
+  function stageCaptureList(side,index){
+    if(!archiveIndex)return [];
+    const all=archiveIndex[side]||[];
+    if(side==='optim')return all;
+    const [start,end]=appxCaptureRanges[index]||[1,90];
+    return all.slice(start-1,end);
+  }
+  function capturePanel(side,stageIndex){
+    const list=stageCaptureList(side,stageIndex), stage=stages[stageIndex];
+    if(!list.length)return `<section class="nc-screen-panel"><h3>${side==='appx'?'Suryoday APPX':'OPTIM'} screen capture</h3><div class="nc-screen-empty">Loading hosted screens…</div></section>`;
+    const key=stage.id;let choice=captureChoice[side][key];
+    if(!Number.isInteger(choice)||choice<0||choice>=list.length)choice=side==='appx'?Math.min(appxCaptureStarts[stageIndex]||0,list.length-1):Math.min(optimCaptureStarts[stageIndex]||0,list.length-1);
+    captureChoice[side][key]=choice;
+    const item=list[choice];
+    const indexed=side==='appx'?`Stage-linked Suryoday captures · ${list.length} image(s)`:`Hosted OPTIM archive · ${list.length} images · stage match must be selected`;
+    return `<section class="nc-screen-panel"><div class="nc-screen-title"><div><h3>${side==='appx'?'Suryoday APPX screen':'OPTIM screen'}</h3><small>${indexed}</small></div><span>${choice+1} / ${list.length}</span></div><label class="nc-capture-picker">Select ${side==='appx'?'Suryoday':'OPTIM'} screen<select data-capture-select="${side}" data-stage-index="${stageIndex}">${list.map((x,i)=>`<option value="${i}" ${i===choice?'selected':''}>${esc(x.name)}</option>`).join('')}</select></label><div class="nc-image-frame"><img src="${esc(item.path)}" alt="${esc(side==='appx'?'Suryoday APPX':'OPTIM')} capture ${esc(item.name)}" loading="lazy"></div><div class="nc-image-nav"><button type="button" data-capture-step="-1" data-capture-side="${side}" data-stage-index="${stageIndex}" ${choice===0?'disabled':''}>← Previous ${side==='appx'?'Suryoday':'OPTIM'}</button><span>${esc(item.name)}</span><button type="button" data-capture-step="1" data-capture-side="${side}" data-stage-index="${stageIndex}" ${choice===list.length-1?'disabled':''}>Next ${side==='appx'?'Suryoday':'OPTIM'} →</button></div>${side==='optim'?'<p class="nc-capture-caveat">OPTIM captures are hosted and browseable, but their archive has no approved stage-to-image index. Choose the matching image here; do not treat the initial image as an approved stage mapping.</p>':''}</section>`;
+  }
+  function sourceFieldsForStage(index){
+    if(!migrationData)return [];
+    const product=migrationData.products.find(p=>p.key==='new-car');if(!product)return [];
+    const out=[],seen=new Set();
+    for(const group of sourceGroups[index]||[])for(const gid of product.stageFiles[group]||[])for(const f of migrationData.fieldGroups[gid]||[]){const key=`${gid}|${f.id}|${f.name}`;if(!seen.has(key)){seen.add(key);out.push({...f,_group:group})}}
+    return out;
+  }
+  function catalogScreensForStage(index){
+    if(!appxCatalog)return [];
+    const moduleIds=appxModuleScreens[index]||[];
+    const allowed=new Set(appxStageScreenIds[index]||[]);
+    return appxCatalog.screens.filter(s=>(s.modules||[]).some(id=>moduleIds.includes(id))&&(!s.productIds?.length||s.productIds.includes('2'))&&(!allowed.size||allowed.has(s.id)));
+  }
+  function fieldRows(side,index){
+    if(side==='appx'){
+      const screens=catalogScreensForStage(index);
+      if(screens.length){const selected=screens.find(s=>s.id===selectedAppxScreen[stages[index].id])||screens[0];selectedAppxScreen[stages[index].id]=selected.id;return (selected.fields||[]).map(f=>({...f,_screen:selected.title,_page:selected.page}))}
+      return sourceFieldsForStage(index);
+    }
+    return (optimDetailedFields[index]||stages[index].optimFields||[]).map(label=>({label,control:'See OPTIM screen/workbook',required:'Not established',lookupEvidence:'Check source sheet / target runtime',validationStatus:'Validate in OPTIM screen and service rules'}));
+  }
+  function fieldTable(side,index){
+    const rows=fieldRows(side,index);const title=side==='appx'?'Suryoday APPX fields':'OPTIM fields';
+    if(!rows.length)return `<section class="nc-field-panel"><div class="nc-field-panel-head"><h3>${title}</h3><span>Field list pending</span></div><p>Field controls are not indexed for this stage in the supplied reference catalog.</p></section>`;
+    const screens=side==='appx'?catalogScreensForStage(index):[];
+    const screenSelect=screens.length?`<label class="nc-capture-picker">APPX screen / module<select data-appx-screen-stage="${index}">${screens.map(s=>`<option value="${esc(s.id)}" ${s.id===selectedAppxScreen[stages[index].id]?'selected':''}>${esc(s.title)} · ${esc(s.page)} · ${s.fieldCount} fields</option>`).join('')}</select></label>`:'';
+    return `<section class="nc-field-panel"><div class="nc-field-panel-head"><h3>${title}${rows[0]?` · ${esc(rows[0]._screen||stages[index].appxModule)}`:''}</h3><span>${rows.length} indexed line(s)</span></div>${screenSelect}<div class="nc-field-scroll"><table class="nc-field-table"><thead><tr><th>#</th><th>Field label / key</th><th>Control</th><th>Required</th><th>Lookup / options</th><th>Validation evidence</th></tr></thead><tbody>${rows.map((f,i)=>{const displayLabel=f.label&&f.label!=='Maximum value'?f.label:(f.id||f.name||f.label||'[No linked label]');return `<tr><td>${String(i+1).padStart(3,'0')}</td><td><b>${esc(displayLabel)}</b><small>${f.label==='Maximum value'?'Source label is generic; screen/control ID shown':esc(f.id||'')}${f._screen?` · ${esc(f._screen)} / ${esc(f._page)}`:''}</small></td><td>${esc(f.control||f.type||'Unknown')}</td><td>${esc(f.required===true?'Required':f.required===false?'Not marked required':f.required||'Not established')}</td><td>${esc((f.lookupValues||f.lookupOptions||[]).join(', ')||f.lookupEvidence||'No dropdown indexed')}</td><td>${esc(f.validationStatus||f.validatorEvidence?.join('; ')||f.clientRuleEvidence?.join('; ')||'Runtime/server rule must be verified')}</td></tr>`}).join('')}</tbody></table></div><p class="nc-field-foot">Source: ${side==='appx'?'Suryoday source field catalog and appx-screen-catalog.json. Unlabelled/hidden controls are retained and identified.':'New Car OPTIM worksheet inventory plus the selected hosted OPTIM screenshot. Runtime validation must be checked in the screen.'}</p></section>`;
+  }
   function pill(s){return `<span class="nc-pill ${s.toLowerCase().replace(/[^a-z]+/g,'-')}">${esc(s)}</span>`}
   function render(){
     if(!host)return;
@@ -41,15 +136,19 @@
       <div class="nc-metrics"><article><small>Journey stages</small><strong>${stages.length}</strong></article><article><small>Mapped field groups</small><strong>${stages.filter(x=>x.appxFields.length||x.optimFields.length).length}</strong></article><article><small>Open verification / policy items</small><strong>${stages.filter(x=>x.status!=='MATCH').length}</strong></article><article><small>Reference screens reviewed</small><strong>90</strong></article></div>
       <section class="nc-flow"><div class="nc-section-head"><div><h2>End-to-end journey</h2><p>The supplied Suryoday process flow has eight broad handoff stages. Select a card to open the detailed comparison.</p></div></div><div class="nc-timeline">${['Lead & KYC','Loan & documents','Underwriting','Credit decision','Deal structure','Sanction & NACH','QC & authorization','Disbursed'].map((n,i)=>`<button data-jump="${[0,2,10,15,16,18,20,22][i]}"><i>${String(i+1).padStart(2,'0')}</i>${n}</button>`).join('')}</div><div class="nc-source-note">Explicit Suryoday handoff: Application Form submission transfers the case directly to Underwriting. The manual states no separate CPA stage. OPTIM journey lists Due Diligence and Credit before its mobile repayment/deal steps; confirm whether this is a workflow split or an extra stage.</div></section>
       <div class="nc-toolbar"><input id="nc-search" type="search" value="${esc(search)}" placeholder="Search stages, fields, rules or evidence" aria-label="Search New Car comparison"><select id="nc-filter" aria-label="Filter status"><option value="all">All statuses</option>${statuses.map(s=>`<option ${filter===s?'selected':''} value="${esc(s)}">${esc(s)}</option>`).join('')}</select><span>${visible.length} of ${stages.length} stages</span></div>
-      <div class="nc-stage-list">${visible.map(s=>`<article class="nc-stage ${openId===s.id?'expanded':''}" id="${s.id}"><button class="nc-stage-toggle" aria-expanded="${openId===s.id}" data-stage="${s.id}"><span class="nc-stage-index">${s.id.replace('NC-','')}</span><span class="nc-stage-name"><b>${esc(s.title)}</b><small>APPX: ${esc(s.appxModule)} · OPTIM: ${esc(s.optimModule)}</small></span><span class="nc-stage-role">${esc(s.appxRole)}</span>${pill(s.status)}<span class="nc-chevron">${openId===s.id?'−':'+'}</span></button>${openId===s.id?`<div class="nc-stage-body"><div class="nc-halves"><section><h3>Suryoday APPX</h3><p><b>Channel:</b> ${esc(s.appxChannel)} &nbsp; <b>Role:</b> ${esc(s.appxRole)}</p><h4>Fields / controls listed</h4><ul class="nc-fields">${s.appxFields.map(f=>`<li>${esc(f)} <small>${fieldNote(f)}</small></li>`).join('')}</ul><p class="nc-evidence"><b>Evidence:</b> ${esc(s.appxEvidence)}</p></section><section><h3>OPTIM</h3><p><b>Channel:</b> ${esc(s.optimChannel)} &nbsp; <b>Role:</b> ${esc(s.optimRole)}</p><h4>Fields / capabilities listed</h4><ul class="nc-fields">${s.optimFields.map(f=>`<li>${esc(f)} <small>${fieldNote(f)}</small></li>`).join('')}</ul><p class="nc-evidence"><b>Evidence:</b> ${esc(s.optimEvidence)}</p></section></div><div class="nc-gap"><b>Developer comparison & next action</b><p>${esc(s.detail)}</p><p><b>Validation to record:</b> APPX and OPTIM screen reference, field key/label/type, required/editable state, lookup source, client and server validation, conditional behavior, role, entry/exit condition, failure/return path, and positive/negative test evidence. Mark each item verified only after checking the target runtime/configuration.</p></div></div>`:''}</article>`).join('')||'<div class="nc-empty">No stages match this search.</div>'}</div>
+      <div class="nc-stage-list">${visible.map(s=>`<article class="nc-stage ${openId===s.id?'expanded':''}" id="${s.id}"><button class="nc-stage-toggle" aria-expanded="${openId===s.id}" data-stage="${s.id}"><span class="nc-stage-index">${s.id.replace('NC-','')}</span><span class="nc-stage-name"><b>${esc(s.title)}</b><small>APPX: ${esc(s.appxModule)} · OPTIM: ${esc(s.optimModule)}</small></span><span class="nc-stage-role">${esc(s.appxRole)}</span>${pill(s.status)}<span class="nc-chevron">${openId===s.id?'−':'+'}</span></button>${openId===s.id?`<div class="nc-stage-body"><div class="nc-screen-grid">${capturePanel('appx',stages.indexOf(s))}${capturePanel('optim',stages.indexOf(s))}</div><div class="nc-halves nc-field-halves">${fieldTable('appx',stages.indexOf(s))}${fieldTable('optim',stages.indexOf(s))}</div><div class="nc-gap"><b>${esc(s.title)} · stage / role / handoff</b><p><b>Suryoday:</b> ${esc(s.appxChannel)} · ${esc(s.appxRole)} · ${esc(s.appxEvidence)}</p><p><b>OPTIM:</b> ${esc(s.optimChannel)} · ${esc(s.optimRole)} · ${esc(s.optimEvidence)}</p><p><b>Developer review:</b> ${esc(s.detail)}</p><p>For each field, confirm the visible label and source key, type, required/editable state, dropdown values, field and server validation, conditions, role, and screen-to-stage mapping. Unknown details stay marked for verification.</p></div></div>`:''}</article>`).join('')||'<div class="nc-empty">No stages match this search.</div>'}</div>
       <section class="nc-underwriting"><div class="nc-section-head"><div><h2>Underwriting and control submodules</h2><p>Grouped by evidence shown in the manual and worksheet; underlying authority and policy rules remain subject to validation.</p></div></div><div class="nc-subgrid">${['Case allocation & queues','Customer / application summary','Asset and loan summary','Overall characteristics & exposure','Bank account validation and banking','Income, obligations & FOIR','Scorecard / bureau review','Verification: TVR, FI & RCU','Document review & audit','Credit observations','Risk and mitigants','Credit recommendation / assessment','Credit deviation','Business deviation','Special conditions','Credit approval & history','Deal structure approval','Sanction conditions','QC maker / checker','Disbursement pending','Auth approval & reconciliation'].map((x,i)=>`<div><b>${String(i+1).padStart(2,'0')} · ${x}</b><small>${i<18?'APPX section/queue evidenced; detailed rules and authority need confirmation.':'Queue or step evidenced; maker-checker permissions and disposition need confirmation.'}</small></div>`).join('')}</div></section>
       <section class="nc-underwriting"><div class="nc-section-head"><div><h2>Policy and configuration items to resolve</h2><p>These source conflicts must remain open until the approved product policy, scheme masters and workflow are supplied.</p></div></div><div class="nc-policy-grid"><article><b>ROI notes conflict</b><p>Workbook notes differ between Suryoday and OPTIM. They are not treated as approved rate bands.</p></article><article><b>Scorecard weights do not add up</b><p>Suryoday listed characteristics total 130 while the worksheet states 100. Confirm approved weights and scorecard version.</p></article><article><b>Lookup masters</b><p>Dealer, scheme, policy, customer grade, manufacturer/model/variant and relationship lookups are dynamic; active values are not established by screenshots.</p></article><article><b>Channels differ</b><p>Suryoday lists REFER; OPTIM lists CORPORATE DSA. Confirm whether each is active for New Car and define the mapping.</p></article><article><b>Roles & approvals</b><p>Suryoday journey lists RSM for business approval; OPTIM lists Business User. Confirm role mapping, authority matrix and maker-checker separation.</p></article><article><b>Integrations</b><p>OTP, Aadhaar/PAN, bureau/dedupe, bank verification, NACH, document services and CBS completion need interface and exception evidence.</p></article></div></section>
       <section class="nc-source-index"><h2>Source index</h2><ol><li><b>SURYODAY OPTIM COMPARISON FIELDS.xlsx</b> — Suryoday Complete Data, OPTIM Complete Data, OPTIM vs Suryoday Journey. Workbook rows are referenced per stage above. Inventory and journey statements are candidate evidence, not runtime confirmation.</li><li><b>Suryoday_Vehicle_LOS_Process_Flow.pdf</b> — one-page New Car vehicle LOS flow; the eight steps and application-to-underwriting handoff.</li><li><b>Suryoday_Vehicle_LOS_User_Manual.docx</b> — version 1.0, 21 Nov 2026, “For Business Review”; 90 screenshot captions/evidence entries. Screenshot numbers are used because a stable rendered page index is not available.</li></ol><p>Sample personal and case data from files/screenshots is deliberately omitted. This module is a migration analysis aid and not a substitute for approved Suryoday policy or production configuration.</p></section>`;
     $('#nc-search').addEventListener('input',e=>{search=e.target.value;render();$('#nc-search').focus();$('#nc-search').setSelectionRange(search.length,search.length)});
     $('#nc-filter').addEventListener('change',e=>{filter=e.target.value;render()});
     host.querySelectorAll('[data-stage]').forEach(b=>b.addEventListener('click',()=>{openId=openId===b.dataset.stage?'':b.dataset.stage;render()}));
+    host.querySelectorAll('[data-capture-select]').forEach(el=>el.addEventListener('change',()=>{captureChoice[el.dataset.captureSelect][stages[Number(el.dataset.stageIndex)].id]=Number(el.value);render()}));
+    host.querySelectorAll('[data-appx-screen-stage]').forEach(el=>el.addEventListener('change',()=>{selectedAppxScreen[stages[Number(el.dataset.appxScreenStage)].id]=el.value;render()}));
+    host.querySelectorAll('[data-capture-step]').forEach(el=>el.addEventListener('click',()=>{const side=el.dataset.captureSide,index=Number(el.dataset.stageIndex),stage=stages[index],list=stageCaptureList(side,index),key=stage.id;captureChoice[side][key]=Math.max(0,Math.min(list.length-1,(captureChoice[side][key]||0)+Number(el.dataset.captureStep)));render()}));
     host.querySelectorAll('[data-jump]').forEach(b=>b.addEventListener('click',()=>{openId=stages[Number(b.dataset.jump)]?.id||'';render();document.getElementById(openId)?.scrollIntoView({behavior:'smooth',block:'center'})}));
   }
   function fieldNote(f){return /\b(OTP|amount|ROI|FOIR|IFSC|PAN|PIN|Mobile|loan|premium|EMI|cost|tenure|number|income|margin|price|distance)\b/i.test(f)?'type/rule validation not evidenced':'lookup / required / editability to verify'}
-  document.addEventListener('migration-newcar-view-selected',render);
+  document.addEventListener('migration-data-ready',ev=>{migrationData=ev.detail||window.suryodayMigrationData||migrationData});
+  document.addEventListener('migration-newcar-view-selected',()=>{render();loadScreenSources()});
 })();
