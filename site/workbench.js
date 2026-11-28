@@ -109,7 +109,7 @@
 
   function setView(next){
     view=next;
-    for(const id of ['dashboard-view','comparison-view','screens-view','inventory-view','tracker-view','evidence-view']) $(`#${id}`).hidden=true;
+    for(const id of ['dashboard-view','comparison-view','newcar-view','screens-view','inventory-view','tracker-view','evidence-view']) $(`#${id}`).hidden=true;
     const landing=$('#landing'), productView=$('#product-view');
     if(next==='products'){
       if(window.suryodayProductSelected){landing.hidden=true;productView.hidden=false}
@@ -120,6 +120,7 @@
     if(!data)return;
     if(next==='dashboard')renderDashboard();
     if(next==='comparison')renderComparison();
+    if(next==='newcar')document.dispatchEvent(new CustomEvent('migration-newcar-view-selected'));
     if(next==='screens')renderScreenWalkthrough();
     if(next==='inventory')renderSourceInventory();
     if(next==='tracker')renderTracker();
